@@ -1,0 +1,23 @@
+(1) θ 바꿔 끼우기 — 사건 발생 접시 수
+   space E_j · 자료 본실험 1~100: θ(본실험) 3.14% → 4/98 · θ(되감기2) 3.77% → 2/98
+   space E_j · 자료 되감기2 101~200: θ(본실험) 3.14% → 4/99 · θ(되감기2) 3.77% → 2/99
+  energy E_e · 자료 본실험 1~100: θ(본실험) 12.86% → 0/98 · θ(되감기2) 8.21% → 8/98
+  energy E_e · 자료 되감기2 101~200: θ(본실험) 12.86% → 0/99 · θ(되감기2) 8.21% → 8/99
+  energy E_h · 자료 본실험 1~100: θ(본실험) 12.86% → 78/98 · θ(되감기2) 8.21% → 96/98
+  energy E_h · 자료 되감기2 101~200: θ(본실험) 12.86% → 79/99 · θ(되감기2) 8.21% → 97/99
+
+==================== 자료 본실험 1~100
+(3) space 흔한 길: [reascld → reasccld] 92 · [raccld → reascld → reasccld] 2 · [reascld → reasccld → easccldr] 1 · [reascld → reasccld → easclrd → easccldr] 1 · [reascld → reasccld → eascclrd] 1
+(2) space 파생 아닌 교대 쌍(둘 다 거친 접시 · 앞선 쪽): reasccld 먼저 3/3 (easccldr·reasccld) · reascld 먼저 3/3 (easccldr·reascld) · easclrd 먼저 2/2 (easccldr·easclrd) · easclrd 먼저 1/2 (easclrd·reasccld) · reascld 먼저 2/2 (easclrd·reascld) · raccld 먼저 2/2 (raccld·reasccld)
+(3) energy 흔한 길: [rashcld → reascld → reashcld → reasccld] 5 · [rahcld → reascld → reashcld] 4 · [rahcld → reascld] 3 · [raschld → reascld] 2 · [rashcld → reascld → reasccld → reashcld] 2
+(2) energy 파생 아닌 교대 쌍(둘 다 거친 접시 · 앞선 쪽): rahcld 먼저 39/39 (rahcld·reascld) · rashcld 먼저 23/23 (rashcld·reascld) · rahcld 먼저 23/23 (rahcld·reashcld) · rahcld 먼저 20/20 (rahcld·reasccld) · rashcld 먼저 17/17 (rashcld·reasccld) · raschld 먼저 13/13 (raschld·reascld)
+(3) mat 흔한 길: [racld] 35 · [rahcld → racld] 6 · [rancld → racld] 4 · [raxcld → racld] 4 · [racld → arcld] 3
+(2) mat 파생 아닌 교대 쌍(둘 다 거친 접시 · 앞선 쪽): arcld 먼저 4/8 (arcld·racld) · racld 먼저 3/4 (racld·rcald) · racld 먼저 2/3 (acrld·racld) · rasecld 먼저 2/2 (racld·rasecld) · rancld 먼저 2/2 (arcld·rancld) · rasncld 먼저 2/2 (racld·rasncld)
+
+==================== 자료 되감기2 101~200
+(3) space 흔한 길: [reascld → reasccld] 95 · [reascld → reasccld → easccldr] 3 · [reascld → reasccld → eascldr → easccldr] 1
+(2) space 파생 아닌 교대 쌍(둘 다 거친 접시 · 앞선 쪽): reasccld 먼저 4/4 (easccldr·reasccld) · reascld 먼저 4/4 (easccldr·reascld) · reasccld 먼저 1/1 (eascldr·reasccld) · reascld 먼저 1/1 (eascldr·reascld)
+(3) energy 흔한 길: [rahcld → reascld → reasccld] 4 · [rashcld → reascld → reashcld → reasccld] 3 · [rahcld → reascld → reashcld] 2 · [rahcld → reascld → reaschld → reasccld] 2 · [racld → reascld → reasccld] 2
+(2) energy 파생 아닌 교대 쌍(둘 다 거친 접시 · 앞선 쪽): rahcld 먼저 47/47 (rahcld·reascld) · rahcld 먼저 30/30 (rahcld·reasccld) · rahcld 먼저 24/24 (rahcld·reashcld) · racld 먼저 17/17 (racld·reascld) · raschld 먼저 15/16 (raschld·reascld) · rahcld 먼저 13/13 (rahcld·reaschld)
+(3) mat 흔한 길: [racld] 31 · [rahcld → racld] 6 · [raxcld → racld] 4 · [racld → arcld] 4 · [rancld → racld] 3
+(2) mat 파생 아닌 교대 쌍(둘 다 거친 접시 · 앞선 쪽): racld 먼저 5/8 (arcld·racld) · racld 먼저 2/2 (aclrd·racld) · crald 먼저 1/2 (crald·racld) · rjdsarcld 먼저 1/1 (racald·rjdsarcld) · rjdsarcld 먼저 1/1 (racld·rjdsarcld) · rajcld 먼저 1/1 (rajcld·rhacld)

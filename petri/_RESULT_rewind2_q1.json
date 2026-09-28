@@ -1,0 +1,446 @@
+{
+ "plan": {
+  "conds": [
+   "space",
+   "energy",
+   "mat"
+  ],
+  "seeds": [
+   101,
+   200
+  ],
+  "ticks": 50000,
+  "sim": "0.3.1",
+  "mu": 0.01,
+  "mat_density": 8
+ },
+ "conds": {
+  "space": {
+   "planned": 100,
+   "survived": 99,
+   "extinct": 1,
+   "theta": 0.03773781148429035,
+   "L2_x_median": 0.01606230226332441,
+   "L2_h_median": 0.008413461538461538,
+   "L2_n_median": 0.008006058638970031
+  },
+  "energy": {
+   "planned": 100,
+   "survived": 99,
+   "extinct": 1,
+   "theta": 0.08209945598038462,
+   "L2_x_median": 0.022864401397268974,
+   "L2_h_median": 0.1755688622754491,
+   "L2_n_median": 0.026377036462373934
+  },
+  "mat": {
+   "planned": 100,
+   "survived": 91,
+   "extinct": 9,
+   "theta": 0.20395078842488304,
+   "L2_x_median": 0.06493506493506493,
+   "L2_h_median": 0.06970128022759602,
+   "L2_n_median": 0.07547169811320754
+  }
+ },
+ "q1_hold": {
+  "space": false,
+  "energy": false,
+  "mat": false
+ },
+ "q1": {
+  "space": {
+   "E_j": {
+    "k": 2,
+    "n": 99,
+    "lo": 0.005557603625523107,
+    "hi": 0.07069169626868313,
+    "verdict": "거의 안 일어난다",
+    "t_median": 1500.0,
+    "t_q1": 1000.0,
+    "t_q3": 2000.0
+   },
+   "E_noc": {
+    "k": 0,
+    "n": 99,
+    "lo": 0.0,
+    "hi": 0.03735453357396229,
+    "verdict": "거의 안 일어난다",
+    "t_median": null,
+    "t_q1": null,
+    "t_q3": null
+   },
+   "E_e": {
+    "k": 99,
+    "n": 99,
+    "lo": 0.9626454664260378,
+    "hi": 1.0,
+    "verdict": "매번 일어난다",
+    "t_median": 2500.0,
+    "t_q1": 2500.0,
+    "t_q3": 3000.0
+   },
+   "E_h": {
+    "k": 4,
+    "n": 99,
+    "lo": 0.015822382974672186,
+    "hi": 0.09932168323977801,
+    "verdict": "중립 대조(판정 없음)",
+    "t_median": 500.0,
+    "t_q1": 500.0,
+    "t_q3": 500.0
+   },
+   "E_short": {
+    "k": 0,
+    "n": 99,
+    "lo": 0.0,
+    "hi": 0.03735453357396229,
+    "verdict": "거의 안 일어난다",
+    "t_median": null,
+    "t_q1": null,
+    "t_q3": null
+   },
+   "E_seed": {
+    "k": 99,
+    "n": 99,
+    "lo": 0.9626454664260378,
+    "hi": 1.0,
+    "verdict": "매번 일어난다",
+    "t_median": 13500.0,
+    "t_q1": 11000.0,
+    "t_q3": 16500.0
+   }
+  },
+  "energy": {
+   "E_j": {
+    "k": 1,
+    "n": 99,
+    "lo": 0.0017852613200520298,
+    "hi": 0.05501665541403223,
+    "verdict": "거의 안 일어난다",
+    "t_median": 500.0,
+    "t_q1": 500.0,
+    "t_q3": 500.0
+   },
+   "E_noc": {
+    "k": 0,
+    "n": 99,
+    "lo": 0.0,
+    "hi": 0.03735453357396229,
+    "verdict": "거의 안 일어난다",
+    "t_median": null,
+    "t_q1": null,
+    "t_q3": null
+   },
+   "E_e": {
+    "k": 8,
+    "n": 99,
+    "lo": 0.041513905489623,
+    "hi": 0.15141969336531508,
+    "verdict": "우연에 달렸다",
+    "t_median": 2000.0,
+    "t_q1": 1500.0,
+    "t_q3": 2500.0
+   },
+   "E_h": {
+    "k": 97,
+    "n": 99,
+    "lo": 0.9293083037313168,
+    "hi": 0.9944423963744768,
+    "verdict": "매번 일어난다",
+    "t_median": 1500.0,
+    "t_q1": 1500.0,
+    "t_q3": 2000.0
+   },
+   "E_short": {
+    "k": 0,
+    "n": 99,
+    "lo": 0.0,
+    "hi": 0.03735453357396229,
+    "verdict": "거의 안 일어난다",
+    "t_median": null,
+    "t_q1": null,
+    "t_q3": null
+   },
+   "E_seed": {
+    "k": 99,
+    "n": 99,
+    "lo": 0.9626454664260378,
+    "hi": 1.0,
+    "verdict": "매번 일어난다",
+    "t_median": 5500.0,
+    "t_q1": 4500.0,
+    "t_q3": 7000.0
+   }
+  },
+  "mat": {
+   "E_j": {
+    "k": 3,
+    "n": 91,
+    "lo": 0.01127420246334579,
+    "hi": 0.09249460784774133,
+    "verdict": "거의 안 일어난다",
+    "t_median": 500.0,
+    "t_q1": 500.0,
+    "t_q3": 750.0
+   },
+   "E_noc": {
+    "k": 0,
+    "n": 91,
+    "lo": 0.0,
+    "hi": 0.04050543221539915,
+    "verdict": "거의 안 일어난다",
+    "t_median": null,
+    "t_q1": null,
+    "t_q3": null
+   },
+   "E_e": {
+    "k": 1,
+    "n": 91,
+    "lo": 0.0019424213233478899,
+    "hi": 0.05965080359061392,
+    "verdict": "거의 안 일어난다",
+    "t_median": 2000.0,
+    "t_q1": 2000.0,
+    "t_q3": 2000.0
+   },
+   "E_h": {
+    "k": 7,
+    "n": 91,
+    "lo": 0.03775902099480837,
+    "hi": 0.15036096011052938,
+    "verdict": "중립 대조(판정 없음)",
+    "t_median": 1500.0,
+    "t_q1": 750.0,
+    "t_q3": 3750.0
+   },
+   "E_short": {
+    "k": 1,
+    "n": 91,
+    "lo": 0.0019424213233478899,
+    "hi": 0.05965080359061392,
+    "verdict": "거의 안 일어난다",
+    "t_median": 1550.0,
+    "t_q1": 1550.0,
+    "t_q3": 1550.0
+   },
+   "E_seed": {
+    "k": 91,
+    "n": 91,
+    "lo": 0.959494567784601,
+    "hi": 1.0,
+    "verdict": "매번 일어난다",
+    "t_median": 5500.0,
+    "t_q1": 3000.0,
+    "t_q3": 9250.0
+   }
+  }
+ },
+ "q2": {
+  "space": {
+   "n": 99,
+   "between_median": 0.9950654894869702,
+   "within_median": 0.9987812885533566,
+   "within_p5": 0.9969472588198078,
+   "verdict": "갈라진다",
+   "top_dominant": "reasccld",
+   "top_dominant_share": "93/99 = 94% [87%, 97%]",
+   "letter_between_median": 0.9997886322572939
+  },
+  "energy": {
+   "n": 99,
+   "between_median": 0.9341996245469071,
+   "within_median": 0.9970231983109328,
+   "within_p5": 0.9944240560118822,
+   "verdict": "갈라진다",
+   "top_dominant": "reascld",
+   "top_dominant_share": "58/99 = 59% [49%, 68%]",
+   "letter_between_median": 0.9991095475115577
+  },
+  "mat": {
+   "n": 91,
+   "between_median": 0.9510274612148285,
+   "within_median": 0.9970484713976795,
+   "within_p5": 0.9940197848198595,
+   "verdict": "갈라진다",
+   "top_dominant": "racld",
+   "top_dominant_share": "84/91 = 92% [85%, 96%]",
+   "letter_between_median": 0.9994741163687034
+  }
+ },
+ "q3": {
+  "space": {
+   "with_seed": {
+    "n_pairs_tau": 1,
+    "jaccard_mean": 0.9866694152408438,
+    "tau_mean": 0.3333333333333333,
+    "null_p975": 1.0,
+    "testable": true,
+    "repeats": false
+   },
+   "without_seed": {
+    "n_pairs_tau": 0,
+    "jaccard_mean": 0.9800041228612657,
+    "tau_mean": NaN,
+    "null_p975": NaN,
+    "testable": false,
+    "repeats": false
+   },
+   "verdict_from": "전체",
+   "verdict": "순서 반복 없음"
+  },
+  "energy": {
+   "with_seed": {
+    "n_pairs_tau": 21,
+    "jaccard_mean": 0.92711124853982,
+    "tau_mean": 0.6944039478399348,
+    "null_p975": 0.3769436303796173,
+    "testable": true,
+    "repeats": true
+   },
+   "without_seed": {
+    "n_pairs_tau": 0,
+    "jaccard_mean": 0.8861746718889576,
+    "tau_mean": NaN,
+    "null_p975": NaN,
+    "testable": false,
+    "repeats": false
+   },
+   "verdict_from": "전체",
+   "verdict": "순서가 반복된다"
+  },
+  "mat": {
+   "with_seed": {
+    "n_pairs_tau": 0,
+    "jaccard_mean": 0.9463573463573464,
+    "tau_mean": NaN,
+    "null_p975": NaN,
+    "testable": false,
+    "repeats": false
+   },
+   "without_seed": {
+    "n_pairs_tau": 0,
+    "jaccard_mean": 0.006818181818181818,
+    "tau_mean": NaN,
+    "null_p975": NaN,
+    "testable": false,
+    "repeats": false
+   },
+   "verdict_from": "—",
+   "verdict": "판정 불가 — 공통 사건 ≥ 3 인 접시 쌍 없음"
+  }
+ },
+ "q4": {
+  "space-energy": {
+   "E_j": {
+    "lo": -0.020202020202020204,
+    "hi": 0.04040404040404041,
+    "differs": false
+   },
+   "E_noc": {
+    "lo": 0.0,
+    "hi": 0.0,
+    "differs": false
+   },
+   "E_e": {
+    "lo": 0.8686868686868687,
+    "hi": 0.9696969696969697,
+    "differs": true
+   },
+   "E_short": {
+    "lo": 0.0,
+    "hi": 0.0,
+    "differs": false
+   },
+   "E_seed": {
+    "lo": 0.0,
+    "hi": 0.0,
+    "differs": false
+   },
+   "q2": {
+    "lo": 0.05203203928724469,
+    "hi": 0.07114631864426005,
+    "differs": true
+   },
+   "q3": {
+    "lo": -0.6666666666666667,
+    "hi": 0.047619047619047616,
+    "differs": false
+   }
+  },
+  "space-mat": {
+   "E_j": {
+    "lo": -0.06593406593406594,
+    "hi": 0.029415029415029416,
+    "differs": false
+   },
+   "E_noc": {
+    "lo": 0.0,
+    "hi": 0.0,
+    "differs": false
+   },
+   "E_e": {
+    "lo": 0.967032967032967,
+    "hi": 1.0,
+    "differs": true
+   },
+   "E_short": {
+    "lo": -0.03296703296703297,
+    "hi": 0.0,
+    "differs": false
+   },
+   "E_seed": {
+    "lo": 0.0,
+    "hi": 0.0,
+    "differs": false
+   },
+   "q2": {
+    "lo": 0.03134001096512426,
+    "hi": 0.05596271334216818,
+    "differs": true
+   },
+   "q3": {
+    "lo": null,
+    "hi": null,
+    "differs": null
+   }
+  },
+  "energy-mat": {
+   "E_j": {
+    "lo": -0.06682206682206683,
+    "hi": 0.018426018426018428,
+    "differs": false
+   },
+   "E_noc": {
+    "lo": 0.0,
+    "hi": 0.0,
+    "differs": false
+   },
+   "E_e": {
+    "lo": 0.017538017538017536,
+    "hi": 0.13042513042513043,
+    "differs": true
+   },
+   "E_short": {
+    "lo": -0.03296703296703297,
+    "hi": 0.0,
+    "differs": false
+   },
+   "E_seed": {
+    "lo": 0.0,
+    "hi": 0.0,
+    "differs": false
+   },
+   "q2": {
+    "lo": -0.03277199864621291,
+    "hi": -0.0017006715600498936,
+    "differs": true
+   },
+   "q3": {
+    "lo": null,
+    "hi": null,
+    "differs": null
+   }
+  }
+ }
+}

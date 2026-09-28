@@ -1,0 +1,8 @@
+복제하는 코드 수 (길이별) — mono_nb 241 코드 중
+  길이 4:   1개 · 상위 6 = acld(27)
+  길이 5:   9개 · 상위 6 = racld(873), sacld(26), ascld(22), cacld(20), xacld(20), hacld(20)
+  길이 6:  53개 · 상위 6 = rascld(725), rsacld(612), racldn(607), racldh(601), raclxd(576), raclhd(557)
+  길이 7:  62개 · 상위 6 = rascled(1362), raescld(1256), rasceld(858), reascld(845), rasecld(782), rasclnd(606)
+
+  길이 5 상위(WT 제외): sacld(26), ascld(22), cacld(20), xacld(20), hacld(20)
+  길이 6 상위(WT 제외): rsacld(612), racldn(607), racldh(601), raclxd(576), raclhd(557)

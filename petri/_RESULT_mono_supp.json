@@ -1,0 +1,18 @@
+{
+ "racld": {
+  "wt_median_pop": 873.0,
+  "n": 116,
+  "n_dead": 60,
+  "U_dead_median": 0.6863468634686343,
+  "U_graded": 0.9165155569081465,
+  "ambiguous": 5
+ },
+ "rascld": {
+  "wt_median_pop": 725.0,
+  "n": 137,
+  "n_dead": 61,
+  "U_dead_median": 0.6099071207430313,
+  "U_graded": 0.8375146791929119,
+  "ambiguous": 8
+ }
+}

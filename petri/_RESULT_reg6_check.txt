@@ -1,0 +1,9 @@
+  lin_racld_mu0p01_s00501.json             체크섬 True(12d15652) · 끝 개체 True(3685)
+  lin_rascld_mu0p005_s00502.json           체크섬 True(523bbada) · 끝 개체 True(4947)
+  bud_mat_d04_racld_s00501.json            체크섬 True(335fd627) · 끝 개체 True(663)
+  bud_mat_d08_rascld_s00503.json           체크섬 True(af9047d6) · 끝 개체 True(5965)
+  bud_space_rascld_s00502.json             체크섬 True(0cc36604) · 끝 개체 True(10274)
+  dms 기본값: 팔 12 중 옛 기록(dms_mu1)과 같은 궤적 12 · 체크섬 True
+  dms --exact: 앞 3칸이 기본값과 같은 팔 12/12 · 출력 키 차이 ['exact_series']
+  --exact 예시(씨앗 팔 μ1%): 끝 줄 [3000, 4222, 553, 79, 871] → 계통 안 씨앗 그대로 14.3%
+회귀 검사: 전부 통과

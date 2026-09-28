@@ -1,0 +1,23 @@
+== replay.js v0.3.5 기본값 = 되감기 2 기록
+  ✅ 시드 101 · 체크섬 fcca2eab = fcca2eab · 기록 전부 같음 True · sim 0.3.5
+  ✅ 시드 102 · 체크섬 1fc43e9f = 1fc43e9f · 기록 전부 같음 True · sim 0.3.5
+  ✅ 시드 103 · 체크섬 1a96a89e = 1a96a89e · 기록 전부 같음 True · sim 0.3.5
+== lineage.js v1.5.0 기본값 = 해부 7 기록
+  ✅ 시드 701 씨앗 μ 1% · 다른 필드 없음 · opts {'cosmic': None, 'diffuse': None, 'age0': None, 'ageVar': None}
+== dms.js 기본값 = 해부 6C 기록 (배경 3 · μ 0.5%)
+  ✅ 배경 체크섬 True · 팔 계통 기록 같음 14/14 · 새 표시 없음 True
+== 새 옵션 (서술 · 시드 9501 · μ 1% · 밀도 8)
+   lin_racld_mu0p01_s09501.json           cosmic None · diffuse None · age None+None · R 7.31 · F 0.77 · 부풀림 4.32 · 우주선 변화 724 · 끝 WT 몫(상위8 중) 0.48 · 멸종 -1 · chk 7b85557d
+   lin_racld_mu0p01_s09501_a600.json      cosmic None · diffuse None · age 600+600 · R 9.31 · F 0.78 · 부풀림 5.32 · 우주선 변화 239 · 끝 WT 몫(상위8 중) 0.61 · 멸종 -1 · chk 9a4c7278
+  ✅ lin_racld_mu0p01_s09501_a600.json 체크섬이 기본값과 다름
+   lin_racld_mu0p01_s09501_c0.json        cosmic False · diffuse None · age None+None · R 7.63 · F 0.77 · 부풀림 4.45 · 우주선 변화 0 · 끝 WT 몫(상위8 중) 0.69 · 멸종 -1 · chk 0d6ecec3
+  ✅ cosmic 0 → 우주선 변화 0
+  ✅ lin_racld_mu0p01_s09501_c0.json 체크섬이 기본값과 다름
+   lin_racld_mu0p01_s09501_df0p05.json    cosmic None · diffuse 0.05 · age None+None · R 8.18 · F 0.80 · 부풀림 4.85 · 우주선 변화 52 · 끝 WT 몫(상위8 중) 0.00 · 멸종 -1 · chk fbaf9e90
+  ✅ lin_racld_mu0p01_s09501_df0p05.json 체크섬이 기본값과 다름
+   lin_racld_mu0p01_s09501_df0p5.json     cosmic None · diffuse 0.5 · age None+None · R 6.34 · F 0.77 · 부풀림 3.91 · 우주선 변화 2271 · 끝 WT 몫(상위8 중) 0.68 · 멸종 -1 · chk 20663428
+  ✅ lin_racld_mu0p01_s09501_df0p5.json 체크섬이 기본값과 다름
+   lin_rascld_mu0p01_s09501_a1200.json    cosmic None · diffuse None · age 1200+1200 · R 13.06 · F 0.69 · 부풀림 5.95 · 우주선 변화 14 · 끝 WT 몫(상위8 중) 0.21 · 멸종 -1 · chk 06cd719f
+  ✅ lin_rascld_mu0p01_s09501_a1200.json 체크섬이 기본값과 다름
+
+회귀 검사: 통과

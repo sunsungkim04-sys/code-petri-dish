@@ -1,0 +1,18 @@
+== replay.js 기본값 = 되감기 2 기록
+  ✅ 시드 101 · 체크섬 fcca2eab = fcca2eab · 기록 전부 같음 True · find_first 필드 없음 True
+  ✅ 시드 102 · 체크섬 1fc43e9f = 1fc43e9f · 기록 전부 같음 True · find_first 필드 없음 True
+  ✅ 시드 103 · 체크섬 1a96a89e = 1a96a89e · 기록 전부 같음 True · find_first 필드 없음 True
+== lifehist.js 3,000틱 = 해부 1 팔 기록
+  ✅ 배경 3 체크섬 대조 True
+  ✅ 배경 3 팔 계통 기록 같음 12/12
+  ✅ 배경 3 칸 셈(끝 = 시작 + 출생 − 사망) 전부 맞음 · 부모 잃음 0
+  ✅ 배경 4 체크섬 대조 True
+  ✅ 배경 4 팔 계통 기록 같음 12/12
+  ✅ 배경 4 칸 셈(끝 = 시작 + 출생 − 사망) 전부 맞음 · 부모 잃음 0
+== lineage.js v1.3.0
+  ✅ reg_lin/off/lin_rascld_mu0p01_s00701.json = 해부 7 기록 (다른 필드 없음) · spec 없음 True
+  ✅ reg_lin/offff/lin_racld_mu0p005_s00702_ff.json = 해부 7 기록 (다른 필드 없음) · spec 없음 True
+  ✅ reg_lin/on/lin_rascld_mu0p01_s00701.json 체크섬 = 끈 판 (True) · 결과 합 114670 · 맞게 9897 · 빠뜨림 408 · 바뀜 684 · 끼어듦 255 · 헛손질 103426 · 그 밖 0 · 죽음 261
+  ✅ reg_lin/onff/lin_racld_mu0p005_s00702_ff.json 체크섬 = 끈 판 (True) · 결과 합 11173090 · 맞게 966577 · 빠뜨림 1582 · 바뀜 3483 · 끼어듦 1393 · 헛손질 10200055 · 그 밖 0 · 죽음 28405
+
+회귀 검사: 통과

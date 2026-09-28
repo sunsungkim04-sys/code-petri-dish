@@ -1,0 +1,106 @@
+== 해부 13 판정 — 둘째 코드 가족에서 짝지은 고리 사다리
+  밑 코드 `acld`(고리 3) · 이웃 94 · μ [0.0, 0.003]
+  밑 코드 `rascled`(고리 2) · 이웃 158 · μ [0.0, 0.003]
+  점검 문제 0
+
+-- 밑 코드 `acld` (고리 3) · 배경 20 · 밑 코드 자신이 불임인 배경 0
+   밑 코드 자신 Δ 중앙값 -4.453
+   +n (판정) · 고리 {3: ['acldn', 'aclnd'], 4: ['acnld', 'ancld', 'nacld']}
+     ΔΔ acnld    (4) − acldn    (3) = -0.474 [-0.653, -0.296] · 배경 20 · 틱당 -0.474 ✅
+     ΔΔ acnld    (4) − aclnd    (3) = -0.413 [-0.629, -0.177] · 배경 20 · 틱당 -0.413 ✅
+     ΔΔ ancld    (4) − acldn    (3) = -0.775 [-1.169, -0.443] · 배경 20 · 틱당 -0.775 ✅
+     ΔΔ ancld    (4) − aclnd    (3) = -0.714 [-1.155, -0.362] · 배경 20 · 틱당 -0.714 ✅
+     ΔΔ nacld    (4) − acldn    (3) = -0.802 [-1.199, -0.448] · 배경 20 · 틱당 -0.802 ✅
+     ΔΔ nacld    (4) − aclnd    (3) = -0.741 [-1.207, -0.322] · 배경 20 · 틱당 -0.741 ✅
+     [음성] acldn     vs aclnd     (3틱) = +0.061 [-0.139, +0.291] ✅
+     [음성] acnld     vs ancld     (4틱) = +0.301 [-0.082, +0.768] ❌ 0.15 밖
+     [음성] acnld     vs nacld     (4틱) = +0.328 [-0.060, +0.782] ❌ 0.15 밖
+     [음성] ancld     vs nacld     (4틱) = +0.027 [-0.559, +0.637] ✅
+   +x (서술) · 고리 {3: ['acldx', 'aclxd', 'acxld', 'axcld', 'xacld']}
+     [음성] acldx     vs aclxd     (3틱) = -0.036 [-0.280, +0.222] 
+     [음성] acldx     vs acxld     (3틱) = -0.222 [-0.515, +0.060] 
+     [음성] acldx     vs axcld     (3틱) = +0.092 [-0.222, +0.386] 
+     [음성] acldx     vs xacld     (3틱) = +0.459 [+0.081, +0.836] 
+     [음성] aclxd     vs acxld     (3틱) = -0.186 [-0.509, +0.122] 
+     [음성] aclxd     vs axcld     (3틱) = +0.128 [-0.199, +0.477] 
+     [음성] aclxd     vs xacld     (3틱) = +0.495 [+0.158, +0.874] 
+     [음성] acxld     vs axcld     (3틱) = +0.314 [-0.015, +0.632] 
+     [음성] acxld     vs xacld     (3틱) = +0.681 [+0.313, +1.080] 
+     [음성] axcld     vs xacld     (3틱) = +0.367 [+0.052, +0.675] 
+   N1 ✅(6짝) · N2 ✅ · N3 ❌(4쌍)
+   N5 서술 — μ 0.003
+     ΔΔ acnld    (4) − acldn    (3) = -0.924 [-1.403, -0.427] · 틱당 -0.924
+     ΔΔ acnld    (4) − aclnd    (3) = -0.433 [-0.903, +0.012] · 틱당 -0.433
+     ΔΔ ancld    (4) − acldn    (3) = -0.574 [-1.023, -0.110] · 틱당 -0.574
+     ΔΔ ancld    (4) − aclnd    (3) = -0.083 [-0.499, +0.341] · 틱당 -0.083
+
+-- 밑 코드 `rascled` (고리 2) · 배경 20 · 밑 코드 자신이 불임인 배경 0
+   밑 코드 자신 Δ 중앙값 +1.059
+   +n (판정) · 고리 {2: ['nrascled', 'ranscled', 'rascledn', 'rasclend', 'rasclned', 'rnascled'], 3: ['rascnled', 'rasncled']}
+     ΔΔ rascnled (3) − nrascled (2) = -0.932 [-0.995, -0.868] · 배경 20 · 틱당 -0.932 ✅
+     ΔΔ rascnled (3) − ranscled (2) = -0.975 [-1.028, -0.924] · 배경 20 · 틱당 -0.975 ✅
+     ΔΔ rascnled (3) − rascledn (2) = -0.975 [-1.044, -0.911] · 배경 20 · 틱당 -0.975 ✅
+     ΔΔ rascnled (3) − rasclend (2) = -0.751 [-0.821, -0.689] · 배경 20 · 틱당 -0.751 ✅
+     ΔΔ rascnled (3) − rasclned (2) = -0.919 [-0.982, -0.861] · 배경 20 · 틱당 -0.919 ✅
+     ΔΔ rascnled (3) − rnascled (2) = -0.926 [-0.986, -0.875] · 배경 20 · 틱당 -0.926 ✅
+     ΔΔ rasncled (3) − nrascled (2) = -0.894 [-0.961, -0.825] · 배경 20 · 틱당 -0.894 ✅
+     ΔΔ rasncled (3) − ranscled (2) = -0.937 [-1.013, -0.862] · 배경 20 · 틱당 -0.937 ✅
+     ΔΔ rasncled (3) − rascledn (2) = -0.937 [-1.016, -0.859] · 배경 20 · 틱당 -0.937 ✅
+     ΔΔ rasncled (3) − rasclend (2) = -0.714 [-0.794, -0.636] · 배경 20 · 틱당 -0.714 ✅
+     ΔΔ rasncled (3) − rasclned (2) = -0.881 [-0.955, -0.800] · 배경 20 · 틱당 -0.881 ✅
+     ΔΔ rasncled (3) − rnascled (2) = -0.888 [-0.935, -0.841] · 배경 20 · 틱당 -0.888 ✅
+     [음성] nrascled  vs ranscled  (2틱) = -0.043 [-0.103, +0.016] ✅
+     [음성] nrascled  vs rascledn  (2틱) = -0.043 [-0.105, +0.018] ✅
+     [음성] nrascled  vs rasclend  (2틱) = +0.180 [+0.124, +0.238] ❌ 0.15 밖
+     [음성] nrascled  vs rasclned  (2틱) = +0.013 [-0.052, +0.083] ✅
+     [음성] nrascled  vs rnascled  (2틱) = +0.006 [-0.065, +0.066] ✅
+     [음성] ranscled  vs rascledn  (2틱) = +0.000 [-0.054, +0.050] ✅
+     [음성] ranscled  vs rasclend  (2틱) = +0.223 [+0.160, +0.282] ❌ 0.15 밖
+     [음성] ranscled  vs rasclned  (2틱) = +0.056 [+0.003, +0.113] ✅
+     [음성] ranscled  vs rnascled  (2틱) = +0.048 [-0.013, +0.107] ✅
+     [음성] rascledn  vs rasclend  (2틱) = +0.223 [+0.152, +0.299] ❌ 0.15 밖
+     [음성] rascledn  vs rasclned  (2틱) = +0.056 [-0.001, +0.111] ✅
+     [음성] rascledn  vs rnascled  (2틱) = +0.048 [-0.026, +0.119] ✅
+     [음성] rasclend  vs rasclned  (2틱) = -0.167 [-0.228, -0.100] ❌ 0.15 밖
+     [음성] rasclend  vs rnascled  (2틱) = -0.175 [-0.230, -0.115] ❌ 0.15 밖
+     [음성] rasclned  vs rnascled  (2틱) = -0.007 [-0.066, +0.049] ✅
+     [음성] rascnled  vs rasncled  (3틱) = -0.038 [-0.111, +0.034] ✅
+   +x (서술) · 고리 {2: ['rascledx', 'rasclexd', 'rasclxed', 'rascxled', 'rasxcled', 'raxscled', 'rxascled', 'xrascled']}
+     [음성] rascledx  vs rasclexd  (2틱) = +0.016 [-0.042, +0.075] 
+     [음성] rascledx  vs rasclxed  (2틱) = -0.001 [-0.062, +0.059] 
+     [음성] rascledx  vs rascxled  (2틱) = -0.007 [-0.086, +0.071] 
+     [음성] rascledx  vs rasxcled  (2틱) = +0.000 [-0.067, +0.069] 
+     [음성] rascledx  vs raxscled  (2틱) = -0.006 [-0.072, +0.061] 
+     [음성] rascledx  vs rxascled  (2틱) = -0.036 [-0.102, +0.031] 
+     [음성] rascledx  vs xrascled  (2틱) = +0.053 [-0.036, +0.139] 
+     [음성] rasclexd  vs rasclxed  (2틱) = -0.017 [-0.086, +0.054] 
+     [음성] rasclexd  vs rascxled  (2틱) = -0.023 [-0.090, +0.044] 
+     [음성] rasclexd  vs rasxcled  (2틱) = -0.015 [-0.088, +0.069] 
+     [음성] rasclexd  vs raxscled  (2틱) = -0.022 [-0.099, +0.056] 
+     [음성] rasclexd  vs rxascled  (2틱) = -0.052 [-0.129, +0.027] 
+     [음성] rasclexd  vs xrascled  (2틱) = +0.037 [-0.047, +0.118] 
+     [음성] rasclxed  vs rascxled  (2틱) = -0.006 [-0.080, +0.066] 
+     [음성] rasclxed  vs rasxcled  (2틱) = +0.002 [-0.045, +0.052] 
+     [음성] rasclxed  vs raxscled  (2틱) = -0.005 [-0.051, +0.041] 
+     [음성] rasclxed  vs rxascled  (2틱) = -0.035 [-0.095, +0.032] 
+     [음성] rasclxed  vs xrascled  (2틱) = +0.054 [-0.008, +0.113] 
+     [음성] rascxled  vs rasxcled  (2틱) = +0.008 [-0.066, +0.092] 
+     [음성] rascxled  vs raxscled  (2틱) = +0.001 [-0.074, +0.082] 
+     [음성] rascxled  vs rxascled  (2틱) = -0.029 [-0.117, +0.064] 
+     [음성] rascxled  vs xrascled  (2틱) = +0.060 [-0.037, +0.148] 
+     [음성] rasxcled  vs raxscled  (2틱) = -0.007 [-0.064, +0.046] 
+     [음성] rasxcled  vs rxascled  (2틱) = -0.037 [-0.100, +0.025] 
+     [음성] rasxcled  vs xrascled  (2틱) = +0.053 [-0.035, +0.137] 
+     [음성] raxscled  vs rxascled  (2틱) = -0.030 [-0.091, +0.032] 
+     [음성] raxscled  vs xrascled  (2틱) = +0.060 [-0.013, +0.130] 
+     [음성] rxascled  vs xrascled  (2틱) = +0.089 [+0.020, +0.159] 
+   N1 ✅(12짝) · N2 ✅ · N3 ❌(16쌍)
+   N5 서술 — μ 0.003
+     ΔΔ rascnled (3) − nrascled (2) = -0.540 [-0.665, -0.425] · 틱당 -0.540
+     ΔΔ rascnled (3) − ranscled (2) = -0.495 [-0.584, -0.404] · 틱당 -0.495
+     ΔΔ rasncled (3) − nrascled (2) = -0.566 [-0.674, -0.465] · 틱당 -0.566
+     ΔΔ rasncled (3) − ranscled (2) = -0.521 [-0.613, -0.423] · 틱당 -0.521
+
+== 종합
+  ❌ 판정한 밑 코드 어디서도 N1 · N3 이 서지 않는다 — 보고서 K2 를 `racld` 가족으로 한정한다
+기록 → _RESULT_pairs13.json

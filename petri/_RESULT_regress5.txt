@@ -1,0 +1,7 @@
+  mono_mat_racld_mu0_s00001.json     chk True · 앞6열 True · top True · 자유글자 52591/85856 (61.3%)
+  mono_mat_racld_mu0_s00002.json     chk True · 앞6열 True · top True · 자유글자 52550/85856 (61.2%)
+  mono_mat_racld_mu0_s00003.json     chk True · 앞6열 True · top True · 자유글자 52505/85856 (61.2%)
+  mono_mat_rascld_mu0_s00001.json    chk True · 앞6열 True · top True · 자유글자 45949/85856 (53.5%)
+  mono_mat_rascld_mu0_s00002.json    chk True · 앞6열 True · top True · 자유글자 45707/85856 (53.2%)
+  mono_mat_rascld_mu0_s00003.json    chk True · 앞6열 True · top True · 자유글자 46087/85856 (53.7%)
+파일 6 · 회귀 검사: 통과 — v1.1.0 은 궤적을 바꾸지 않는다

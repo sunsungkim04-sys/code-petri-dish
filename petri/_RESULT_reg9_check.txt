@@ -1,0 +1,16 @@
+== replay.js v0.3.4 기본값 = 되감기 2 기록
+  ✅ 시드 101 · 체크섬 fcca2eab = fcca2eab · 기록 전부 같음 True · sim 0.3.4
+  ✅ 시드 102 · 체크섬 1fc43e9f = 1fc43e9f · 기록 전부 같음 True · sim 0.3.4
+  ✅ 시드 103 · 체크섬 1a96a89e = 1a96a89e · 기록 전부 같음 True · sim 0.3.4
+== lineage.js v1.4.0 기본값 = 해부 7 기록
+  ✅ 시드 701 씨앗 μ 1% · 다른 필드 없음 · remember_die False
+== dms.js 기본값 = 해부 6C 기록 (배경 3 · μ 0.5%)
+  ✅ 배경 체크섬 True · 팔 계통 기록 같음 14/14 · remember_die 없음 True
+== dms.js --remember-die 1 (배경 3 · μ 0.5%)
+  ✅ 배경 체크섬 그대로 True · remember_die 표시 True · 팔 궤적 다름 14/14 (μ > 0 이라 달라야 함)
+   (서술) μ 0 에서 팔 궤적이 원래와 같은 팔 0/14 — 다르게 나오는 것이 맞다(헛손질 동안 난수를 안 굴려 난수 소비가 다르다)
+== lineage.js --remember-die --spec (서술)
+   lin_racld_mu0p01_s09401.json · remember_die True · R 1.12 · F 0.94 · I_계보 0.98 · 헛손질/맞게 9.9 · 멸종 -1
+   lin_rascld_mu0p01_s09401.json · remember_die True · R 1.11 · F 0.92 · I_계보 0.97 · 헛손질/맞게 16.8 · 멸종 -1
+
+회귀 검사: 통과

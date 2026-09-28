@@ -1,0 +1,28 @@
+
+==================== space · WT reasccld · 배경 20
+(1) 양성 대조 reasccl 소멸 틱: 중앙 500 · 범위 500~750 (20/20)
+    치명 돌연변이 121개(양성 대조 제외)의 소멸 틱 중앙값 분포: 5% 500 · 중앙 750 · 95% 1,875 · 양성 대조의 가장 늦은 소멸보다 늦게 사라진 것 40/121
+    가장 빨리 사라진 치명: reasccla(sub:7:a) 500 · reascdcld(ins:5:d) 500 · reasccln(sub:7:n) 500 · reasccls(sub:7:s) 500 · reascclc(sub:7:c) 500 · reasccll(sub:7:l) 500
+    가장 늦게 사라진 치명: reascclld(ins:6:l/ins:7:l) 2,500 · reascclnd(ins:7:n) 2,500 · reascclsd(ins:7:s) 2,500 · reascclcd(ins:7:c) 2,500 · reascclhd(ins:7:h) 2,500 · rejasccld(ins:2:j) 2,250
+(2) 가장 덜 해로운 10: reascccld(ins:4:c/ins:5:c/ins:6:c) -0.52 소멸 0/20 · reacsccld(ins:3:c) -2.08 소멸 0/20 · reascld(del:4/del:5) -4.38 소멸 2/20 · areasccld(ins:0:a) -5.62 소멸 4/20 · reasccled(ins:7:e) -6.01 소멸 5/20 · reasccxld(ins:6:x) -6.65 소멸 8/20 · rexasccld(ins:2:x) -6.72 소멸 9/20 · reaxsccld(ins:3:x) -6.72 소멸 9/20 · reascclxd(ins:7:x) -6.73 소멸 9/20 · xreasccld(ins:0:x) -6.75 소멸 9/20
+    무늬 x 끼어듦: xreasccld -6.75 소멸 9/20 틱 2,500 · rxeasccld -6.77 소멸 9/20 틱 2,500 · rexasccld -6.72 소멸 9/20 틱 2,500 · reaxsccld -6.72 소멸 9/20 틱 2,500 · reasxccld -6.94 소멸 10/20 틱 2,500 · reascxcld -6.86 소멸 9/20 틱 2,500 · reasccxld -6.65 소멸 8/20 틱 2,500 · reascclxd -6.73 소멸 9/20 틱 2,500 · reasccldx -6.86 소멸 10/20 틱 2,500
+    이로움: 없음
+
+==================== mat · WT racld · 배경 20
+(1) 양성 대조 racl 소멸 틱: 중앙 750 · 범위 750~750 (20/20)
+    치명 돌연변이 49개(양성 대조 제외)의 소멸 틱 중앙값 분포: 5% 750 · 중앙 750 · 95% 750 · 양성 대조의 가장 늦은 소멸보다 늦게 사라진 것 1/49
+    가장 빨리 사라진 치명: rcld(del:1) 750 · rscld(sub:1:s) 750 · radld(sub:2:d) 750 · lacld(sub:0:l) 750 · rdcld(sub:1:d) 750 · ranld(sub:2:n) 750
+    가장 늦게 사라진 치명: raccd(sub:3:c) 1,250 · rcld(del:1) 750 · rscld(sub:1:s) 750 · radld(sub:2:d) 750 · lacld(sub:0:l) 750 · rdcld(sub:1:d) 750
+(2) 가장 덜 해로운 10: rsacld(ins:1:s) -0.19 소멸 0/20 · racldx(ins:5:x) -0.42 소멸 0/20 · raclde(ins:5:e) -0.43 소멸 0/20 · raclxd(ins:4:x) -0.44 소멸 0/20 · racxld(ins:3:x) -0.45 소멸 0/20 · raxcld(ins:2:x) -0.49 소멸 0/20 · rxacld(ins:1:x) -0.55 소멸 0/20 · raclds(ins:5:s) -0.57 소멸 0/20 · raclsd(ins:4:s) -0.58 소멸 0/20 · racldn(ins:5:n) -0.58 소멸 0/20
+    무늬 x 끼어듦: xracld -0.62 소멸 0/20 틱 nan · rxacld -0.55 소멸 0/20 틱 nan · raxcld -0.49 소멸 0/20 틱 nan · racxld -0.45 소멸 0/20 틱 nan · raclxd -0.44 소멸 0/20 틱 nan · racldx -0.42 소멸 0/20 틱 nan
+    이로움: rascld(ins:2:s) +0.39[+0.34,+0.44]
+
+==================== energy · WT reascld · 배경 60
+(1) 양성 대조 reascl 소멸 틱: 중앙 750 · 범위 500~750 (60/60)
+    치명 돌연변이 93개(양성 대조 제외)의 소멸 틱 중앙값 분포: 5% 450 · 중앙 500 · 95% 1,100 · 양성 대조의 가장 늦은 소멸보다 늦게 사라진 것 14/93
+    가장 빨리 사라진 치명: eascld(del:0) 250 · ceascld(sub:0:c) 250 · eeascld(sub:0:e) 250 · reaseld(sub:4:e) 250 · deascld(sub:0:d) 375 · reasccd(sub:5:c) 500
+    가장 늦게 사라진 치명: reasclrd(ins:6:r) 1,250 · rearscld(ins:3:r) 1,250 · reahcld(sub:3:h) 1,250 · rreascld(ins:0:r/ins:1:r) 1,250 · rhascld(sub:1:h) 1,250 · jreascld(ins:0:j) 1,000
+(2) 가장 덜 해로운 10: areascld(ins:0:a) -0.93 소멸 5/60 · reascnld(ins:5:n) -1.02 소멸 2/60 · reasncld(ins:4:n) -1.33 소멸 3/60 · rneascld(ins:1:n) -1.40 소멸 6/60 · nreascld(ins:0:n) -1.51 소멸 6/60 · reascldn(ins:7:n) -1.87 소멸 11/60 · reacscld(ins:3:c) -1.98 소멸 14/60 · reasxcld(ins:4:x) -2.24 소멸 16/60 · sreascld(ins:0:s) -2.28 소멸 14/60 · xreascld(ins:0:x) -2.48 소멸 18/60
+    무늬 x 끼어듦: xreascld -2.48 소멸 18/60 틱 2,500 · rxeascld -2.71 소멸 22/60 틱 2,500 · rexascld -2.55 소멸 20/60 틱 2,500 · reaxscld -2.73 소멸 21/60 틱 2,500 · reasxcld -2.24 소멸 16/60 틱 2,500 · reascxld -2.67 소멸 20/60 틱 2,500 · reasclxd -2.63 소멸 21/60 틱 2,500 · reascldx -2.49 소멸 18/60 틱 2,375
+    이로움: reashcld(ins:4:h) +2.05[+1.87,+2.23] · reaschld(ins:5:h) +1.96[+1.78,+2.14] · reasccld(ins:4:c/ins:5:c) +1.38[+1.24,+1.52] · rheascld(ins:1:h) +1.20[+1.02,+1.38] · hreascld(ins:0:h) +1.15[+0.96,+1.34] · reahscld(ins:3:h) +0.51[+0.32,+0.71] · reasclhd(ins:6:h) +0.37[+0.18,+0.55]
+    구별 안 됨: reascldh(ins:7:h) -0.16[-0.49,+0.12] · rehascld(ins:2:h) +0.15[-0.12,+0.39]

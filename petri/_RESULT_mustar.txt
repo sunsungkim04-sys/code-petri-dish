@@ -1,0 +1,72 @@
+== 교차 μ* — 단순 모형 대 실측 (λ = 가족의 불임 몫 · G 7.14) · 🟡 사후 서술
+   밑        짧은        긴            ΔΔ(0)      상승 실측      상승 모형     μ* 실측     μ* 모형
+   racld    raclnd    nracld      -0.619     +0.217     +0.092         밖    0.0202
+   racld    raclnd    rnacld      -0.589     +0.266     +0.084         밖    0.0209
+   racld    raclnd    rancld      -0.567     +0.179     +0.083         밖    0.0205
+   racld    raclnd    racnld      -0.505     +0.218     +0.088         밖    0.0173
+   racld    racldn    nracld      -0.653     +0.173     +0.093         밖    0.0210
+   racld    racldn    rnacld      -0.623     +0.222     +0.086         밖    0.0218
+   racld    racldn    rancld      -0.602     +0.135     +0.084         밖    0.0215
+   racld    racldn    racnld      -0.539     +0.175     +0.089         밖    0.0182
+   rascld   nrascld   rasncld     -0.553     +0.344     +0.211    0.0050    0.0078
+   rascld   nrascld   rascnld     -0.542     +0.381     +0.229    0.0056    0.0071
+   rascld   rnascld   rasncld     -0.479     +0.199     +0.226    0.0074    0.0064
+   rascld   rnascld   rascnld     -0.469     +0.235     +0.244    0.0076    0.0058
+   rascld   ranscld   rasncld     -0.581     +0.341     +0.214    0.0059    0.0081
+   rascld   ranscld   rascnld     -0.570     +0.377     +0.232    0.0064    0.0074
+   rascld   rasclnd   rasncld     -0.668     +0.436     +0.212    0.0053    0.0095
+   rascld   rasclnd   rascnld     -0.658     +0.472     +0.230    0.0060    0.0086
+   rascld   rascldn   rasncld     -0.701     +0.402     +0.223    0.0062    0.0094
+   rascld   rascldn   rascnld     -0.690     +0.438     +0.241    0.0066    0.0086
+   rsacld   nrsacld   rsnacld     -0.482     +0.236     +0.134         밖    0.0107
+   rsacld   nrsacld   rsancld     -0.464     +0.211     +0.132         밖    0.0105
+   rsacld   nrsacld   rsacnld     -0.449     +0.235     +0.127    0.0100    0.0106
+   rsacld   rnsacld   rsnacld     -0.565     +0.236     +0.136    0.0099    0.0125
+   rsacld   rnsacld   rsancld     -0.548     +0.211     +0.134         밖    0.0123
+   rsacld   rnsacld   rsacnld     -0.532     +0.236     +0.128    0.0095    0.0124
+   rsacld   rsaclnd   rsnacld     -0.585     +0.299     +0.129    0.0098    0.0136
+   rsacld   rsaclnd   rsancld     -0.567     +0.274     +0.127         밖    0.0134
+   rsacld   rsaclnd   rsacnld     -0.552     +0.298     +0.122    0.0095    0.0136
+   rsacld   rsacldn   rsnacld     -0.624     +0.199     +0.128         밖    0.0147
+   rsacld   rsacldn   rsancld     -0.606     +0.174     +0.126         밖    0.0145
+   rsacld   rsacldn   rsacnld     -0.591     +0.199     +0.120         밖    0.0148
+   racldx   raclndx   nracldx     -0.643     +0.232     +0.092         밖    0.0209
+   racldx   raclndx   rnacldx     -0.651     +0.213     +0.082         밖    0.0238
+   racldx   raclndx   rancldx     -0.603     +0.233     +0.080         밖    0.0225
+   racldx   raclndx   racnldx     -0.624     +0.275     +0.078         밖    0.0242
+   racldx   racldnx   nracldx     -0.661     +0.251     +0.099         밖    0.0200
+   racldx   racldnx   rnacldx     -0.669     +0.232     +0.089         밖    0.0226
+   racldx   racldnx   rancldx     -0.621     +0.252     +0.087         밖    0.0215
+   racldx   racldnx   racnldx     -0.643     +0.294     +0.084         밖    0.0229
+   racldx   racldxn   nracldx     -0.687     +0.210     +0.097         밖    0.0212
+   racldx   racldxn   rnacldx     -0.695     +0.191     +0.087         밖    0.0239
+   racldx   racldxn   rancldx     -0.647     +0.211     +0.085         밖    0.0228
+   racldx   racldxn   racnldx     -0.668     +0.254     +0.082         밖    0.0243
+   acld     aclnd     nacld       -0.741     +0.572     +0.036         밖    0.0609
+   acld     aclnd     ancld       -0.714     +0.631     +0.046         밖    0.0467
+   acld     aclnd     acnld       -0.413     -0.020     +0.060    0.0049    0.0205
+   acld     acldn     nacld       -0.802     +0.143     +0.034         밖    0.0698
+   acld     acldn     ancld       -0.775     +0.201     +0.044         밖    0.0530
+   acld     acldn     acnld       -0.474     -0.450     +0.058         밖    0.0244
+   rascled  nrascled  rasncled    -0.894     +0.328     +0.060         밖    0.0451
+   rascled  nrascled  rascnled    -0.932     +0.392     +0.062    0.0092    0.0454
+   rascled  rnascled  rasncled    -0.888     +0.354     +0.062         밖    0.0431
+   rascled  rnascled  rascnled    -0.926     +0.418     +0.064         밖    0.0434
+   rascled  ranscled  rasncled    -0.937     +0.416     +0.068         밖    0.0415
+   rascled  ranscled  rascnled    -0.975     +0.480     +0.070         밖    0.0418
+   rascled  rasclned  rasncled    -0.881     +0.366     +0.060         밖    0.0443
+   rascled  rasclned  rascnled    -0.919     +0.430     +0.062         밖    0.0446
+   rascled  rasclend  rasncled    -0.714     +0.244     +0.069    0.0096    0.0308
+   rascled  rasclend  rascnled    -0.751     +0.308     +0.072    0.0085    0.0315
+   rascled  rascledn  rasncled    -0.937     +0.374     +0.066         밖    0.0423
+   rascled  rascledn  rascnled    -0.975     +0.438     +0.068         밖    0.0427
+
+== 밑 코드별 요약: 상승 실측/모형 비(중앙) · μ* 실측(중앙 · 구간 안 짝 수) · μ* 모형(중앙)
+   racld    비 2.36 (범위 1.61~3.15) · μ* 실측 — (0/8 짝) · μ* 모형 0.0209
+   rascld   비 1.66 (범위 0.88~2.05) · μ* 실측 0.0062 (10/10 짝) · μ* 모형 0.0081
+   rsacld   비 1.75 (범위 1.39~2.45) · μ* 실측 0.0098 (5/12 짝) · μ* 모형 0.0134
+   racldx   비 2.61 (범위 2.16~3.55) · μ* 실측 — (0/12 짝) · μ* 모형 0.0228
+   acld     비 4.59 (범위 -7.72~15.68) · μ* 실측 0.0049 (1/6 짝) · μ* 모형 0.0530
+   rascled  비 6.13 (범위 3.51~6.96) · μ* 실측 0.0092 (3/12 짝) · μ* 모형 0.0431
+
+   전체 60 짝: 상승 실측/모형 중앙 2.45 · 사분위 [1.75, 4.15] — 단순 모형은 충실도 몫을 그만큼 덜 잡는다(해부 12 M1 과 같은 방향)
