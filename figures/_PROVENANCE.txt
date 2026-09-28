@@ -83,78 +83,78 @@ F5   an11.txt         B table lifespan 1200 · mu 0.001             +0.007
 F5   an11.txt         B table lifespan 1200 · mu 0.003             -0.649
 F5   an11.txt         B table lifespan 1200 · mu 0.005             -0.900
 F5   an11.txt         B table lifespan 1200 · mu 0.01              -1.033
-F6   model12          cell|rascld|0.001                            meas 0.136 · M1 0.201 · hit True
-F6   model12          cell|rascld|0.003                            meas -0.201 · M1 0.009 · hit False
-F6   model12          cell|rascld|0.005                            meas -0.408 · M1 -0.041 · hit False
-F6   model12          cell|rascld|0.01                             meas -0.753 · M1 0.194 · hit False
-F6   model12          cell|rsacld|0.001                            meas -0.309 · M1 -0.257 · hit True
-F6   model12          cell|rsacld|0.003                            meas -0.385 · M1 -0.308 · hit True
-F6   model12          cell|rsacld|0.005                            meas -0.463 · M1 -0.307 · hit False
-F6   model12          cell|rsacld|0.01                             meas -0.500 · M1 -0.110 · hit False
-F6   model12          cell|racldx|0.001                            meas -0.407 · M1 -0.405 · hit True
-F6   model12          cell|racldx|0.003                            meas -0.390 · M1 -0.366 · hit True
-F6   model12          cell|racldx|0.005                            meas -0.426 · M1 -0.315 · hit False
-F6   model12          cell|racldx|0.01                             meas -0.413 · M1 -0.092 · hit False
-F6   model12          flow|racld/U                                 0.1421
-F6   model12          flow|rascld/U                                0.2296
-F6   model12          flow|rsacld/U                                0.1769
-F6   model12          flow|racldx/U                                0.1464
-F7   pairs13_racldfam pair|rascld|n|* (10짝)                        틱당 -0.701 ~ -0.469
-F7   pairs13_racldfam pair|rsacld|n|* (12짝)                        틱당 -0.624 ~ -0.449
-F7   pairs13_racldfam pair|racld|n|* (8짝)                          틱당 -0.653 ~ -0.505
-F7   pairs13_racldfam pair|racldx|n|* (12짝)                        틱당 -0.695 ~ -0.603
-F7   pairs13          pair|rascled|n|* (12짝)                       틱당 -0.975 ~ -0.714
-F7   pairs13          pair|acld|n|* (6짝)                           틱당 -0.802 ~ -0.413
-F7   pairs13_racldfam neg|rascld|n|* (11쌍)                         최대 |ΔΔ| 0.222 · 0.15 밖 2
-F7   pairs13_racldfam neg|rascld|x|* (21쌍)                         최대 |ΔΔ| 0.148 · 0.15 밖 0
-F7   pairs13_racldfam neg|rsacld|n|* (9쌍)                          최대 |ΔΔ| 0.142 · 0.15 밖 0
-F7   pairs13_racldfam neg|rsacld|x|* (21쌍)                         최대 |ΔΔ| 0.160 · 0.15 밖 1
-F7   pairs13_racldfam neg|racld|n|* (7쌍)                           최대 |ΔΔ| 0.114 · 0.15 밖 0
-F7   pairs13_racldfam neg|racld|x|* (15쌍)                          최대 |ΔΔ| 0.204 · 0.15 밖 3
-F7   pairs13_racldfam neg|racldx|n|* (9쌍)                          최대 |ΔΔ| 0.048 · 0.15 밖 0
-F7   pairs13_racldfam neg|racldx|x|* (15쌍)                         최대 |ΔΔ| 0.207 · 0.15 밖 2
-F7   pairs13          neg|rascled|n|* (16쌍)                        최대 |ΔΔ| 0.223 · 0.15 밖 5
-F7   pairs13          neg|rascled|x|* (28쌍)                        최대 |ΔΔ| 0.089 · 0.15 밖 0
-F7   pairs13          neg|acld|n|* (4쌍)                            최대 |ΔΔ| 0.328 · 0.15 밖 2
-F7   pairs13          neg|acld|x|* (10쌍)                           최대 |ΔΔ| 0.681 · 0.15 밖 7
-F7   pairs14          code|rascld|* (7코드)                          R 10.83 ~ 15.85 · L [2, 3]
-F7   pairs14          code|rsacld|* (7코드)                          R 8.26 ~ 10.89 · L [3, 4]
-F7   pairs14          code|racld|* (6코드)                           R 7.61 ~ 9.67 · L [4, 5]
-F7   pairs14          code|racldx|* (7코드)                          R 6.78 ~ 8.64 · L [4, 5]
-F7   pairs14          code|rascled|* (8코드)                         R 3.37 ~ 4.22 · L [2, 3]
-F7   pairs14          code|acld|* (5코드)                            R 4.94 ~ 6.01 · L [3, 4]
-F7   pairs14          A1|* (6등급 쌍)                                 ln R 차 +0.164 ~ +0.362
-F7   pairs14          A2_abs.max                                   0.0497
-F8   pairs15          B1|rascld|* (10짝)                            ΔΔ(μ) 평균 -0.59 -0.41 -0.23 -0.05 +0.17 · 통과 10/10
-F8   pairs15          B1|rsacld|* (12짝)                            ΔΔ(μ) 평균 -0.55 -0.48 -0.31 -0.17 -0.03 · 통과 12/12
-F8   pairs15          B1|racld|* (8짝)                              ΔΔ(μ) 평균 -0.59 -0.51 -0.39 -0.29 -0.15 · 통과 8/8
-F8   pairs15          B1|racldx|* (12짝)                            ΔΔ(μ) 평균 -0.65 -0.52 -0.41 -0.32 -0.12 · 통과 12/12
-F8   pairs15          B1|rascled|* (12짝)                           ΔΔ(μ) 평균 -0.89 -0.72 -0.52 -0.28 -0.07 · 통과 12/12
-F8   pairs15          B1|acld|* (6짝)                               ΔΔ(μ) 평균 -0.65 -0.53 -0.47 -0.22 -0.68 · 통과 1/6
-F8   pairs15          C2|orig · C3|ff · C2|rem                     original Δμ +0.275 [+0.230, +0.331]
-F8   pairs15                                                       find-first Δμ +0.017 [-0.016, +0.051]
-F8   pairs15                                                       remember-roll Δμ +0.034 [-0.010, +0.072]
-F8   pairs15          C1|ff                                        μ0 차 +0.035 [+0.002, +0.067]
-F8   pairs15          C1|rem                                       μ0 차 +0.020 [-0.017, +0.051]
-F8   pairs18          D1|acld (d8 · d32 · ratio)                   +0.115 · +0.027 · 0.24
-F8   pairs18          D1|racld (d8 · d32 · ratio)                  +0.183 · +0.058 · 0.32
-F8   pairs18          D1|racldx (d8 · d32 · ratio)                 +0.175 · +0.038 · 0.22
-F8   pairs18          D1|rascld (d8 · d32 · ratio)                 +0.329 · +0.180 · 0.55
-F8   pairs18          D1|rascled (d8 · d32 · ratio)                +0.209 · +0.153 · 0.73
-F8   pairs18          D1|rsacld (d8 · d32 · ratio)                 +0.210 · +0.080 · 0.38
-F8   pairs18          D1b.median · D2.m8 · D2.m32 · D3.abs8 · D3.abs32 1.295 · +0.389 · -0.224 · 0.909 · 0.545
-F9   evo17            curve|0.001 (median · q1 · q3)               끝 2.301 · 최대 2.794
-F9   evo17            curve|0.003 (median · q1 · q3)               끝 3.289 · 최대 3.760
-F9   evo17            curve|0.005 (median · q1 · q3)               끝 3.834 · 최대 4.008
-F9   evo17            curve|0.01 (median · q1 · q3)                끝 4.076 · 최대 4.218
-F9   evo17            V1|0.001                                     끝점 L̄ 중앙 2.301 · 접시 20
-F9   evo17            V1|0.003                                     끝점 L̄ 중앙 3.289 · 접시 20
-F9   evo17            V1|0.005                                     끝점 L̄ 중앙 3.834 · 접시 19
-F9   evo17            V1|0.01                                      끝점 L̄ 중앙 4.076 · 접시 19
-F9   evo17            V1.rho · ci                                  0.964 [0.947, 0.968]
+F6   pairs13_racldfam pair|rascld|n|* (10짝)                        틱당 -0.701 ~ -0.469
+F6   pairs13_racldfam pair|rsacld|n|* (12짝)                        틱당 -0.624 ~ -0.449
+F6   pairs13_racldfam pair|racld|n|* (8짝)                          틱당 -0.653 ~ -0.505
+F6   pairs13_racldfam pair|racldx|n|* (12짝)                        틱당 -0.695 ~ -0.603
+F6   pairs13          pair|rascled|n|* (12짝)                       틱당 -0.975 ~ -0.714
+F6   pairs13          pair|acld|n|* (6짝)                           틱당 -0.802 ~ -0.413
+F6   pairs13_racldfam neg|rascld|n|* (11쌍)                         최대 |ΔΔ| 0.222 · 0.15 밖 2
+F6   pairs13_racldfam neg|rascld|x|* (21쌍)                         최대 |ΔΔ| 0.148 · 0.15 밖 0
+F6   pairs13_racldfam neg|rsacld|n|* (9쌍)                          최대 |ΔΔ| 0.142 · 0.15 밖 0
+F6   pairs13_racldfam neg|rsacld|x|* (21쌍)                         최대 |ΔΔ| 0.160 · 0.15 밖 1
+F6   pairs13_racldfam neg|racld|n|* (7쌍)                           최대 |ΔΔ| 0.114 · 0.15 밖 0
+F6   pairs13_racldfam neg|racld|x|* (15쌍)                          최대 |ΔΔ| 0.204 · 0.15 밖 3
+F6   pairs13_racldfam neg|racldx|n|* (9쌍)                          최대 |ΔΔ| 0.048 · 0.15 밖 0
+F6   pairs13_racldfam neg|racldx|x|* (15쌍)                         최대 |ΔΔ| 0.207 · 0.15 밖 2
+F6   pairs13          neg|rascled|n|* (16쌍)                        최대 |ΔΔ| 0.223 · 0.15 밖 5
+F6   pairs13          neg|rascled|x|* (28쌍)                        최대 |ΔΔ| 0.089 · 0.15 밖 0
+F6   pairs13          neg|acld|n|* (4쌍)                            최대 |ΔΔ| 0.328 · 0.15 밖 2
+F6   pairs13          neg|acld|x|* (10쌍)                           최대 |ΔΔ| 0.681 · 0.15 밖 7
+F6   pairs14          code|rascld|* (7코드)                          R 10.83 ~ 15.85 · L [2, 3]
+F6   pairs14          code|rsacld|* (7코드)                          R 8.26 ~ 10.89 · L [3, 4]
+F6   pairs14          code|racld|* (6코드)                           R 7.61 ~ 9.67 · L [4, 5]
+F6   pairs14          code|racldx|* (7코드)                          R 6.78 ~ 8.64 · L [4, 5]
+F6   pairs14          code|rascled|* (8코드)                         R 3.37 ~ 4.22 · L [2, 3]
+F6   pairs14          code|acld|* (5코드)                            R 4.94 ~ 6.01 · L [3, 4]
+F6   pairs14          A1|* (6등급 쌍)                                 ln R 차 +0.164 ~ +0.362
+F6   pairs14          A2_abs.max                                   0.0497
+F7   pairs15          B1|rascld|* (10짝)                            ΔΔ(μ) 평균 -0.59 -0.41 -0.23 -0.05 +0.17 · 통과 10/10
+F7   pairs15          B1|rsacld|* (12짝)                            ΔΔ(μ) 평균 -0.55 -0.48 -0.31 -0.17 -0.03 · 통과 12/12
+F7   pairs15          B1|racld|* (8짝)                              ΔΔ(μ) 평균 -0.59 -0.51 -0.39 -0.29 -0.15 · 통과 8/8
+F7   pairs15          B1|racldx|* (12짝)                            ΔΔ(μ) 평균 -0.65 -0.52 -0.41 -0.32 -0.12 · 통과 12/12
+F7   pairs15          B1|rascled|* (12짝)                           ΔΔ(μ) 평균 -0.89 -0.72 -0.52 -0.28 -0.07 · 통과 12/12
+F7   pairs15          B1|acld|* (6짝)                               ΔΔ(μ) 평균 -0.65 -0.53 -0.47 -0.22 -0.68 · 통과 1/6
+F7   pairs15          C2|orig · C3|ff · C2|rem                     original Δμ +0.275 [+0.230, +0.331]
+F7   pairs15                                                       find-first Δμ +0.017 [-0.016, +0.051]
+F7   pairs15                                                       remember-roll Δμ +0.034 [-0.010, +0.072]
+F7   pairs15          C1|ff                                        μ0 차 +0.035 [+0.002, +0.067]
+F7   pairs15          C1|rem                                       μ0 차 +0.020 [-0.017, +0.051]
+F7   pairs18          D1|acld (d8 · d32 · ratio)                   +0.115 · +0.027 · 0.24
+F7   pairs18          D1|racld (d8 · d32 · ratio)                  +0.183 · +0.058 · 0.32
+F7   pairs18          D1|racldx (d8 · d32 · ratio)                 +0.175 · +0.038 · 0.22
+F7   pairs18          D1|rascld (d8 · d32 · ratio)                 +0.329 · +0.180 · 0.55
+F7   pairs18          D1|rascled (d8 · d32 · ratio)                +0.209 · +0.153 · 0.73
+F7   pairs18          D1|rsacld (d8 · d32 · ratio)                 +0.210 · +0.080 · 0.38
+F7   pairs18          D1b.median · D2.m8 · D2.m32 · D3.abs8 · D3.abs32 1.295 · +0.389 · -0.224 · 0.909 · 0.545
+F8   evo17            curve|0.001 (median · q1 · q3)               끝 2.301 · 최대 2.794
+F8   evo17            curve|0.003 (median · q1 · q3)               끝 3.289 · 최대 3.760
+F8   evo17            curve|0.005 (median · q1 · q3)               끝 3.834 · 최대 4.008
+F8   evo17            curve|0.01 (median · q1 · q3)                끝 4.076 · 최대 4.218
+F8   evo17            V1|0.001                                     끝점 L̄ 중앙 2.301 · 접시 20
+F8   evo17            V1|0.003                                     끝점 L̄ 중앙 3.289 · 접시 20
+F8   evo17            V1|0.005                                     끝점 L̄ 중앙 3.834 · 접시 19
+F8   evo17            V1|0.01                                      끝점 L̄ 중앙 4.076 · 접시 19
+F8   evo17            V1.rho · ci                                  0.964 [0.947, 0.968]
 FS1  pairs19          A|d8|a{150,300,600}.mean                     0.904 0.909 0.928
 FS1  pairs19          A|d32|a{150,300,600}.mean                    0.614 0.545 0.571
 FS1  pairs19          V1.diff · V2.contrast                        +0.069 [+0.018, +0.121] · +0.067 [+0.005, +0.128]
 FS1  pairs19          cell|d8|a{150,300,600}.vac_median            0.523 0.474 0.438
 FS1  pairs19          cell|d32|a{150,300,600}.vac_median           0.121 0.068 0.039
 FS1  pairs19          P1.r150 · P1.r600                            1.794 · 0.573
+FS2  model12          cell|rascld|0.001                            meas 0.136 · M1 0.201 · hit True
+FS2  model12          cell|rascld|0.003                            meas -0.201 · M1 0.009 · hit False
+FS2  model12          cell|rascld|0.005                            meas -0.408 · M1 -0.041 · hit False
+FS2  model12          cell|rascld|0.01                             meas -0.753 · M1 0.194 · hit False
+FS2  model12          cell|rsacld|0.001                            meas -0.309 · M1 -0.257 · hit True
+FS2  model12          cell|rsacld|0.003                            meas -0.385 · M1 -0.308 · hit True
+FS2  model12          cell|rsacld|0.005                            meas -0.463 · M1 -0.307 · hit False
+FS2  model12          cell|rsacld|0.01                             meas -0.500 · M1 -0.110 · hit False
+FS2  model12          cell|racldx|0.001                            meas -0.407 · M1 -0.405 · hit True
+FS2  model12          cell|racldx|0.003                            meas -0.390 · M1 -0.366 · hit True
+FS2  model12          cell|racldx|0.005                            meas -0.426 · M1 -0.315 · hit False
+FS2  model12          cell|racldx|0.01                             meas -0.413 · M1 -0.092 · hit False
+FS2  model12          flow|racld/U                                 0.1421
+FS2  model12          flow|rascld/U                                0.2296
+FS2  model12          flow|rsacld/U                                0.1769
+FS2  model12          flow|racldx/U                                0.1464

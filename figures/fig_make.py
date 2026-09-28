@@ -228,7 +228,7 @@ def f6():
         for mu in MUS[1:]:
             c = z["cell|%s|%g" % (code, mu)]
             xs.append(mu * 100); me.append(c["meas"]); pr.append(c["M1"])
-            note("F6", "model12", "cell|%s|%g" % (code, mu), "meas %.3f · M1 %.3f · hit %s" % (c["meas"], c["M1"], c["judged"] and c["hit"]))
+            note("FS2", "model12", "cell|%s|%g" % (code, mu), "meas %.3f · M1 %.3f · hit %s" % (c["meas"], c["M1"], c["judged"] and c["hit"]))
         ax.plot(xs, me, "o-", ms=3, lw=1.2, color=COL[code], label=LBL[code])
         ax.plot(xs, pr, "^--", ms=3, lw=1.0, color=COL[code], alpha=0.65)
     ax.axvspan(0.05, 0.35, color="#f1c40f", alpha=0.10, lw=0)
@@ -242,11 +242,11 @@ def f6():
     for i, c in enumerate(codes):
         f = z["flow|" + c]
         ax.bar(i, f["U"], color=COL[c], width=0.6)
-        note("F6", "model12", "flow|%s/U" % c, "%.4f" % f["U"])
+        note("FS2", "model12", "flow|%s/U" % c, "%.4f" % f["U"])
     ax.set_xticks(range(len(codes))); ax.set_xticklabels(codes, fontsize=6.5)
     ax.set_ylabel("variant offspring per birth, U", fontsize=7)
     ax.set_title("measured inside the invasion, μ = 0.3%", fontsize=6.5)
-    save(fig, "F6_model_vs_measured")
+    save(fig, "FS2_model_vs_measured")
 
 
 ORDER = [("rascld", 2, "re-read"), ("rsacld", 3, "re-read"), ("racld", 4, "re-read"),
@@ -278,7 +278,7 @@ def f7():
             ax.errorbar([v["dd"]], [y + off], xerr=[[v["dd"] - v["ci"][0]], [v["ci"][1] - v["dd"]]],
                         fmt="o", ms=2.6, color=col, capsize=1.2, lw=0.7, alpha=0.95)
         d = [v["dd"] for _, v in pr]
-        note("F7", "pairs13" if src == "registered" else "pairs13_racldfam",
+        note("F6", "pairs13" if src == "registered" else "pairs13_racldfam",
              "pair|%s|n|* (%d짝)" % (b, len(pr)), "틱당 %+.3f ~ %+.3f" % (min(d), max(d)))
     for y in range(len(ORDER) - 1):
         ax.axhline(y + 0.5, color="#ecf0f1", lw=0.6, zorder=0)
@@ -301,7 +301,7 @@ def f7():
                 continue
             ax.plot(g, [y + dy] * len(g), "o", ms=2.6, mfc=mfc,
                     color="#c0392b" if src == "registered" else "#34495e", lw=0, alpha=0.9)
-            note("F7", "pairs13" if src == "registered" else "pairs13_racldfam",
+            note("F6", "pairs13" if src == "registered" else "pairs13_racldfam",
                  "neg|%s|%s|* (%d쌍)" % (b, ch, len(g)),
                  "최대 |ΔΔ| %.3f · 0.15 밖 %d" % (max(g), sum(1 for x in g if x > 0.15)))
     for y in range(len(ORDER) - 1):
@@ -327,7 +327,7 @@ def f7():
             ax.plot([v["L"] + jit], [v["R"]], "o", ms=2.8, color=BC[b], alpha=0.85, lw=0, zorder=3)
         xs = sorted(cls)
         ax.plot([x + jit for x in xs], [sum(cls[x]) / len(cls[x]) for x in xs], "-", color=BC[b], lw=0.8, alpha=0.7, zorder=2)
-        note("F7", "pairs14", "code|%s|* (%d코드)" % (b, len(rows)),
+        note("F6", "pairs14", "code|%s|* (%d코드)" % (b, len(rows)),
              "R %.2f ~ %.2f · L %s" % (min(v["R"] for _, v in rows), max(v["R"] for _, v in rows), xs))
         ax.annotate(b, (xs[-1] + jit + 0.06, sum(cls[xs[-1]]) / len(cls[xs[-1]])), fontsize=5.4, color=BC[b], va="center")
     ax.set_xticks([2, 3, 4, 5]); ax.set_xlim(1.6, 5.9)
@@ -338,10 +338,10 @@ def f7():
     ax.annotate("adjacent classes: ln-ratio %+.2f to %+.2f\nequal loop, other position: |ln-ratio| ≤ %.3f" %
                 (min(v["d"] for v in a1), max(v["d"] for v in a1), a2.get("max", float("nan"))),
                 (0.98, 0.97), xycoords="axes fraction", ha="right", va="top", fontsize=5.4, color="#7f8c8d")
-    note("F7", "pairs14", "A1|* (%d등급 쌍)" % len(a1), "ln R 차 %+.3f ~ %+.3f" % (min(v["d"] for v in a1), max(v["d"] for v in a1)))
-    note("F7", "pairs14", "A2_abs.max", "%.4f" % a2.get("max", float("nan")))
+    note("F6", "pairs14", "A1|* (%d등급 쌍)" % len(a1), "ln R 차 %+.3f ~ %+.3f" % (min(v["d"] for v in a1), max(v["d"] for v in a1)))
+    note("F6", "pairs14", "A2_abs.max", "%.4f" % a2.get("max", float("nan")))
     ax.set_title("(c) draws per letter, counted directly", fontsize=7)
-    save(fig, "F7_matched_pairs")
+    save(fig, "F6_matched_pairs")
 
 
 def f8():
@@ -361,7 +361,7 @@ def f8():
                     "-", color=BC[b], lw=0.5, alpha=0.25)
         mean = [sum((v["dd_by_mu"].get(str(m), v["dd_by_mu"].get(m)) for v in rows)) / len(rows) for m in MU]
         ax.plot([m * 100 for m in MU], mean, "o-", color=BC[b], ms=2.6, lw=1.1, label="%s (%d pairs%s)" % (b, len(rows), "" if all(v["pass"] for v in rows) else ", %d fail" % sum(1 for v in rows if not v["pass"])))
-        note("F8", "pairs15", "B1|%s|* (%d짝)" % (b, len(rows)), "ΔΔ(μ) 평균 %s · 통과 %d/%d" % (" ".join("%+.2f" % x for x in mean), sum(1 for v in rows if v["pass"]), len(rows)))
+        note("F7", "pairs15", "B1|%s|* (%d짝)" % (b, len(rows)), "ΔΔ(μ) 평균 %s · 통과 %d/%d" % (" ".join("%+.2f" % x for x in mean), sum(1 for v in rows if v["pass"]), len(rows)))
     ax.set_xlabel("nominal error rate μ (% per letter)"); ax.set_ylabel("ΔΔ, longer loop minus shorter")
     ax.set_xticks([0, 0.1, 0.3, 0.5, 1.0]); ax.set_ylim(-1.05, 0.35)
     ax.legend(fontsize=5.2, frameon=False, loc="upper left", ncol=2, handlelength=1.4)
@@ -371,11 +371,11 @@ def f8():
     for i, (lab, v, col) in enumerate(bars):
         ax.bar(i, v["m"], color=col, width=0.62, alpha=0.9)
         ax.errorbar([i], [v["m"]], yerr=[[v["m"] - v["ci"][0]], [v["ci"][1] - v["m"]]], fmt="none", ecolor="k", capsize=2, lw=0.8)
-        note("F8", "pairs15", "C2|orig · C3|ff · C2|rem" if i == 0 else "", "%s Δμ %+.3f [%+.3f, %+.3f]" % (lab, v["m"], v["ci"][0], v["ci"][1]))
+        note("F7", "pairs15", "C2|orig · C3|ff · C2|rem" if i == 0 else "", "%s Δμ %+.3f [%+.3f, %+.3f]" % (lab, v["m"], v["ci"][0], v["ci"][1]))
     c1 = [("find-first", Z["C1|ff"]), ("remember-roll", Z["C1|rem"])]
     for i, (lab, v) in enumerate(c1, start=1):
         ax.plot([i], [v["m"]], "D", ms=3.2, color="white", mec="k", mew=0.7, zorder=4)
-        note("F8", "pairs15", "C1|%s" % ("ff" if i == 1 else "rem"), "μ0 차 %+.3f [%+.3f, %+.3f]" % (v["m"], v["ci"][0], v["ci"][1]))
+        note("F7", "pairs15", "C1|%s" % ("ff" if i == 1 else "rem"), "μ0 차 %+.3f [%+.3f, %+.3f]" % (v["m"], v["ci"][0], v["ci"][1]))
     ax.axhline(0, color="k", lw=0.6, ls=":")
     ax.set_xticks([0, 1, 2]); ax.set_xticklabels([b[0] for b in bars], fontsize=6.4)
     ax.set_ylabel("rise of ΔΔ from μ = 0 to 0.3%, pooled")
@@ -388,7 +388,7 @@ def f8():
     for i, (b, v) in enumerate(d1):
         ax.plot([0, 1], [v["d8"], v["d32"]], "-o", color=BC.get(b, "#34495e"), ms=2.8, lw=0.9, alpha=0.9)
         ax.annotate(b, (1.03, v["d32"]), fontsize=5.0, color=BC.get(b, "#34495e"), va="center")
-        note("F8", "pairs18", "D1|%s (d8 · d32 · ratio)" % b, "%+.3f · %+.3f · %.2f" % (v["d8"], v["d32"], v["ratio"] if v["ratio"] is not None else float("nan")))
+        note("F7", "pairs18", "D1|%s (d8 · d32 · ratio)" % b, "%+.3f · %+.3f · %.2f" % (v["d8"], v["d32"], v["ratio"] if v["ratio"] is not None else float("nan")))
     ax.axhline(0, color="k", lw=0.6, ls=":")
     ax.set_xticks([0, 1]); ax.set_xticklabels(["density 8", "density 32"], fontsize=6.4); ax.set_xlim(-0.3, 1.55)
     ax.set_ylabel("ln-ratio of draws, shorter over longer loop")
@@ -396,9 +396,9 @@ def f8():
     ax.annotate("pure resident community\nmedian draws per letter %.2f → %.2f\nrise of ΔΔ to 0.3%%: %+.2f → %+.2f\n|ΔΔ| at μ = 0: %.2f → %.2f" % (
         D1b.get("median8", float("nan")), D1b["median"], D2["m8"], D2["m32"], D3["abs8"], D3["abs32"]),
         (0.03, 0.62), xycoords="axes fraction", ha="left", va="center", fontsize=5.2, color="#7f8c8d")
-    note("F8", "pairs18", "D1b.median · D2.m8 · D2.m32 · D3.abs8 · D3.abs32", "%.3f · %+.3f · %+.3f · %.3f · %.3f" % (D1b["median"], D2["m8"], D2["m32"], D3["abs8"], D3["abs32"]))
+    note("F7", "pairs18", "D1b.median · D2.m8 · D2.m32 · D3.abs8 · D3.abs32", "%.3f · %+.3f · %+.3f · %.3f · %.3f" % (D1b["median"], D2["m8"], D2["m32"], D3["abs8"], D3["abs32"]))
     ax.set_title("(c) material made plentiful", fontsize=7)
-    save(fig, "F8_ladder_and_rules")
+    save(fig, "F7_ladder_and_rules")
 
 
 def f9():
@@ -413,7 +413,7 @@ def f9():
         t = [x / 1000 for x in c["t"]]
         ax.fill_between(t, c["q1"], c["q3"], color=MC[mu], alpha=0.15, lw=0)
         ax.plot(t, c["median"], "-", color=MC[mu], lw=1.2, label="μ = %g%%" % (mu * 100))
-        note("F9", "evo17", "curve|%s (median · q1 · q3)" % mu, "끝 %.3f · 최대 %.3f" % (c["median"][-1], max(c["median"])))
+        note("F8", "evo17", "curve|%s (median · q1 · q3)" % mu, "끝 %.3f · 최대 %.3f" % (c["median"][-1], max(c["median"])))
     ax.axhline(2, color="#7f8c8d", lw=0.5, ls=":"); ax.axhline(4, color="#7f8c8d", lw=0.5, ls=":")
     ax.set_xlabel("ticks (thousands)"); ax.set_ylabel("mean copy-loop length of the population")
     ax.set_ylim(1.8, 4.5); ax.legend(fontsize=5.6, frameon=False, loc="lower right", ncol=2)
@@ -424,13 +424,13 @@ def f9():
         xs = [i + (j - (len(v) - 1) / 2.0) * (0.5 / max(len(v), 1)) for j in range(len(v))]
         ax.plot(xs, v, "o", ms=2.2, color=MC[mu], alpha=0.75, lw=0)
         ax.plot([i - 0.32, i + 0.32], [Z["V1|%s" % mu]["median"]] * 2, "-", color="k", lw=1.0)
-        note("F9", "evo17", "V1|%s" % mu, "끝점 L̄ 중앙 %.3f · 접시 %d" % (Z["V1|%s" % mu]["median"], Z["V1|%s" % mu]["n"]))
+        note("F8", "evo17", "V1|%s" % mu, "끝점 L̄ 중앙 %.3f · 접시 %d" % (Z["V1|%s" % mu]["median"], Z["V1|%s" % mu]["n"]))
     ax.set_xticks(range(len(MU))); ax.set_xticklabels(["%g" % (mu * 100) for mu in MU]); ax.set_xlabel("nominal error rate μ (% per letter)")
     ax.set_ylabel("mean loop length at 50,000 ticks"); ax.set_ylim(1.8, 4.5)
     ax.annotate("Spearman %.2f [%.2f, %.2f]" % (Z["V1"]["rho"], Z["V1"]["ci"][0], Z["V1"]["ci"][1]), (0.03, 0.97), xycoords="axes fraction", ha="left", va="top", fontsize=5.6, color="#7f8c8d")
-    note("F9", "evo17", "V1.rho · ci", "%.3f [%.3f, %.3f]" % (Z["V1"]["rho"], Z["V1"]["ci"][0], Z["V1"]["ci"][1]))
+    note("F8", "evo17", "V1.rho · ci", "%.3f [%.3f, %.3f]" % (Z["V1"]["rho"], Z["V1"]["ci"][0], Z["V1"]["ci"][1]))
     ax.set_title("(b) where the population ends up", fontsize=7)
-    save(fig, "F9_evolutionary_trajectory")
+    save(fig, "F8_evolutionary_trajectory")
 
 
 def fS1():
@@ -471,7 +471,7 @@ def fS1():
     save(fig, "FS1_lifespan_ladder")
 
 
-FIGS = {"F2": f2, "F3": f3, "F4": f4, "F5": f5, "F6": f6, "F7": f7, "F8": f8, "F9": f9, "FS1": fS1}
+FIGS = {"F2": f2, "F3": f3, "F4": f4, "F5": f5, "F6": f7, "F7": f8, "F8": f9, "FS1": fS1, "FS2": f6}
 
 
 def main():
