@@ -1,0 +1,147 @@
+== 해부 23 판정 — 위치 대조 N3 의 잡음 바닥 · 세트 S1 첫 세트(배경 3~22) · S2 해부15 E(배경 26~50) · S3 해부20 P(배경 76~100)
+  배경 목록(규칙 = 하드코딩 · 각 20): S1 ✅ · S2 ✅ · S3 ✅
+  읽은 파일 525 · 목록 해시 c6398051eb43760a · 자료 목록 dms23_data_manifest.sha256 fe58631973eb825d
+  G0-b 같은 코드 · 같은 뒤 난수 → 궤적 동일: 20/20 (inv12nbr_racld/mu0)
+  G0-c S1|racld: N3 다시 셈 7 쌍 · 발표 7 쌍 · 최대 차 2.8e-17 (_RESULT_pairs13_racldfam.json)
+  G0-c S1|rascld: N3 다시 셈 11 쌍 · 발표 11 쌍 · 최대 차 1.0e-17 (_RESULT_pairs13_racldfam.json)
+  G0-c S1|rsacld: N3 다시 셈 9 쌍 · 발표 9 쌍 · 최대 차 3.8e-17 (_RESULT_pairs13_racldfam.json)
+  G0-c S1|racldx: N3 다시 셈 9 쌍 · 발표 9 쌍 · 최대 차 2.1e-17 (_RESULT_pairs13_racldfam.json)
+  G0-c S1|acld: N3 다시 셈 4 쌍 · 발표 4 쌍 · 최대 차 1.7e-16 (_RESULT_pairs13.json)
+  G0-c S1|rascled: N3 다시 셈 16 쌍 · 발표 16 쌍 · 최대 차 0.0e+00 (_RESULT_pairs13.json)
+  G0-c S2|racld: N3 다시 셈 7 쌍 · 발표 7 쌍 · 최대 차 0.0e+00 (_RESULT_pairs15.json)
+  G0-c S2|rascld: N3 다시 셈 11 쌍 · 발표 11 쌍 · 최대 차 0.0e+00 (_RESULT_pairs15.json)
+  G0-c S2|rsacld: N3 다시 셈 9 쌍 · 발표 9 쌍 · 최대 차 0.0e+00 (_RESULT_pairs15.json)
+  G0-c S2|racldx: N3 다시 셈 9 쌍 · 발표 9 쌍 · 최대 차 0.0e+00 (_RESULT_pairs15.json)
+  G0-c S2|acld: N3 다시 셈 4 쌍 · 발표 4 쌍 · 최대 차 0.0e+00 (_RESULT_pairs15.json)
+  G0-c S2|rascled: N3 다시 셈 16 쌍 · 발표 16 쌍 · 최대 차 0.0e+00 (_RESULT_pairs15.json)
+  G0-c S3|rcald: N3 다시 셈 7 쌍 · 발표 7 쌍 · 최대 차 0.0e+00 (_RESULT_pairs20.json)
+  G0-c S3|crald: N3 다시 셈 7 쌍 · 발표 7 쌍 · 최대 차 0.0e+00 (_RESULT_pairs20.json)
+  G0-c S3|reasccld: N3 다시 셈 18 쌍 · 발표 18 쌍 · 최대 차 0.0e+00 (_RESULT_pairs20.json)
+  G0-c S3|racld: N3 다시 셈 7 쌍 · 발표 7 쌍 · 최대 차 0.0e+00 (_RESULT_pairs20.json)
+  G0-c S3|rascld: N3 다시 셈 11 쌍 · 발표 11 쌍 · 최대 차 0.0e+00 (_RESULT_pairs20.json)
+  G0-c S3|rsacld: N3 다시 셈 9 쌍 · 발표 9 쌍 · 최대 차 0.0e+00 (_RESULT_pairs20.json)
+  G0-c S3|racldx: N3 다시 셈 9 쌍 · 발표 9 쌍 · 최대 차 0.0e+00 (_RESULT_pairs20.json)
+  G0-c S3|rascled: N3 다시 셈 16 쌍 · 발표 16 쌍 · 최대 차 0.0e+00 (_RESULT_pairs20.json)
+  점검 문제 0
+
+== S1 첫 세트(배경 3~22) · 배경 20
+  racld     C0 K 0/20 (최소 끝/처음 0.734) 판정
+            잡음 바닥 q95 0.052 [0.048, 0.056] · 경험 q95 0.040 · 경험 초과율 0.000 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 0/7 → N 0 · A 0 · P 0 (P_rob 0)
+            CRN 비 중앙 0.827(1 미만 코드 0.67 · 6 코드) · 실패 아닌 쌍 R_var 중앙 1.56
+  rascld    C0 K 0/20 (최소 끝/처음 1.033) 판정
+            잡음 바닥 q95 0.051 [0.045, 0.056] · 경험 q95 0.041 · 경험 초과율 0.000 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 2/11 → N 0 · A 0 · P 2 (P_rob 2)
+            CRN 비 중앙 1.078(1 미만 코드 0.29 · 7 코드) · 실패 아닌 쌍 R_var 중앙 1.24
+       ❌N3 rascldn    vs rnascld    (2틱) ΔΔ -0.222 → P · P_rob · R_var 0.91
+       ❌N3 rasclnd    vs rnascld    (2틱) ΔΔ -0.189 → P · P_rob · R_var 0.85
+  rsacld    C0 K 0/20 (최소 끝/처음 0.536) 판정
+            잡음 바닥 q95 0.059 [0.051, 0.065] · 경험 q95 0.030 · 경험 초과율 0.000 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 0/9 → N 0 · A 0 · P 0 (P_rob 0)
+            CRN 비 중앙 0.676(1 미만 코드 1.00 · 7 코드 · 🟡 중앙 < 0.8 · 1 미만 몫 ≥ 0.75: A 결합 남음) · 실패 아닌 쌍 R_var 중앙 1.08
+  racldx    C0 K 0/20 (최소 끝/처음 0.456) 판정
+            잡음 바닥 q95 0.058 [0.053, 0.063] · 경험 q95 0.066 · 경험 초과율 0.109 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 0/9 → N 0 · A 0 · P 0 (P_rob 0)
+            CRN 비 중앙 0.940(1 미만 코드 0.71 · 7 코드) · 실패 아닌 쌍 R_var 중앙 1.42
+  acld      C0 K 20/20 (최소 끝/처음 0.000) ⏭️ 판정 안 함(계측 불신)
+            잡음 바닥 q95 0.271 [0.220, 0.320] · 경험 q95 0.259 · 경험 초과율 0.036 · 거짓 실패율 0.278(경험 0.364 · 기대 실패 1.1) · N3 실패 2/4 → N 0 · A 1 · P 1 (P_rob 0)
+            CRN 비 중앙 0.695(1 미만 코드 1.00 · 5 코드 · 🟡 중앙 < 0.8 · 1 미만 몫 ≥ 0.75: A 결합 남음) · 실패 아닌 쌍 R_var 중앙 2.96
+       ❌N3 acnld      vs ancld      (4틱) ΔΔ -0.301 → A · R_var 2.85
+       ❌N3 acnld      vs nacld      (4틱) ΔΔ -0.328 → P · R_var 2.37
+  rascled   C0 K 0/20 (최소 끝/처음 1.221) 판정
+            잡음 바닥 q95 0.077 [0.068, 0.085] · 경험 q95 0.051 · 경험 초과율 0.000 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 5/16 → N 0 · A 0 · P 5 (P_rob 5)
+            CRN 비 중앙 1.463(1 미만 코드 0.12 · 8 코드) · 실패 아닌 쌍 R_var 중앙 0.64
+       ❌N3 nrascled   vs rasclend   (2틱) ΔΔ -0.180 → P · P_rob · R_var 0.60
+       ❌N3 ranscled   vs rasclend   (2틱) ΔΔ -0.223 → P · P_rob · R_var 0.68
+       ❌N3 rascledn   vs rasclend   (2틱) ΔΔ -0.223 → P · P_rob · R_var 0.91
+       ❌N3 rasclend   vs rasclned   (2틱) ΔΔ +0.167 → P · P_rob · R_var 0.73
+       ❌N3 rasclend   vs rnascled   (2틱) ΔΔ +0.175 → P · P_rob · R_var 0.57
+
+== S2 해부15 E(배경 26~50) · 배경 20
+  racld     C0 K 0/20 (최소 끝/처음 0.677) 판정
+            잡음 바닥 q95 0.053 [0.048, 0.059] · 경험 q95 0.062 · 경험 초과율 0.127 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 0/7 → N 0 · A 0 · P 0 (P_rob 0)
+            CRN 비 중앙 0.944(1 미만 코드 0.50 · 6 코드) · 실패 아닌 쌍 R_var 중앙 1.68
+  rascld    C0 K 0/20 (최소 끝/처음 1.123) 판정
+            잡음 바닥 q95 0.049 [0.044, 0.053] · 경험 q95 0.042 · 경험 초과율 0.036 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 1/11 → N 0 · A 0 · P 1 (P_rob 1)
+            CRN 비 중앙 0.865(1 미만 코드 0.71 · 7 코드) · 실패 아닌 쌍 R_var 중앙 1.00
+       ❌N3 nrascld    vs rascldn    (2틱) ΔΔ +0.152 → P · P_rob · R_var 1.04
+  rsacld    C0 K 0/20 (최소 끝/처음 0.667) 판정
+            잡음 바닥 q95 0.056 [0.050, 0.062] · 경험 q95 0.061 · 경험 초과율 0.073 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 1/9 → N 0 · A 0 · P 1 (P_rob 1)
+            CRN 비 중앙 0.898(1 미만 코드 0.71 · 7 코드) · 실패 아닌 쌍 R_var 중앙 1.22
+       ❌N3 nrsacld    vs rsacldn    (3틱) ΔΔ +0.172 → P · P_rob · R_var 0.69
+  racldx    C0 K 0/20 (최소 끝/처음 0.432) 판정
+            잡음 바닥 q95 0.064 [0.058, 0.069] · 경험 q95 0.048 · 경험 초과율 0.000 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 0/9 → N 0 · A 0 · P 0 (P_rob 0)
+            CRN 비 중앙 1.065(1 미만 코드 0.43 · 7 코드) · 실패 아닌 쌍 R_var 중앙 1.17
+  acld      C0 K 20/20 (최소 끝/처음 0.000) ⏭️ 판정 안 함(계측 불신)
+            잡음 바닥 q95 0.260 [0.228, 0.290] · 경험 q95 0.289 · 경험 초과율 0.091 · 거짓 실패율 0.258(경험 0.345 · 기대 실패 1.0) · N3 실패 2/4 → N 0 · A 0 · P 2 (P_rob 2)
+            CRN 비 중앙 0.927(1 미만 코드 0.80 · 5 코드) · 실패 아닌 쌍 R_var 중앙 4.98
+       ❌N3 acnld      vs ancld      (4틱) ΔΔ +0.587 → P · P_rob · R_var 3.38
+       ❌N3 ancld      vs nacld      (4틱) ΔΔ -0.588 → P · P_rob · R_var 3.86
+  rascled   C0 K 0/20 (최소 끝/처음 0.988) 판정
+            잡음 바닥 q95 0.072 [0.065, 0.079] · 경험 q95 0.080 · 경험 초과율 0.073 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 2/16 → N 0 · A 0 · P 2 (P_rob 2)
+            CRN 비 중앙 0.835(1 미만 코드 0.62 · 8 코드) · 실패 아닌 쌍 R_var 중앙 0.76
+       ❌N3 ranscled   vs rasclend   (2틱) ΔΔ -0.159 → P · P_rob · R_var 0.98
+       ❌N3 rasclend   vs rasclned   (2틱) ΔΔ +0.214 → P · P_rob · R_var 0.97
+
+== S3 해부20 P(배경 76~100) · 배경 20
+  rcald     C0 K 0/20 (최소 끝/처음 0.511) 판정
+            잡음 바닥 q95 0.059 [0.052, 0.065] · 경험 q95 0.036 · 경험 초과율 0.000 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 0/7 → N 0 · A 0 · P 0 (P_rob 0)
+            CRN 비 중앙 0.819(1 미만 코드 0.83 · 6 코드) · 실패 아닌 쌍 R_var 중앙 1.68
+  crald     C0 K 0/20 (최소 끝/처음 0.524) 판정
+            잡음 바닥 q95 0.061 [0.056, 0.066] · 경험 q95 0.059 · 경험 초과율 0.055 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 0/7 → N 0 · A 0 · P 0 (P_rob 0)
+            CRN 비 중앙 1.046(1 미만 코드 0.33 · 6 코드) · 실패 아닌 쌍 R_var 중앙 1.76
+  reasccld  C0 K 0/20 (최소 끝/처음 1.567) 판정
+            잡음 바닥 q95 0.049 [0.044, 0.054] · 경험 q95 0.038 · 경험 초과율 0.000 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 2/18 → N 0 · A 0 · P 2 (P_rob 2)
+            CRN 비 중앙 0.842(1 미만 코드 0.67 · 9 코드) · 실패 아닌 쌍 R_var 중앙 0.84
+       ❌N3 reansccld  vs reasccldn  (3틱) ΔΔ +0.156 → P · P_rob · R_var 0.65
+       ❌N3 reasccldn  vs renasccld  (3틱) ΔΔ -0.168 → P · P_rob · R_var 0.62
+  racld     C0 K 0/20 (최소 끝/처음 0.748) 판정
+            잡음 바닥 q95 0.059 [0.054, 0.064] · 경험 q95 0.040 · 경험 초과율 0.000 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 1/7 → N 0 · A 0 · P 1 (P_rob 1)
+            CRN 비 중앙 0.982(1 미만 코드 0.67 · 6 코드) · 실패 아닌 쌍 R_var 중앙 0.96
+       ❌N3 nracld     vs racnld     (5틱) ΔΔ +0.157 → P · P_rob · R_var 1.07
+  rascld    C0 K 0/20 (최소 끝/처음 1.317) 판정
+            잡음 바닥 q95 0.051 [0.047, 0.055] · 경험 q95 0.022 · 경험 초과율 0.000 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 3/11 → N 0 · A 0 · P 3 (P_rob 3)
+            CRN 비 중앙 0.818(1 미만 코드 0.71 · 7 코드) · 실패 아닌 쌍 R_var 중앙 1.15
+       ❌N3 nrascld    vs rascldn    (2틱) ΔΔ +0.232 → P · P_rob · R_var 1.35
+       ❌N3 nrascld    vs rasclnd    (2틱) ΔΔ +0.154 → P · P_rob · R_var 1.55
+       ❌N3 rascldn    vs rnascld    (2틱) ΔΔ -0.165 → P · P_rob · R_var 1.47
+  rsacld    C0 K 0/20 (최소 끝/처음 0.655) 판정
+            잡음 바닥 q95 0.057 [0.054, 0.061] · 경험 q95 0.046 · 경험 초과율 0.000 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 0/9 → N 0 · A 0 · P 0 (P_rob 0)
+            CRN 비 중앙 0.619(1 미만 코드 0.71 · 7 코드) · 실패 아닌 쌍 R_var 중앙 1.51
+  racldx    C0 K 0/20 (최소 끝/처음 0.528) 판정
+            잡음 바닥 q95 0.057 [0.050, 0.066] · 경험 q95 0.055 · 경험 초과율 0.000 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 1/9 → N 0 · A 0 · P 1 (P_rob 1)
+            CRN 비 중앙 0.703(1 미만 코드 0.86 · 7 코드 · 🟡 중앙 < 0.8 · 1 미만 몫 ≥ 0.75: A 결합 남음) · 실패 아닌 쌍 R_var 중앙 1.71
+       ❌N3 nracldx    vs racnldx    (5틱) ΔΔ +0.172 → P · P_rob · R_var 2.98
+  rascled   C0 K 0/20 (최소 끝/처음 1.234) 판정
+            잡음 바닥 q95 0.068 [0.061, 0.076] · 경험 q95 0.075 · 경험 초과율 0.091 · 거짓 실패율 0.000(경험 0.000 · 기대 실패 0.0) · N3 실패 5/16 → N 0 · A 0 · P 5 (P_rob 5)
+            CRN 비 중앙 1.117(1 미만 코드 0.00 · 8 코드) · 실패 아닌 쌍 R_var 중앙 0.68
+       ❌N3 nrascled   vs rasclend   (2틱) ΔΔ -0.191 → P · P_rob · R_var 0.75
+       ❌N3 ranscled   vs rasclend   (2틱) ΔΔ -0.163 → P · P_rob · R_var 0.96
+       ❌N3 rascledn   vs rasclend   (2틱) ΔΔ -0.203 → P · P_rob · R_var 0.51
+       ❌N3 rasclend   vs rasclned   (2틱) ΔΔ +0.224 → P · P_rob · R_var 0.66
+       ❌N3 rasclend   vs rnascled   (2틱) ΔΔ +0.192 → P · P_rob · R_var 0.85
+
+== 종합 (판정하는 (세트, 밑 코드)의 N3 실패 쌍 23)
+  S1: 실패 7 → N 0 · A 0 · P 7 (P_rob 7)
+  S2: 실패 4 → N 0 · A 0 · P 4 (P_rob 4)
+  S3: 실패 12 → N 0 · A 0 · P 12 (P_rob 12)
+  ALL3(세 세트 모두 판정되는 같은 고리 배열) 52
+  재현된 P_rob(세 세트): rascld nrascld/rascldn · 부호 + · 세트 S1 S2 S3
+  재현된 P_rob(세 세트): rascld nrascld/rasclnd · 부호 + · 세트 S1 S2 S3
+  재현된 P_rob(세 세트): rascld ranscld/rascldn · 부호 + · 세트 S1 S2 S3
+  재현된 P_rob(세 세트): rascld rascldn/rnascld · 부호 − · 세트 S1 S2 S3
+  재현된 P_rob(세 세트): rascld rasclnd/rnascld · 부호 − · 세트 S1 S2 S3
+  재현된 P_rob(세 세트): rascled nrascled/rasclend · 부호 − · 세트 S1 S2 S3
+  재현된 P_rob(세 세트): rascled ranscled/rasclend · 부호 − · 세트 S1 S2 S3
+  재현된 P_rob(세 세트): rascled rascledn/rasclend · 부호 − · 세트 S1 S2 S3
+  재현된 P_rob(세 세트): rascled rasclend/rasclned · 부호 + · 세트 S1 S2 S3
+  재현된 P_rob(세 세트): rascled rasclend/rnascled · 부호 + · 세트 S1 S2 S3
+  재현된 P_rob(세 세트): rsacld nrsacld/rsacldn · 부호 + · 세트 S1 S2 S3
+  재현된 P_rob(세 세트): rsacld nrsacld/rsaclnd · 부호 + · 세트 S1 S2 S3
+  세 세트 P 이나 P_rob 아님: racld nracld/racnld · 부호 +
+  서술 'V+ 약'(정확히 두 세트 P · 같은 부호): racld racnld/rancld · 부호 − · P 세트 S1 S3 · F 에 넣은 세트 없음
+  서술 'V+ 약'(정확히 두 세트 P · 같은 부호): racld racnld/rnacld · 부호 − · P 세트 S1 S3 · F 에 넣은 세트 없음
+  서술 'V+ 약'(정확히 두 세트 P · 같은 부호): racldx nracldx/racnldx · 부호 + · P 세트 S2 S3 · F 에 넣은 세트 S3
+  서술 'V+ 약'(정확히 두 세트 P · 같은 부호): racldx nracldx/rancldx · 부호 + · P 세트 S2 S3 · F 에 넣은 세트 없음
+  서술 'V+ 약'(정확히 두 세트 P · 같은 부호): racldx racnldx/rnacldx · 부호 − · P 세트 S2 S3 · F 에 넣은 세트 없음
+  서술 'V+ 약'(정확히 두 세트 P · 같은 부호): rascld ranscld/rasclnd · 부호 + · P 세트 S1 S2 · F 에 넣은 세트 없음
+  서술 'V+ 약'(정확히 두 세트 P · 같은 부호): rsacld rnsacld/rsacldn · 부호 + · P 세트 S2 S3 · F 에 넣은 세트 없음
+  서술 'V+ 약'(정확히 두 세트 P · 같은 부호): rsacld rsacnld/rsnacld · 부호 − · P 세트 S2 S3 · F 에 넣은 세트 없음
+  → V+ 위치 효과가 잡음 위
+기록 → _RESULT_noise23.json

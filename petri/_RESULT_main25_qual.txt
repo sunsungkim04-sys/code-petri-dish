@@ -1,0 +1,55 @@
+== 해부 25 자격(Δ 없음) — 성장 main25 · 시드 50 개(2501~2550)
+
+-- 밀도 16: 기록 50/50 · 멸종 0 · 끝 우세 racld 23 → 자격 비율 0.460 (23/50)
+   racld 아닌 끝 우세: reascld 18 · easclrd 4 · aclrde 2 · eascldr 1 · acldre 1 · aclred 1
+   자격 배경의 racld 몫 중앙 0.085 · 개체 수 중앙 4039 · 재료 보존 위반 0
+     s2501  다름  pop  4153  top3 eascldr:236 racld:135 aclrd:132
+     s2502  다름  pop  4021  top3 easclrd:247 racld:167 aclrd:165
+     s2503  자격  pop  4305  top3 racld:439 easclrd:287 aclrd:116
+     s2504  다름  pop  4085  top3 reascld:339 racld:310 rnacld:71
+     s2505  다름  pop  3792  top3 reascld:236 easclrd:147 racld:62
+     s2506  자격  pop  4234  top3 racld:318 reascld:197 aclred:66
+     s2507  자격  pop  4204  top3 racld:319 reascld:214 arcld:74
+     s2508  다름  pop  4014  top3 reascld:323 racld:295 nracld:68
+     s2509  자격  pop  4240  top3 racld:323 reascld:210 reasccld:69
+     s2510  다름  pop  3985  top3 reascld:372 racld:336 rcald:109
+     s2511  자격  pop  4065  top3 racld:272 easclrd:254 reascld:118
+     s2512  자격  pop  4329  top3 racld:450 reascld:293 arcld:84
+     s2513  자격  pop  4181  top3 racld:460 reascld:299 arcld:133
+     s2514  다름  pop  4002  top3 reascld:449 racld:298 arcld:106
+     s2515  자격  pop  4246  top3 racld:417 hracld:103 rhacld:77
+     s2516  다름  pop  3613  top3 aclrde:437 aclrd:172 aclred:67
+     s2517  다름  pop  4007  top3 reascld:258 racld:187 crald:52
+     s2518  자격  pop  4195  top3 racld:252 reascld:207 earscld:169
+     s2519  다름  pop  3938  top3 acldre:409 cldrea:251 acldr:149
+     s2520  다름  pop  3603  top3 aclred:255 reascld:237 aclrde:167
+     s2521  자격  pop  4015  top3 racld:341 reascld:266 reasccld:54
+     s2522  다름  pop  4008  top3 reascld:275 racld:273 xracld:76
+     s2523  자격  pop  4424  top3 racld:326 eascldr:324 arcld:113
+     s2524  다름  pop  3583  top3 aclrde:767 aclrd:133 aclrdj:50
+     s2525  다름  pop  3976  top3 easclrd:181 racld:162 arcld:161
+     s2526  자격  pop  4299  top3 racld:585 reascld:291 rascld:85
+     s2527  자격  pop  4197  top3 racld:329 easclrd:126 reascld:97
+     s2528  다름  pop  3930  top3 reascld:347 racld:237 aclred:130
+     s2529  자격  pop  3872  top3 racld:195 acldre:156 reascld:148
+     s2530  다름  pop  4173  top3 reascld:383 racld:350 aclrd:84
+     s2531  다름  pop  3965  top3 reascld:417 racld:260 rxacld:85
+     s2532  다름  pop  3848  top3 reascld:364 racld:340 nracld:44
+     s2533  다름  pop  4094  top3 reascld:171 eascldr:153 racld:89
+     s2534  다름  pop  3841  top3 easclrd:224 reascld:165 aclrd:113
+     s2535  자격  pop  4199  top3 racld:301 reascld:195 easclrd:158
+     s2536  자격  pop  4150  top3 racld:347 reascld:206 easclrd:93
+     s2537  자격  pop  4096  top3 racld:486 reascld:342 raxcld:73
+     s2538  자격  pop  4381  top3 racld:481 reascld:322 raxcld:83
+     s2539  다름  pop  3887  top3 reascld:318 racld:263 aclrde:254
+     s2540  다름  pop  3998  top3 reascld:301 racld:161 rascld:71
+     s2541  자격  pop  4127  top3 racld:465 reascld:301 arcld:98
+     s2542  다름  pop  4039  top3 reascld:192 racld:184 aclred:103
+     s2543  자격  pop  4256  top3 racld:264 easclrd:152 reascld:118
+     s2544  자격  pop  3989  top3 racld:380 reascld:287 rancld:90
+     s2545  다름  pop  3734  top3 reascld:321 racld:204 rhacld:69
+     s2546  다름  pop  3877  top3 easclrd:255 aclrd:213 aclred:93
+     s2547  다름  pop  3927  top3 reascld:352 racld:173 arcld:103
+     s2548  다름  pop  3996  top3 reascld:364 racld:221 rascld:123
+     s2549  자격  pop  4322  top3 racld:776 reascld:305 acld:70
+     s2550  자격  pop  4301  top3 racld:560 easclrd:222 reascld:130

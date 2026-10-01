@@ -1,0 +1,196 @@
+{
+ "root": "pilot20",
+ "pilot": true,
+ "collapse": 0.1,
+ "k_max": 1,
+ "candidates": [
+  "rcald",
+  "crald",
+  "reasccld"
+ ],
+ "seeds": [
+  24,
+  25
+ ],
+ "per_base": {
+  "rcald": {
+   "K": 0,
+   "n_bg": 2,
+   "min_ratio": 0.7318840579710145,
+   "n_arms": 34,
+   "n_extinct_arms": 0,
+   "pass": true,
+   "role": "candidate",
+   "codes": [
+    "nrcald",
+    "rncald",
+    "rcnald",
+    "rcanld",
+    "rcalnd",
+    "rcaldn"
+   ]
+  },
+  "crald": {
+   "K": 0,
+   "n_bg": 2,
+   "min_ratio": 0.6111111111111112,
+   "n_arms": 34,
+   "n_extinct_arms": 0,
+   "pass": true,
+   "role": "candidate",
+   "codes": [
+    "ncrald",
+    "cnrald",
+    "crnald",
+    "cranld",
+    "cralnd",
+    "craldn"
+   ]
+  },
+  "reasccld": {
+   "K": 0,
+   "n_bg": 2,
+   "min_ratio": 1.5346534653465347,
+   "n_arms": 40,
+   "n_extinct_arms": 0,
+   "pass": true,
+   "role": "candidate",
+   "codes": [
+    "nreasccld",
+    "rneasccld",
+    "renasccld",
+    "reansccld",
+    "reasnccld",
+    "reascncld",
+    "reasccnld",
+    "reascclnd",
+    "reasccldn"
+   ]
+  },
+  "racld": {
+   "K": 0,
+   "n_bg": 2,
+   "min_ratio": 0.7415458937198067,
+   "n_arms": 34,
+   "n_extinct_arms": 0,
+   "pass": true,
+   "role": "S-",
+   "codes": [
+    "nracld",
+    "rnacld",
+    "rancld",
+    "racnld",
+    "raclnd",
+    "racldn"
+   ]
+  },
+  "rascld": {
+   "K": 0,
+   "n_bg": 2,
+   "min_ratio": 1.5866336633663367,
+   "n_arms": 36,
+   "n_extinct_arms": 0,
+   "pass": true,
+   "role": "S-",
+   "codes": [
+    "nrascld",
+    "rnascld",
+    "ranscld",
+    "rasncld",
+    "rascnld",
+    "rasclnd",
+    "rascldn"
+   ]
+  },
+  "rsacld": {
+   "K": 0,
+   "n_bg": 2,
+   "min_ratio": 0.8526570048309179,
+   "n_arms": 36,
+   "n_extinct_arms": 0,
+   "pass": true,
+   "role": "S-",
+   "codes": [
+    "nrsacld",
+    "rnsacld",
+    "rsnacld",
+    "rsancld",
+    "rsacnld",
+    "rsaclnd",
+    "rsacldn"
+   ]
+  },
+  "racldx": {
+   "K": 0,
+   "n_bg": 2,
+   "min_ratio": 0.6111111111111112,
+   "n_arms": 36,
+   "n_extinct_arms": 0,
+   "pass": true,
+   "role": "S-",
+   "codes": [
+    "nracldx",
+    "rnacldx",
+    "rancldx",
+    "racnldx",
+    "raclndx",
+    "racldnx",
+    "racldxn"
+   ]
+  },
+  "acld": {
+   "K": 2,
+   "n_bg": 2,
+   "min_ratio": 0.0049504950495049506,
+   "n_arms": 32,
+   "n_extinct_arms": 0,
+   "pass": false,
+   "role": "S+",
+   "codes": [
+    "nacld",
+    "ancld",
+    "acnld",
+    "aclnd",
+    "acldn"
+   ]
+  },
+  "rascled": {
+   "K": 0,
+   "n_bg": 2,
+   "min_ratio": 1.5797101449275361,
+   "n_arms": 38,
+   "n_extinct_arms": 0,
+   "pass": true,
+   "role": "S-",
+   "codes": [
+    "nrascled",
+    "rnascled",
+    "ranscled",
+    "rasncled",
+    "rascnled",
+    "rasclned",
+    "rasclend",
+    "rascledn"
+   ]
+  }
+ },
+ "S_plus": true,
+ "S_minus": true,
+ "pass": [
+  "rcald",
+  "crald",
+  "reasccld",
+  "racld",
+  "rascld",
+  "rsacld",
+  "racldx",
+  "rascled"
+ ],
+ "candidates_pass": [
+  "rcald",
+  "crald",
+  "reasccld"
+ ],
+ "complete": true,
+ "bad": []
+}

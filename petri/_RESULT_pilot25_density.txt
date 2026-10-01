@@ -1,0 +1,37 @@
+== 해부 25 자격(Δ 없음) — 성장 pilot25g · 시드 12 개(2591~2602)
+
+-- 밀도 12: 기록 12/12 · 멸종 0 · 끝 우세 racld 8 → 자격 비율 0.667 (8/12)
+   racld 아닌 끝 우세: aclred 2 · acldre 1 · aclrde 1
+   자격 배경의 racld 몫 중앙 0.129 · 개체 수 중앙 4332 · 재료 보존 위반 0
+     s2591  자격  pop  4609  top3 racld:795 aclred:206 aclrd:138
+     s2592  다름  pop  4126  top3 aclred:406 racld:277 aclrd:216
+     s2593  자격  pop  4071  top3 racld:483 deasclr:166 arcld:117
+     s2594  자격  pop  4641  top3 racld:928 arcld:177 reascld:140
+     s2595  자격  pop  4301  top3 racld:469 aclrd:110 aclrde:99
+     s2596  자격  pop  4332  top3 racld:392 aclred:228 acldre:203
+     s2597  다름  pop  3808  top3 aclred:227 racld:184 aclrd:162
+     s2598  자격  pop  4486  top3 racld:577 acldre:374 arcld:90
+     s2599  자격  pop  4387  top3 racld:731 reascld:205 acldr:70
+     s2600  다름  pop  3870  top3 acldre:814 racld:174 acldr:114
+     s2601  다름  pop  3862  top3 aclrde:202 aclrd:168 racld:160
+     s2602  자격  pop  4357  top3 racld:536 aclred:171 aclrd:106
+
+-- 밀도 16: 기록 12/12 · 멸종 0 · 끝 우세 racld 9 → 자격 비율 0.750 (9/12)
+   racld 아닌 끝 우세: reascld 2 · eascldr 1
+   자격 배경의 racld 몫 중앙 0.082 · 개체 수 중앙 4065 · 재료 보존 위반 0
+     s2591  다름  pop  4005  top3 reascld:294 racld:242 crald:64
+     s2592  자격  pop  4287  top3 racld:362 eascldr:204 reascld:146
+     s2593  자격  pop  4325  top3 racld:348 eascldr:117 reascld:110
+     s2594  다름  pop  4023  top3 eascldr:290 acldr:101 racld:95
+     s2595  자격  pop  4076  top3 racld:334 reascld:166 easclrd:103
+     s2596  자격  pop  3959  top3 racld:203 reascld:182 arcld:103
+     s2597  자격  pop  4065  top3 racld:231 easclrd:165 aclrd:121
+     s2598  자격  pop  4065  top3 racld:203 reascld:180 easclrd:131
+     s2599  자격  pop  4204  top3 racld:484 reascld:319 arcld:76
+     s2600  다름  pop  3904  top3 reascld:336 racld:157 deasclr:125
+     s2601  자격  pop  3887  top3 racld:508 reascld:236 dreascl:132
+     s2602  자격  pop  4255  top3 racld:577 reascld:269 rascld:79
+
+== 밀도 규칙(사전등록 §2 · 결과 전 고정): 자격 ≥ 8/12 이면 그 밀도 · 16 먼저
+   밀도 16 9/12 · 밀도 12 8/12 → 밀도 16
+기록 → _RESULT_pilot25_density.json

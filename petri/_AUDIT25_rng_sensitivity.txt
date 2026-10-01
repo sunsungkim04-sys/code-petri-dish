@@ -1,0 +1,8 @@
+# 해부25 감사 (10-01) — 판정기 자신의 방법(pairs25_analyze.py 동결판 import · LSet · flip_cens · pct)으로 L2 재추출 흐름만 바꿔 다시 셈
+# 재생성: 서버 ~/tmp_audit25 에서 python3 audit25_rng_sensitivity.py (볼트 사본) · ~/petri 의 동결 판정기 · 원자료를 읽기만 한다
+frozen P_up 0.9860 d_lo +0.00328%p
+alt200 P_up min 0.9720 med 0.9795 max 0.9860  >=0.975: 183/200  rank of frozen(<=): 198
+alt d_lo min -0.0009 med +0.0011 max +0.0027 (%p)
+# python3 audit25_R_median.py — 판정기 ib_summary 의 'R 중앙' = 코드별(6) 배경 합산 R 의 sorted[n//2](위 중앙)
+d8 n_bg 20 upper-median 7.849 true median 7.836 nracld:7.530 rnacld:7.717 racnld:7.822 rancld:7.849 raclnd:9.524 racldn:9.556
+D n_bg 20 upper-median 6.851 true median 6.822 nracld:6.394 rnacld:6.699 rancld:6.793 racnld:6.851 racldn:8.215 raclnd:8.257

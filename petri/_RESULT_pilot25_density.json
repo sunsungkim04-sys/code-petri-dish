@@ -1,0 +1,697 @@
+{
+ "root": "pilot25g",
+ "seeds": [
+  2591,
+  2592,
+  2593,
+  2594,
+  2595,
+  2596,
+  2597,
+  2598,
+  2599,
+  2600,
+  2601,
+  2602
+ ],
+ "dens": {
+  "12": {
+   "n": 12,
+   "records": 12,
+   "missing": [],
+   "extinct": 0,
+   "qualified": [
+    2591,
+    2593,
+    2594,
+    2595,
+    2596,
+    2598,
+    2599,
+    2602
+   ],
+   "frac": 0.6666666666666666,
+   "other_tops": {
+    "aclred": 2,
+    "acldre": 1,
+    "aclrde": 1
+   },
+   "rows": [
+    {
+     "seed": 2591,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 4609,
+     "racld_share": 0.17248860924278586,
+     "top_share": 0.17248860924278586,
+     "top3": [
+      [
+       "racld",
+       795
+      ],
+      [
+       "aclred",
+       206
+      ],
+      [
+       "aclrd",
+       138
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2592,
+     "extinct": -1,
+     "top": "aclred",
+     "pop": 4126,
+     "racld_share": 0.06713523994183228,
+     "top_share": 0.09840038778477944,
+     "top3": [
+      [
+       "aclred",
+       406
+      ],
+      [
+       "racld",
+       277
+      ],
+      [
+       "aclrd",
+       216
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2593,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 4071,
+     "racld_share": 0.11864406779661017,
+     "top_share": 0.11864406779661017,
+     "top3": [
+      [
+       "racld",
+       483
+      ],
+      [
+       "deasclr",
+       166
+      ],
+      [
+       "arcld",
+       117
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2594,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 4641,
+     "racld_share": 0.1999569058392588,
+     "top_share": 0.1999569058392588,
+     "top3": [
+      [
+       "racld",
+       928
+      ],
+      [
+       "arcld",
+       177
+      ],
+      [
+       "reascld",
+       140
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2595,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 4301,
+     "racld_share": 0.10904440827714484,
+     "top_share": 0.10904440827714484,
+     "top3": [
+      [
+       "racld",
+       469
+      ],
+      [
+       "aclrd",
+       110
+      ],
+      [
+       "aclrde",
+       99
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2596,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 4332,
+     "racld_share": 0.0904893813481071,
+     "top_share": 0.0904893813481071,
+     "top3": [
+      [
+       "racld",
+       392
+      ],
+      [
+       "aclred",
+       228
+      ],
+      [
+       "acldre",
+       203
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2597,
+     "extinct": -1,
+     "top": "aclred",
+     "pop": 3808,
+     "racld_share": 0.04831932773109244,
+     "top_share": 0.05961134453781513,
+     "top3": [
+      [
+       "aclred",
+       227
+      ],
+      [
+       "racld",
+       184
+      ],
+      [
+       "aclrd",
+       162
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2598,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 4486,
+     "racld_share": 0.12862238074008026,
+     "top_share": 0.12862238074008026,
+     "top3": [
+      [
+       "racld",
+       577
+      ],
+      [
+       "acldre",
+       374
+      ],
+      [
+       "arcld",
+       90
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2599,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 4387,
+     "racld_share": 0.1666286756325507,
+     "top_share": 0.1666286756325507,
+     "top3": [
+      [
+       "racld",
+       731
+      ],
+      [
+       "reascld",
+       205
+      ],
+      [
+       "acldr",
+       70
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2600,
+     "extinct": -1,
+     "top": "acldre",
+     "pop": 3870,
+     "racld_share": 0.04496124031007752,
+     "top_share": 0.2103359173126615,
+     "top3": [
+      [
+       "acldre",
+       814
+      ],
+      [
+       "racld",
+       174
+      ],
+      [
+       "acldr",
+       114
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2601,
+     "extinct": -1,
+     "top": "aclrde",
+     "pop": 3862,
+     "racld_share": 0.041429311237700675,
+     "top_share": 0.0523045054375971,
+     "top3": [
+      [
+       "aclrde",
+       202
+      ],
+      [
+       "aclrd",
+       168
+      ],
+      [
+       "racld",
+       160
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2602,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 4357,
+     "racld_share": 0.1230204268992426,
+     "top_share": 0.1230204268992426,
+     "top3": [
+      [
+       "racld",
+       536
+      ],
+      [
+       "aclred",
+       171
+      ],
+      [
+       "aclrd",
+       106
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    }
+   ]
+  },
+  "16": {
+   "n": 12,
+   "records": 12,
+   "missing": [],
+   "extinct": 0,
+   "qualified": [
+    2592,
+    2593,
+    2595,
+    2596,
+    2597,
+    2598,
+    2599,
+    2601,
+    2602
+   ],
+   "frac": 0.75,
+   "other_tops": {
+    "reascld": 2,
+    "eascldr": 1
+   },
+   "rows": [
+    {
+     "seed": 2591,
+     "extinct": -1,
+     "top": "reascld",
+     "pop": 4005,
+     "racld_share": 0.060424469413233456,
+     "top_share": 0.07340823970037454,
+     "top3": [
+      [
+       "reascld",
+       294
+      ],
+      [
+       "racld",
+       242
+      ],
+      [
+       "crald",
+       64
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2592,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 4287,
+     "racld_share": 0.08444133426638675,
+     "top_share": 0.08444133426638675,
+     "top3": [
+      [
+       "racld",
+       362
+      ],
+      [
+       "eascldr",
+       204
+      ],
+      [
+       "reascld",
+       146
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2593,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 4325,
+     "racld_share": 0.08046242774566474,
+     "top_share": 0.08046242774566474,
+     "top3": [
+      [
+       "racld",
+       348
+      ],
+      [
+       "eascldr",
+       117
+      ],
+      [
+       "reascld",
+       110
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2594,
+     "extinct": -1,
+     "top": "eascldr",
+     "pop": 4023,
+     "racld_share": 0.02361421824509073,
+     "top_share": 0.07208550832711906,
+     "top3": [
+      [
+       "eascldr",
+       290
+      ],
+      [
+       "acldr",
+       101
+      ],
+      [
+       "racld",
+       95
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2595,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 4076,
+     "racld_share": 0.08194308145240432,
+     "top_share": 0.08194308145240432,
+     "top3": [
+      [
+       "racld",
+       334
+      ],
+      [
+       "reascld",
+       166
+      ],
+      [
+       "easclrd",
+       103
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2596,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 3959,
+     "racld_share": 0.05127557464006062,
+     "top_share": 0.05127557464006062,
+     "top3": [
+      [
+       "racld",
+       203
+      ],
+      [
+       "reascld",
+       182
+      ],
+      [
+       "arcld",
+       103
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2597,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 4065,
+     "racld_share": 0.05682656826568266,
+     "top_share": 0.05682656826568266,
+     "top3": [
+      [
+       "racld",
+       231
+      ],
+      [
+       "easclrd",
+       165
+      ],
+      [
+       "aclrd",
+       121
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2598,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 4065,
+     "racld_share": 0.04993849938499385,
+     "top_share": 0.04993849938499385,
+     "top3": [
+      [
+       "racld",
+       203
+      ],
+      [
+       "reascld",
+       180
+      ],
+      [
+       "easclrd",
+       131
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2599,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 4204,
+     "racld_share": 0.11512844909609896,
+     "top_share": 0.11512844909609896,
+     "top3": [
+      [
+       "racld",
+       484
+      ],
+      [
+       "reascld",
+       319
+      ],
+      [
+       "arcld",
+       76
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2600,
+     "extinct": -1,
+     "top": "reascld",
+     "pop": 3904,
+     "racld_share": 0.04021516393442623,
+     "top_share": 0.0860655737704918,
+     "top3": [
+      [
+       "reascld",
+       336
+      ],
+      [
+       "racld",
+       157
+      ],
+      [
+       "deasclr",
+       125
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2601,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 3887,
+     "racld_share": 0.1306920504244919,
+     "top_share": 0.1306920504244919,
+     "top3": [
+      [
+       "racld",
+       508
+      ],
+      [
+       "reascld",
+       236
+      ],
+      [
+       "dreascl",
+       132
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    },
+    {
+     "seed": 2602,
+     "extinct": -1,
+     "top": "racld",
+     "pop": 4255,
+     "racld_share": 0.13560517038777908,
+     "top_share": 0.13560517038777908,
+     "top3": [
+      [
+       "racld",
+       577
+      ],
+      [
+       "reascld",
+       269
+      ],
+      [
+       "rascld",
+       79
+      ]
+     ],
+     "cons_viol": 0,
+     "ticks": 50000,
+     "planned": 50000,
+     "mu": 0.01
+    }
+   ]
+  }
+ },
+ "rule": {
+  "need": 8,
+  "q16": 9,
+  "q12": 8,
+  "pick": "16"
+ }
+}

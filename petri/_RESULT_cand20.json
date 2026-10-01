@@ -1,0 +1,447 @@
+{
+ "picked": [
+  "rcald",
+  "crald",
+  "reasccld"
+ ],
+ "sources": 450,
+ "log": [
+  {
+   "code": "racld",
+   "worlds": 432,
+   "total": 531051,
+   "loop": 4,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 0 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "acld",
+   "worlds": 347,
+   "total": 28152,
+   "loop": 3,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 0 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "arcld",
+   "worlds": 177,
+   "total": 31483,
+   "loop": 4,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "rxacld",
+   "worlds": 153,
+   "total": 10978,
+   "loop": 4,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "rsacld",
+   "worlds": 131,
+   "total": 40415,
+   "loop": 3,
+   "shape": [
+    1,
+    0,
+    true
+   ],
+   "verdict": "✗ K4 거리 0 · K5 모양 (1, 0, True)"
+  },
+  {
+   "code": "xracld",
+   "worlds": 125,
+   "total": 7485,
+   "loop": 4,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "rascld",
+   "worlds": 119,
+   "total": 27914,
+   "loop": 2,
+   "shape": [
+    1,
+    0,
+    true
+   ],
+   "verdict": "✗ K4 거리 0 · K5 모양 (1, 0, True)"
+  },
+  {
+   "code": "rcald",
+   "worlds": 115,
+   "total": 12946,
+   "loop": 4,
+   "shape": [
+    1,
+    1,
+    false
+   ],
+   "verdict": "✅ 채택"
+  },
+  {
+   "code": "raxcld",
+   "worlds": 108,
+   "total": 8652,
+   "loop": 4,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "reascld",
+   "worlds": 104,
+   "total": 101718,
+   "loop": 2,
+   "shape": [
+    1,
+    0,
+    true
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, True)"
+  },
+  {
+   "code": "hracld",
+   "worlds": 102,
+   "total": 5626,
+   "loop": 5,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "rnacld",
+   "worlds": 101,
+   "total": 6567,
+   "loop": 5,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "rhacld",
+   "worlds": 96,
+   "total": 5336,
+   "loop": 5,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "acrld",
+   "worlds": 95,
+   "total": 11431,
+   "loop": 4,
+   "shape": [
+    1,
+    1,
+    false
+   ],
+   "verdict": "✗ K4 거리 1"
+  },
+  {
+   "code": "nracld",
+   "worlds": 93,
+   "total": 5089,
+   "loop": 5,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "sracld",
+   "worlds": 91,
+   "total": 4857,
+   "loop": 4,
+   "shape": [
+    1,
+    0,
+    true
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, True)"
+  },
+  {
+   "code": "aclrd",
+   "worlds": 87,
+   "total": 7024,
+   "loop": 3,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "crald",
+   "worlds": 82,
+   "total": 6961,
+   "loop": 4,
+   "shape": [
+    1,
+    2,
+    false
+   ],
+   "verdict": "✅ 채택"
+  },
+  {
+   "code": "rahcld",
+   "worlds": 68,
+   "total": 4438,
+   "loop": 5,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "rancld",
+   "worlds": 68,
+   "total": 4208,
+   "loop": 5,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "raclxd",
+   "worlds": 64,
+   "total": 4048,
+   "loop": 4,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "racxld",
+   "worlds": 54,
+   "total": 3138,
+   "loop": 4,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "rachld",
+   "worlds": 52,
+   "total": 3072,
+   "loop": 5,
+   "shape": [
+    1,
+    1,
+    false
+   ],
+   "verdict": "✗ K4 거리 1"
+  },
+  {
+   "code": "racnld",
+   "worlds": 50,
+   "total": 3079,
+   "loop": 5,
+   "shape": [
+    1,
+    1,
+    false
+   ],
+   "verdict": "✗ K4 거리 1"
+  },
+  {
+   "code": "raclsd",
+   "worlds": 46,
+   "total": 2499,
+   "loop": 4,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "raclhd",
+   "worlds": 44,
+   "total": 2819,
+   "loop": 4,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "resacld",
+   "worlds": 39,
+   "total": 22952,
+   "loop": 3,
+   "shape": [
+    1,
+    0,
+    true
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, True)"
+  },
+  {
+   "code": "raclnd",
+   "worlds": 39,
+   "total": 2302,
+   "loop": 4,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "carld",
+   "worlds": 35,
+   "total": 2829,
+   "loop": 4,
+   "shape": [
+    1,
+    2,
+    false
+   ],
+   "verdict": "✗ K6 모양 중복"
+  },
+  {
+   "code": "rseacld",
+   "worlds": 31,
+   "total": 6389,
+   "loop": 4,
+   "shape": [
+    1,
+    0,
+    true
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, True)"
+  },
+  {
+   "code": "raescld",
+   "worlds": 30,
+   "total": 4697,
+   "loop": 2,
+   "shape": [
+    1,
+    0,
+    true
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, True)"
+  },
+  {
+   "code": "rcld",
+   "worlds": 26,
+   "total": 966,
+   "loop": 3,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "jacld",
+   "worlds": 25,
+   "total": 937,
+   "loop": 4,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K2 j · K4 거리 1 · K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "rascled",
+   "worlds": 24,
+   "total": 3498,
+   "loop": 2,
+   "shape": [
+    1,
+    0,
+    true
+   ],
+   "verdict": "✗ K4 거리 0 · K5 모양 (1, 0, True)"
+  },
+  {
+   "code": "aclred",
+   "worlds": 24,
+   "total": 2331,
+   "loop": 3,
+   "shape": [
+    1,
+    0,
+    false
+   ],
+   "verdict": "✗ K5 모양 (1, 0, False)"
+  },
+  {
+   "code": "reasccld",
+   "worlds": 20,
+   "total": 2047,
+   "loop": 3,
+   "shape": [
+    2,
+    0,
+    true
+   ],
+   "verdict": "✅ 채택"
+  }
+ ],
+ "rule": {
+  "MIN_WORLDS": 20,
+  "MAX_PICK": 4,
+  "TOPK": 10
+ }
+}

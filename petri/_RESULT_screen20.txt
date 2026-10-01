@@ -1,0 +1,17 @@
+== 해부 20 선별 · 루트 inv20S · 후보 rcald crald reasccld · 대조 racld rascld rsacld racldx acld rascled · 선별 배경 [64, 66, 67, 68, 69, 70, 71, 72, 73, 74]
+  점검 문제 0
+
+  밑 코드     역할        K(무너진 배경)  최소 끝/처음 비  멸종 팔   규칙
+  rcald      candidate    0 / 10       0.550        0 / 170   통과
+  crald      candidate    0 / 10       0.570        0 / 170   통과
+  reasccld   candidate    0 / 10       1.563        0 / 200   통과
+  racld      S-           0 / 10       0.743        0 / 170   통과
+  rascld     S-           0 / 10       1.087        0 / 180   통과
+  rsacld     S-           0 / 10       0.595        0 / 180   통과
+  racldx     S-           0 / 10       0.362        0 / 180   통과
+  acld       S+          10 / 10       0.005        0 / 160   제외
+  rascled    S-           0 / 10       1.132        0 / 190   통과
+
+  규칙 대조 S+ (`acld` 제외됨): ✅ · S− (기존 다섯 통과): ✅
+  짝 단계로: 후보 rcald crald reasccld · 대조 racld rascld rsacld racldx rascled
+기록 → _RESULT_screen20.json
