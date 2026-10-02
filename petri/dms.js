@@ -29,7 +29,7 @@ const COND = {
 };
 const cond = args.cond;
 if (!COND[cond]) { console.error(`알 수 없는 cond: ${cond}`); process.exit(2); }
-if (!['0.3.1', '0.3.2', '0.3.3', '0.3.4', '0.3.5'].includes(Sim.VERSION)) { console.error(`sim ${Sim.VERSION} — 0.3.1~0.3.5 가 필요하다`); process.exit(2); }
+if (!['0.3.1', '0.3.2', '0.3.3', '0.3.4', '0.3.5', '0.3.6'].includes(Sim.VERSION)) { console.error(`sim ${Sim.VERSION} — 0.3.1~0.3.6 가 필요하다`); process.exit(2); }
 const seed = parseInt(args.seed, 10);
 const WT = args.wt;
 const frac = parseFloat(args.frac || '0.1');
@@ -46,13 +46,18 @@ const exact = args.exact === '1';
 // 해부 7(09-16 추가): --find-first 1 이면 배경은 원래 규칙으로 키우고(체크섬 대조 그대로) **팔을 돌리는 동안만**
 // sim v0.3.3 의 재료 먼저 규칙을 쓴다. 기본값(끔)이면 출력이 전과 같다.
 const findFirst = args['find-first'] === '1';
-if (findFirst && !['0.3.3', '0.3.4', '0.3.5'].includes(Sim.VERSION)) { console.error('--find-first 는 sim 0.3.3~0.3.5 가 필요하다'); process.exit(2); }
+if (findFirst && !['0.3.3', '0.3.4', '0.3.5', '0.3.6'].includes(Sim.VERSION)) { console.error('--find-first 는 sim 0.3.3~0.3.5 가 필요하다'); process.exit(2); }
 // 해부 9(09-17 추가): --remember-die 1 이면 팔을 돌리는 동안만 sim v0.3.4 의 기억하는 주사위 규칙을 쓴다. 기본값(끔)이면 출력이 전과 같다.
 const rememberDie = args['remember-die'] === '1';
-if (rememberDie && !['0.3.4', '0.3.5'].includes(Sim.VERSION)) { console.error('--remember-die 는 sim 0.3.4/0.3.5 가 필요하다'); process.exit(2); }
+// 해부 28(10-02 추가): --redraw-p P 면 팔을 돌리는 동안만 기억하는 주사위를 켜고, 헛손질마다 확률 P 로 기억을 지운다(sim v0.3.6 redrawP).
+//   P = 0 은 --remember-die 1 과 같고 P = 1 은 원래 규칙과 같다. 동전 난수 흐름은 팔 시드에서 따로 연다(w.rnd2). 기본값(안 줌)이면 출력이 전과 같다.
+const redrawP = args['redraw-p'] !== undefined ? Number(args['redraw-p']) : null;
+if (redrawP !== null && (!(redrawP >= 0 && redrawP <= 1) || Sim.VERSION !== '0.3.6')) { console.error('--redraw-p 는 [0, 1] 이고 sim 0.3.6 이 필요하다'); process.exit(2); }
+if (redrawP !== null && rememberDie) { console.error('--redraw-p 와 --remember-die 를 함께 주지 말 것'); process.exit(2); }
+if (rememberDie && !['0.3.4', '0.3.5', '0.3.6'].includes(Sim.VERSION)) { console.error('--remember-die 는 sim 0.3.4/0.3.5 가 필요하다'); process.exit(2); }
 // 해부 10(09-18 추가): --cosmic 0 이면 팔 동안만 우주선 돌연변이를 끈다(sim 0.3.5). --ancestor CODE 면 배경을 그 시조로 키운다(본실험 기록이 없어 체크섬 대조는 'no-main').
 const cosmicOff = args.cosmic === '0';
-if (cosmicOff && Sim.VERSION !== '0.3.5') { console.error('--cosmic 0 은 sim 0.3.5 가 필요하다'); process.exit(2); }
+if (cosmicOff && !['0.3.5', '0.3.6'].includes(Sim.VERSION)) { console.error('--cosmic 0 은 sim 0.3.5 가 필요하다'); process.exit(2); }
 const ancestor = args.ancestor || null;
 // 해부 18(09-28 추가): --density D 면 배경을 그 밀도로 키운다(기본 8 이면 출력 전과 같음). 8 이 아니면 main 기록이 없어 체크섬은 'no-main' · 파일 이름 끝 _dD · 출력 density.
 const densityV = parseFloat(args.density || '8');
@@ -63,7 +68,7 @@ const gtag = growMu === 0.01 ? '' : '_gmu' + String(growMu).replace('.', 'p');
 // 해부 11(09-20 추가): --age0 N --age-var N 이면 **배경과 팔 모두** 그 수명으로 돈다(sim 0.3.5 · 세계 전체 옵션). 기본값(안 줌)이면 출력이 전과 같다.
 const age0V = args.age0 ? parseInt(args.age0, 10) : null;
 const ageVarV = args['age-var'] ? parseInt(args['age-var'], 10) : null;
-if ((age0V !== null || ageVarV !== null) && Sim.VERSION !== '0.3.5') { console.error('--age0 은 sim 0.3.5 가 필요하다'); process.exit(2); }
+if ((age0V !== null || ageVarV !== null) && !['0.3.5', '0.3.6'].includes(Sim.VERSION)) { console.error('--age0 은 sim 0.3.5 가 필요하다'); process.exit(2); }
 // 해부 9 B(09-17 추가): --no-mat 1 이면 팔을 돌리는 동안만 재료 규칙을 끈다(w.o.mat = false · w.mat = null → 헛손질 0 · 거름 0).
 // 배경은 그대로 재료 세계에서 키운다(체크섬 대조). 재료 보존 점검은 뜻이 없어 참으로 둔다. 기본값(끔)이면 출력이 전과 같다.
 const noMat = args['no-mat'] === '1';
@@ -195,6 +200,7 @@ function runArm(base, kind, key, labels, postSeed) {
   w.o.mu = muAssay;
   if (findFirst) w.o.findFirst = true;
   if (rememberDie) w.o.rememberDie = true;
+  if (redrawP !== null) { w.o.rememberDie = true; w.o.redrawP = redrawP; w.rnd2 = Sim.mulberry32((postSeed ^ 0x28282828) >>> 0); }
   if (noMat) { w.o.mat = false; w.mat = null; }
   if (cosmicOff) w.o.cosmic = false;
   const inj = inject(w, enc(key));
@@ -284,6 +290,7 @@ fs.mkdirSync(outDir, { recursive: true });
 if (exact) out.exact_series = ['t', 'pop', 'tag1', 'tag1_exact_injected', 'rest_exact_wt'];
 if (findFirst) out.find_first = true;
 if (rememberDie) out.remember_die = true;
+if (redrawP !== null) out.redraw_p = redrawP;
 if (noMat) out.no_mat = true;
 if (cosmicOff) out.cosmic_off = true;
 if (ancestor) out.ancestor = ancestor;

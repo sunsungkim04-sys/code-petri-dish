@@ -1,6 +1,6 @@
 {
   "title": "Code Petri Dish: simulator, instruments, pre-registered judging scripts and results for 'Mutation rate without a modifier'",
-  "description": "Simulator (sim.js v0.3.5), instruments, launch and judging scripts, frozen SHA-256 files, independent recounts and result files behind every number in the manuscript <i>Mutation rate without a modifier: copy-loop geometry couples speed to fidelity when replication can stall</i> (MinSeo Kim, 2026), together with the figure generator and its provenance list. Backgrounds are grown deterministically from their seeds by the scripts provided.",
+  "description": "Simulator (sim.js v0.3.6), instruments, launch and judging scripts, frozen SHA-256 files, independent recounts and result files behind every number in the manuscript <i>Mutation rate without a modifier: copy-loop geometry couples speed to fidelity when replication can stall</i> (MinSeo Kim and Jae-Ho Shin, 2026), together with the figure generator and its provenance list. Backgrounds are grown deterministically from their seeds by the scripts provided.",
   "upload_type": "software",
   "license": "MIT",
   "creators": [
@@ -8,7 +8,19 @@
       "name": "Kim, MinSeo",
       "affiliation": "Department of Applied Biosciences, Kyungpook National University",
       "orcid": "0009-0003-7085-5573"
+    },
+    {
+      "name": "Shin, Jae-Ho",
+      "affiliation": "Department of Applied Biosciences, Kyungpook National University",
+      "orcid": "0000-0001-6450-9787"
     }
   ],
-  "keywords": ["digital evolution", "artificial life", "mutation rate", "replicator", "pre-registration"]
+  "keywords": [
+    "digital evolution",
+    "artificial life",
+    "mutation rate",
+    "replicator",
+    "pre-registration"
+  ],
+  "version": "v1.1"
 }

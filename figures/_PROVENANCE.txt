@@ -20,30 +20,24 @@ F2   inv9/inv10       delta/anc|rascld|0.001                       0.122 [0.074,
 F2   inv9/inv10       delta/anc|rascld|0.003                       -0.168 [-0.221, -0.121]
 F2   inv9/inv10       delta/anc|rascld|0.005                       -0.450 [-0.512, -0.390]
 F2   inv9/inv10       delta/anc|rascld|0.01                        -0.780 [-0.872, -0.696]
-F3   spec8            cells/orig/racld/4/0.001/I                   10.004
-F3   spec8            cells/orig/racld/8/0.001/I                   8.465
-F3   spec8            cells/orig/racld/32/0.001/I                  1.038
 F3   spec8            cells/orig/rascld/4/0.001/I                  15.075
 F3   spec8            cells/orig/rascld/8/0.001/I                  12.310
 F3   spec8            cells/orig/rascld/32/0.001/I                 1.067
 F3   spec8            cells/orig/rsacld/4/0.001/I                  10.625
 F3   spec8            cells/orig/rsacld/8/0.001/I                  8.784
 F3   spec8            cells/orig/rsacld/32/0.001/I                 1.045
-F3   spec8            cells/ff/racld/4/0.001/I                     0.767
-F3   spec8            cells/ff/racld/8/0.001/I                     0.835
-F3   spec8            cells/ff/racld/32/0.001/I                    1.002
+F3   spec8            cells/orig/racld/4/0.001/I                   10.004
+F3   spec8            cells/orig/racld/8/0.001/I                   8.465
+F3   spec8            cells/orig/racld/32/0.001/I                  1.038
 F3   spec8            cells/ff/rascld/4/0.001/I                    0.745
 F3   spec8            cells/ff/rascld/8/0.001/I                    0.814
 F3   spec8            cells/ff/rascld/32/0.001/I                   0.991
 F3   spec8            cells/ff/rsacld/4/0.001/I                    0.758
 F3   spec8            cells/ff/rsacld/8/0.001/I                    0.811
 F3   spec8            cells/ff/rsacld/32/0.001/I                   1.005
-F4   an11             A_cells/racld|8|300/s                        10.90
-F4   an11             A_cells/racld|8|600/s                        20.27
-F4   an11             A_cells/racld|8|1200/s                       34.95
-F4   an11             A_cells/racld|14|300/s                       1.20
-F4   an11             A_cells/racld|14|600/s                       1.87
-F4   an11             A_cells/racld|14|1200/s                      2.75
+F3   spec8            cells/ff/racld/4/0.001/I                     0.767
+F3   spec8            cells/ff/racld/8/0.001/I                     0.835
+F3   spec8            cells/ff/racld/32/0.001/I                    1.002
 F4   an11             A_cells/rascld|8|300/s                       18.48
 F4   an11             A_cells/rascld|8|600/s                       34.31
 F4   an11             A_cells/rascld|8|1200/s                      59.16
@@ -56,28 +50,31 @@ F4   an11             A_cells/rsacld|8|1200/s                      39.96
 F4   an11             A_cells/rsacld|14|300/s                      1.53
 F4   an11             A_cells/rsacld|14|600/s                      2.43
 F4   an11             A_cells/rsacld|14|1200/s                     3.60
-F4   an11             A_contrast|racld|8                           Δln s 1.165 · share -0.078 · tpb 1.191 · lpb -0.053
+F4   an11             A_cells/racld|8|300/s                        10.90
+F4   an11             A_cells/racld|8|600/s                        20.27
+F4   an11             A_cells/racld|8|1200/s                       34.95
+F4   an11             A_cells/racld|14|300/s                       1.20
+F4   an11             A_cells/racld|14|600/s                       1.87
+F4   an11             A_cells/racld|14|1200/s                      2.75
 F4   an11             A_contrast|rascld|8                          Δln s 1.164 · share -0.079 · tpb 1.193 · lpb -0.049
 F4   an11             A_contrast|rsacld|8                          Δln s 1.169 · share -0.080 · tpb 1.194 · lpb -0.056
+F4   an11             A_contrast|racld|8                           Δln s 1.165 · share -0.078 · tpb 1.191 · lpb -0.053
 F5   an11             C_delta|rascld                               0.388 [0.342, 0.438]
 F5   an11             C_delta|rsacld                               -0.194 [-0.225, -0.161]
 F5   an11             C_delta|racldx                               -0.420 [-0.462, -0.381]
 F5   an11             C_delta|nracld                               -1.235 [-1.294, -1.184]
 F5   an11             C_delta|racldn                               -0.582 [-0.629, -0.537]
 F5   an11             C_delta|racldr                               -3.521 [-3.646, -3.403]
-F5   an11             B/300|rascld                                 mu0 0.378 · slope -111.9
 F5   an11.txt         B table lifespan 300 · mu 0                  +0.378
 F5   an11.txt         B table lifespan 300 · mu 0.001              +0.122
 F5   an11.txt         B table lifespan 300 · mu 0.003              -0.168
 F5   an11.txt         B table lifespan 300 · mu 0.005              -0.450
 F5   an11.txt         B table lifespan 300 · mu 0.01               -0.780
-F5   an11             B/600|rascld                                 mu0 0.355 · slope -129.6
 F5   an11.txt         B table lifespan 600 · mu 0                  +0.355
 F5   an11.txt         B table lifespan 600 · mu 0.001              +0.052
 F5   an11.txt         B table lifespan 600 · mu 0.003              -0.355
 F5   an11.txt         B table lifespan 600 · mu 0.005              -0.714
 F5   an11.txt         B table lifespan 600 · mu 0.01               -0.979
-F5   an11             B/1200|rascld                                mu0 0.401 · slope -135.5
 F5   an11.txt         B table lifespan 1200 · mu 0                 +0.401
 F5   an11.txt         B table lifespan 1200 · mu 0.001             +0.007
 F5   an11.txt         B table lifespan 1200 · mu 0.003             -0.649
@@ -89,6 +86,11 @@ F6   pairs13_racldfam pair|racld|n|* (8짝)                          틱당 -0.6
 F6   pairs13_racldfam pair|racldx|n|* (12짝)                        틱당 -0.695 ~ -0.603
 F6   pairs13          pair|rascled|n|* (12짝)                       틱당 -0.975 ~ -0.714
 F6   pairs13          pair|acld|n|* (6짝)                           틱당 -0.802 ~ -0.413
+F6   noise23          rows/S1|rascld/q95                           0.051 [0.045, 0.056]
+F6   noise23          rows/S1|rsacld/q95                           0.059 [0.051, 0.065]
+F6   noise23          rows/S1|racld/q95                            0.052 [0.048, 0.056]
+F6   noise23          rows/S1|racldx/q95                           0.058 [0.053, 0.063]
+F6   noise23          rows/S1|rascled/q95                          0.077 [0.068, 0.085]
 F6   pairs13_racldfam neg|rascld|n|* (11쌍)                         최대 |ΔΔ| 0.222 · 0.15 밖 2
 F6   pairs13_racldfam neg|rascld|x|* (21쌍)                         최대 |ΔΔ| 0.148 · 0.15 밖 0
 F6   pairs13_racldfam neg|rsacld|n|* (9쌍)                          최대 |ΔΔ| 0.142 · 0.15 밖 0
@@ -115,7 +117,7 @@ F7   pairs15          B1|racld|* (8짝)                              ΔΔ(μ) �
 F7   pairs15          B1|racldx|* (12짝)                            ΔΔ(μ) 평균 -0.65 -0.52 -0.41 -0.32 -0.12 · 통과 12/12
 F7   pairs15          B1|rascled|* (12짝)                           ΔΔ(μ) 평균 -0.89 -0.72 -0.52 -0.28 -0.07 · 통과 12/12
 F7   pairs15          B1|acld|* (6짝)                               ΔΔ(μ) 평균 -0.65 -0.53 -0.47 -0.22 -0.68 · 통과 1/6
-F7   pairs15          C2|orig · C3|ff · C2|rem                     original Δμ +0.275 [+0.230, +0.331]
+F7   pairs15          C2|orig · C3|ff · C2|rem                     roll-first Δμ +0.275 [+0.230, +0.331]
 F7   pairs15                                                       find-first Δμ +0.017 [-0.016, +0.051]
 F7   pairs15                                                       remember-roll Δμ +0.034 [-0.010, +0.072]
 F7   pairs15          C1|ff                                        μ0 차 +0.035 [+0.002, +0.067]
@@ -154,7 +156,7 @@ FS2  model12          cell|racldx|0.001                            meas -0.407 �
 FS2  model12          cell|racldx|0.003                            meas -0.390 · M1 -0.366 · hit True
 FS2  model12          cell|racldx|0.005                            meas -0.426 · M1 -0.315 · hit False
 FS2  model12          cell|racldx|0.01                             meas -0.413 · M1 -0.092 · hit False
-FS2  model12          flow|racld/U                                 0.1421
 FS2  model12          flow|rascld/U                                0.2296
 FS2  model12          flow|rsacld/U                                0.1769
+FS2  model12          flow|racld/U                                 0.1421
 FS2  model12          flow|racldx/U                                0.1464

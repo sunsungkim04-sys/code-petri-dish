@@ -25,6 +25,11 @@
  * v0.3.5 (2026-09-18) — 규칙 의존 사다리용 옵션 셋(해부 10): opts.cosmic(기본 true — false 면 우주선 돌연변이를 끄고 그 주사위도 안 굴린다) ·
  *   opts.diffuse(기본 0.15 — 틱마다 재료를 옮기는 시도 수 = 접시 칸 × 이 값) · opts.age0 / opts.ageVar(기본 300 / 300 — 수명 = age0 + [0, ageVar)).
  *   기본값이면 v0.3.4 와 난수 소비 · 궤적이 같다 — 체크섬으로 대조한다.
+ * v0.3.6 (2026-10-02) — opts.redrawP(기본 null) 추가: **다시 굴림 확률 세계**(해부 28 용량–반응).
+ *   기억하는 주사위(rememberDie)를 켠 채, 재료가 없어 헛손질할 때마다 확률 redrawP 로 기억을 지운다 — 지우면 다음 시도가 새로 굴린다.
+ *   redrawP = 0 이면 기억하는 주사위 세계와 같고, 1 이면 원래 규칙(헛손질마다 다시 굴림)과 같다. 동전은 **따로 연 난수 흐름 w.rnd2** 에서
+ *   뽑고 0 < redrawP < 1 일 때만 뽑는다 — 그래서 양 끝은 각 세계와 난수 소비까지 같다(dms.js 가 w.rnd2 를 연다).
+ *   기본값(null)이면 v0.3.5 와 궤적이 같다 — 체크섬으로 대조한다.
  */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory();
@@ -32,7 +37,7 @@
 })(typeof self !== 'undefined' ? self : this, function () {
 'use strict';
 
-const VERSION = '0.3.5';
+const VERSION = '0.3.6';
 const LET = 'nsracldjehx';
 const N = 120, C = N * N, K = LET.length;
 const X = LET.indexOf('x');
@@ -210,7 +215,11 @@ function copyOne(w, org) {
     else if (r < mu * 5 / 3) { k = (w.rnd() * K) | 0; dtype = 2; }          // 바뀜
     if (w.o.rememberDie) { org.dk = k; org.dtype = dtype; org.dpos = org.rh; }
   }
-  if (w.mat && !take(w, org.i, k)) return;                      // 재료가 없으면 이번 틱은 헛손질 (기억은 남는다)
+  if (w.mat && !take(w, org.i, k)) {                            // 재료가 없으면 이번 틱은 헛손질 (기억은 남는다)
+    const q = w.o.redrawP;                                      // v0.3.6: 확률 q 로 기억을 지운다(다음 시도가 새로 굴림)
+    if (q != null && (q >= 1 || (q > 0 && w.rnd2() < q))) org.dpos = -1;
+    return;
+  }
   org.dpos = -1;                                                // 성공 — 기억을 지운다
   c.g.push(k);
   if (adv) org.rh++;
