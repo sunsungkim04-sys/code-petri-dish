@@ -1,0 +1,1275 @@
+diff --git a/avida-core/CMakeLists.txt b/avida-core/CMakeLists.txt
+index a3f488677..2a0fe2224 100644
+--- a/avida-core/CMakeLists.txt
++++ b/avida-core/CMakeLists.txt
+@@ -260,6 +260,7 @@ SET(MAIN_SOURCES
+   ${MAIN_DIR}/cPhenPlastGenotype.cc
+   ${MAIN_DIR}/cPhenPlastUtil.cc
+   ${MAIN_DIR}/cPlasticPhenotype.cc
++  ${MAIN_DIR}/cMaterial.cc
+   ${MAIN_DIR}/cPopulation.cc
+   ${MAIN_DIR}/cPopulationCell.cc
+   ${MAIN_DIR}/cPopulationInterface.cc
+diff --git a/avida-core/source/actions/PopulationActions.cc b/avida-core/source/actions/PopulationActions.cc
+index 84e5bfae0..41cc66a82 100644
+--- a/avida-core/source/actions/PopulationActions.cc
++++ b/avida-core/source/actions/PopulationActions.cc
+@@ -61,6 +61,7 @@
+ #include <vector>
+ 
+ #include "stdlib.h"
++#include "cMaterial.h"
+ 
+ using namespace Avida;
+ using namespace AvidaTools;
+@@ -6200,9 +6201,58 @@ public:
+ 	}
+ };
+ 
++// ---- Conserved material (Code Petri Dish port) ----
++class cActionMaterialAudit : public cAction
++{
++public:
++  cActionMaterialAudit(cWorld* world, const cString& args, Feedback&) : cAction(world, args) { ; }
++  static const cString GetDescription() { return "Arguments: (none) -- run the conservation audit now"; }
++  void Process(cAvidaContext&) { m_world->GetPopulation().GetMaterial().Audit(true); }
++};
++
++class cActionMaterialInvade : public cAction
++{
++private:
++  cString m_seq; double m_frac; int m_seed; int m_label;
++public:
++  cActionMaterialInvade(cWorld* world, const cString& args, Feedback&) : cAction(world, args), m_frac(0.1), m_seed(1), m_label(1)
++  {
++    cString largs(args);
++    m_seq = largs.PopWord();
++    if (largs.GetSize()) m_frac = largs.PopWord().AsDouble();
++    if (largs.GetSize()) m_seed = largs.PopWord().AsInt();
++    if (largs.GetSize()) m_label = largs.PopWord().AsInt();
++  }
++  static const cString GetDescription() { return "Arguments: <sequence> [frac=0.1] [inj_seed=1] [label=1]"; }
++  void Process(cAvidaContext& ctx)
++  {
++    int n = 0, t = 0, d = 0, s = 0;
++    m_world->GetPopulation().GetMaterial().Invade(ctx, (const char*)m_seq, m_frac, (uint64_t)m_seed, m_label, n, t, d, s);
++    std::cerr << "[material] invade n=" << n << " target=" << t << " done=" << d << " skipped=" << s << std::endl;
++  }
++};
++
++class cActionMaterialForkArms : public cAction
++{
++private:
++  cString m_file; int m_parallel;
++public:
++  cActionMaterialForkArms(cWorld* world, const cString& args, Feedback&) : cAction(world, args), m_parallel(1)
++  {
++    cString largs(args);
++    m_file = largs.PopWord();
++    if (largs.GetSize()) m_parallel = largs.PopWord().AsInt();
++  }
++  static const cString GetDescription() { return "Arguments: <arms_file> [parallel=1]"; }
++  void Process(cAvidaContext& ctx) { m_world->GetPopulation().GetMaterial().ForkArms(ctx, (const char*)m_file, m_parallel); }
++};
++
+ void RegisterPopulationActions(cActionLibrary* action_lib)
+ {
+   action_lib->Register<cActionInject>("Inject");
++  action_lib->Register<cActionMaterialAudit>("MaterialAudit");
++  action_lib->Register<cActionMaterialInvade>("MaterialInvade");
++  action_lib->Register<cActionMaterialForkArms>("MaterialForkArms");
+   action_lib->Register<cActionInjectRandom>("InjectRandom");
+   action_lib->Register<cActionInjectWholeGenomeDuplications>("InjectWholeGenomeDuplications");
+   action_lib->Register<cActionInjectWholeGenomeDuplicationsNopCPrepend>("InjectWholeGenomeDuplicationsNopCPrepend");
+diff --git a/avida-core/source/cpu/cHardwareBase.h b/avida-core/source/cpu/cHardwareBase.h
+index d1d97fc6b..51711e5cc 100644
+--- a/avida-core/source/cpu/cHardwareBase.h
++++ b/avida-core/source/cpu/cHardwareBase.h
+@@ -30,11 +30,14 @@
+ #include <cassert>
+ #include <climits>
+ #include <iostream>
++#include <vector>
+ 
+ #include "cHardwareTracer.h"
+ #include "cInstSet.h"
+ #include "tBuffer.h"
+ 
++class cMaterial;
++
+ class cAvidaContext;
+ class cCodeLabel;
+ class cCPUMemory;
+@@ -126,6 +129,14 @@ public:
+   // interrupt types
+   enum interruptTypes {MSG_INTERRUPT = 0, MOVE_INTERRUPT};
+   
++  // --------  Conserved material (h-copy-mat)  ---------
++  virtual void MaterialAddHeld(std::vector<long long>& per_kind) const { (void)per_kind; }
++  virtual void MaterialReleaseAll(cMaterial& mat, int cell) { (void)mat; (void)cell; }
++  virtual void MaterialDiscard() { ; }
++  virtual void MaterialClearCarried() { ; }
++  virtual int MaterialBucket(cMaterial& mat) { (void)mat; return 0; }
++  virtual bool MaterialLifeCheck(cMaterial& mat, int update) { (void)mat; (void)update; return false; }
++
+   // --------  Organism  ---------
+   cOrganism* GetOrganism() { return m_organism; }
+   const cInstSet& GetInstSet() const { return *m_inst_set; }
+diff --git a/avida-core/source/cpu/cHardwareCPU.cc b/avida-core/source/cpu/cHardwareCPU.cc
+index 8a5d61f82..4a73993b0 100755
+--- a/avida-core/source/cpu/cHardwareCPU.cc
++++ b/avida-core/source/cpu/cHardwareCPU.cc
+@@ -22,6 +22,7 @@
+ 
+ 
+ #include "cHardwareCPU.h"
++#include "cMaterial.h"
+ 
+ #include "avida/core/WorldDriver.h"
+ #include "avida/output/File.h"
+@@ -378,6 +379,7 @@ tInstLib<cHardwareCPU::tMethod>* cHardwareCPU::initInstLib(void)
+     tInstLibEntry<tMethod>("res-jmp-head", &cHardwareCPU::Inst_ResJumpHead, INST_CLASS_FLOW_CONTROL, nInstFlag::STALL, "Move head ?IP? by amount in CX register depending on resource level; CX = old pos."),
+     
+     tInstLibEntry<tMethod>("h-copy-res", &cHardwareCPU::Inst_HeadCopy_ifResource, INST_CLASS_LIFECYCLE, nInstFlag::STALL, "Copy from read-head to write-head if specific resource 1 is available; advance both"),
++    tInstLibEntry<tMethod>("h-copy-mat", &cHardwareCPU::Inst_HeadCopyMat, INST_CLASS_LIFECYCLE, 0, "Copy from read-head to write-head taking the letter from conserved material (MATERIAL_MODE); stalls if not within reach"),
+     tInstLibEntry<tMethod>("h-copy2", &cHardwareCPU::Inst_HeadCopy2),
+     tInstLibEntry<tMethod>("h-copy3", &cHardwareCPU::Inst_HeadCopy3),
+     tInstLibEntry<tMethod>("h-copy4", &cHardwareCPU::Inst_HeadCopy4),
+@@ -789,7 +791,9 @@ cHardwareCPU::cHardwareCPU(cAvidaContext& ctx, cWorld* world, cOrganism* in_orga
+   ConstInstructionSequencePtr in_seq_p;
+   in_seq_p.DynamicCastFrom(in_genome.Representation());
+   m_memory = *in_seq_p;
+-  
++  m_mat_held.assign(m_memory.GetSize(), 1);
++  m_mat_dpos = -1; m_mat_dk = 0; m_mat_dtype = 0; m_mat_last_att = -1; m_mat_born = -1; m_mat_life = -1; m_mat_founder = -1;
++
+   Reset(ctx);                            // Setup the rest of the hardware...
+   internalReset();
+ }
+@@ -1758,7 +1762,8 @@ bool cHardwareCPU::Allocate_Main(cAvidaContext& ctx, const int allocated_size)
+   }
+   
+   m_mal_active = true;
+-  
++  m_mat_dpos = -1; m_mat_last_att = -1;
++
+   return true;
+ }
+ 
+@@ -1796,20 +1801,25 @@ bool cHardwareCPU::Divide_Main(cAvidaContext& ctx, const int div_point,
+   if (m_world->GetConfig().REQUIRE_EXACT_COPY.Get() && (seq != *offspring_seq) ) {
+     return false;
+   }
+-  
++
++  // Conserved material: every kept site must embody a letter; discarded copied sites return.
++  const bool mat_on = m_world->GetPopulation().GetMaterial().Enabled() && m_organism->GetCellID() >= 0;
++  if (mat_on && !matDivideAccount(div_point, child_size)) return false;
++
+   m_organism->OffspringGenome() = offspring;
+-  
++
+   // Cut off everything in this memory past the divide point.
+   m_memory.Resize(div_point);
+-  
++  if (mat_on) m_mat_held.assign(div_point, 1);
++
+   // Handle Divide Mutations...
+   Divide_DoMutations(ctx, mut_multiplier);
+-  
++
+   // Many tests will require us to run the offspring through a test CPU;
+   // this is, for example, to see if mutations need to be reverted or if
+   // lineages need to be updated.
+-  Divide_TestFitnessMeasures1(ctx); 
+-  
++  Divide_TestFitnessMeasures1(ctx);
++
+   if (m_world->GetConfig().DIVIDE_METHOD.Get() != DIVIDE_METHOD_OFFSPRING) {
+     // reset first time instruction costs
+     for (int i = 0; i < m_inst_ft_cost.GetSize(); i++) {
+@@ -11033,3 +11043,161 @@ bool cHardwareCPU::Inst_SetMatePreferenceHighestMerit(cAvidaContext& ctx) { retu
+ bool cHardwareCPU::Inst_SetMatePreferenceLowestDisplayA(cAvidaContext& ctx) { return Inst_SetMatePreference(ctx, MATE_PREFERENCE_LOWEST_DISPLAY_A); }
+ bool cHardwareCPU::Inst_SetMatePreferenceLowestDisplayB(cAvidaContext& ctx) { return Inst_SetMatePreference(ctx, MATE_PREFERENCE_LOWEST_DISPLAY_B); }
+ bool cHardwareCPU::Inst_SetMatePreferenceLowestMerit(cAvidaContext& ctx) { return Inst_SetMatePreference(ctx, MATE_PREFERENCE_LOWEST_MERIT); }
++
++
++// ======================================================================
++//  Conserved material (Code Petri Dish port) — h-copy-mat
++// ======================================================================
++
++void cHardwareCPU::matSyncHeld()
++{
++  const int n = m_memory.GetSize();
++  if ((int)m_mat_held.size() < n) m_mat_held.resize(n, 0);          // allocation appends un-copied sites
++  else if ((int)m_mat_held.size() > n) {
++    m_world->GetPopulation().GetMaterial().Anomaly("held array longer than memory");
++    m_mat_held.resize(n);
++  }
++}
++
++void cHardwareCPU::MaterialAddHeld(std::vector<long long>& per_kind) const
++{
++  const int n = Apto::Min((int)m_mat_held.size(), m_memory.GetSize());
++  for (int i = 0; i < n; i++) if (m_mat_held[i]) per_kind[m_memory[i].GetOp()]++;
++}
++
++int cHardwareCPU::MaterialBucket(cMaterial& mat)
++{
++  int l = m_organism->GetLineageLabel();
++  if (l < 0) l = 0;
++  if (l > 3) l = 3;
++  if (!mat.FounderOn()) return l;
++  if (m_mat_founder < 0) m_mat_founder = (cMaterial::KindsOf(m_organism->GetGenome()) == mat.Founder()) ? 1 : 0;
++  return m_mat_founder ? l : l + 4;
++}
++
++bool cHardwareCPU::MaterialLifeCheck(cMaterial& mat, int update)
++{
++  if (m_mat_born < 0) { m_mat_born = update; m_mat_life = mat.DrawLifespan(); }
++  return update - m_mat_born >= m_mat_life;
++}
++
++void cHardwareCPU::MaterialReleaseAll(cMaterial& mat, int cell)
++{
++  const int n = Apto::Min((int)m_mat_held.size(), m_memory.GetSize());
++  for (int i = 0; i < n; i++) if (m_mat_held[i]) mat.Put(cell, m_memory[i].GetOp());
++  m_mat_held.clear();
++}
++
++// At divide: sites [0, div_point + child_size) are kept (parent and offspring) and must each embody a
++// letter; un-copied ones are materialised from reach or the divide is refused. Copied sites past the
++// offspring are discarded and returned to the own cell. The offspring's letters go into transit.
++bool cHardwareCPU::matDivideAccount(int div_point, int child_size)
++{
++  cMaterial& mat = m_world->GetPopulation().GetMaterial();
++  mat.EnsureInit();
++  matSyncHeld();
++  const int cell = m_organism->GetCellID();
++  cMatCounters& C = mat.Ctr(MaterialBucket(mat));
++  const int keep = div_point + child_size;
++  std::vector<std::pair<int, int> > taken;
++  for (int i = 0; i < keep; i++) {
++    if (m_mat_held[i]) continue;
++    const int k = m_memory[i].GetOp();
++    const int at = mat.Take(cell, k);
++    if (at < 0) {
++      for (size_t j = 0; j < taken.size(); j++) mat.Put(taken[j].first, taken[j].second);
++      C.div_fail_mat++;
++      return false;
++    }
++    taken.push_back(std::make_pair(at, k));
++  }
++  for (int i = 0; i < keep; i++) m_mat_held[i] = 1;
++  C.uncopied_mat += (long long)taken.size();
++  for (int i = keep; i < (int)m_mat_held.size(); i++) {
++    if (m_mat_held[i]) { mat.Put(cell, m_memory[i].GetOp()); m_mat_held[i] = 0; C.extra_ret++; }
++  }
++  std::vector<int> kinds;
++  kinds.reserve(child_size);
++  for (int i = div_point; i < keep; i++) kinds.push_back(m_memory[i].GetOp());
++  mat.TransitAdd(kinds);
++  C.divides++;
++  m_mat_dpos = -1; m_mat_last_att = -1;
++  return true;
++}
++
++// Mirrors copyOne() of the Code Petri Dish simulator (petri/sim.js v0.3.6, lines 201-227):
++//   find-first: seek the intended letter; if not within reach, stall without drawing.
++//   draw (own stream): r < pdel -> deletion (no material; read head advances, nothing written)
++//                      r < pdel+pins -> insertion of a uniform random letter (read head stays)
++//                      r < pdel+pins+psub -> substitution by a uniform random letter
++//   draw-once: the outcome (letter, type) is carried across stalls at the same read position;
++//              with COPY_REDRAW_Q = q >= 0, each stall discards it with probability q.
++//   seek the letter to write (own cell, then neighbours); if none, stall: the cycle is spent,
++//   nothing is written, no head moves (under draw-first the next attempt draws again).
++bool cHardwareCPU::Inst_HeadCopyMat(cAvidaContext& ctx)
++{
++  cMaterial& mat = m_world->GetPopulation().GetMaterial();
++  const int cell = m_organism->GetCellID();
++  if (!mat.Enabled() || cell < 0) return Inst_HeadCopy(ctx);   // material off, or a test CPU
++  mat.EnsureInit();
++
++  cHeadCPU& read_head = getHead(nHardware::HEAD_READ);
++  cHeadCPU& write_head = getHead(nHardware::HEAD_WRITE);
++  read_head.Adjust();
++  write_head.Adjust();
++  matSyncHeld();
++
++  cMatCounters& C = mat.Ctr(MaterialBucket(mat));
++  const int k0 = read_head.GetInst().GetOp();
++  const int rh = read_head.GetPosition();
++  const int now = m_organism->GetPhenotype().GetTimeUsed();
++  C.attempts++;
++  if (m_mat_last_att >= 0) { C.gap_sum += now - m_mat_last_att; C.gap_n++; }
++  m_mat_last_att = now;
++
++  const int rule = mat.Rule();
++  if (rule == 1 && !mat.Has(cell, k0)) { C.stalls++; C.nodraw_stalls++; return true; }
++
++  int k = k0, dtype = 0;
++  if (rule == 2 && m_mat_dpos >= 0 && m_mat_dpos == rh) {
++    k = m_mat_dk; dtype = m_mat_dtype; C.reused++;
++  } else {
++    C.draws++;
++    const double pd = mat.PDel(), pi = mat.PIns(), ps = mat.PSub();
++    const double r = mat.CopyRng().Uniform();
++    if (r < pd) {
++      C.err_draws++; C.del++;
++      ReadInst(k0);
++      read_head.Advance();
++      m_mat_dpos = -1;
++      return true;
++    }
++    if (r < pd + pi) { k = mat.RandomKind(); dtype = 1; C.err_draws++; }
++    else if (r < pd + pi + ps) { k = mat.RandomKind(); dtype = 2; C.err_draws++; C.sub_draws++; }
++    if (rule == 2) { m_mat_dk = k; m_mat_dtype = dtype; m_mat_dpos = rh; }
++  }
++
++  if (mat.Take(cell, k) < 0) {
++    C.stalls++;
++    if (dtype != 0) C.err_stalls++;
++    if (rule == 2) {
++      const double q = mat.Q();
++      if (q >= 0 && (q >= 1 || (q > 0 && mat.QRng().Uniform() < q))) m_mat_dpos = -1;
++    }
++    return true;
++  }
++  m_mat_dpos = -1;
++
++  const int wp = write_head.GetPosition();
++  if (m_mat_held[wp]) { mat.Put(cell, m_memory[wp].GetOp()); C.overwrite_ret++; }
++  if (dtype != 1) ReadInst(k0);
++  write_head.SetInst(Instruction(k));
++  m_mat_held[wp] = 1;
++  write_head.SetFlagCopied();
++  if (k != k0) { write_head.SetFlagMutated(); write_head.SetFlagCopyMut(); }
++  C.written++;
++  if (dtype == 2) { C.sub_written++; if (k != k0) C.sub_changed++; }
++  if (dtype == 1) { C.ins_written++; write_head.Advance(); }
++  else { read_head.Advance(); write_head.Advance(); }
++  return true;
++}
+diff --git a/avida-core/source/cpu/cHardwareCPU.h b/avida-core/source/cpu/cHardwareCPU.h
+index 9c3034dab..dd4e6b059 100755
+--- a/avida-core/source/cpu/cHardwareCPU.h
++++ b/avida-core/source/cpu/cHardwareCPU.h
+@@ -664,6 +664,7 @@ private:
+   bool Inst_SetFlow(cAvidaContext& ctx);
+ 
+   bool Inst_HeadCopy_ifResource(cAvidaContext& ctx);
++  bool Inst_HeadCopyMat(cAvidaContext& ctx);
+   bool Inst_HeadCopy2(cAvidaContext& ctx);
+   bool Inst_HeadCopy3(cAvidaContext& ctx);
+   bool Inst_HeadCopy4(cAvidaContext& ctx);
+@@ -930,6 +931,23 @@ public:
+ private:
+   std::pair<bool, int> m_last_cell_data; //<! If cell data has been previously collected, and it's value.
+ 
++  // conserved material (h-copy-mat)
++  std::vector<unsigned char> m_mat_held;   // per memory site: 1 if the site embodies a letter of material
++  int m_mat_dpos, m_mat_dk, m_mat_dtype;   // carried draw (draw-once): read position, letter, type
++  int m_mat_last_att;                      // time_used at the previous attempt in this gestation (-1 none)
++  int m_mat_born, m_mat_life;              // update first seen in the population, drawn lifespan (-1 = not yet)
++  int m_mat_founder;                       // genome equals MATERIAL_CENSUS_FOUNDER (1/0, -1 unknown)
++  void matSyncHeld();
++  bool matDivideAccount(int div_point, int child_size);
++public:
++  void MaterialAddHeld(std::vector<long long>& per_kind) const;
++  void MaterialReleaseAll(cMaterial& mat, int cell);
++  void MaterialDiscard() { m_mat_held.clear(); }
++  void MaterialClearCarried() { m_mat_dpos = -1; m_mat_last_att = -1; }
++  bool MaterialLifeCheck(cMaterial& mat, int update);
++  int MaterialBucket(cMaterial& mat);
++private:
++
+   // -------- Synchronization primitives --------
+ public:
+   //! Called when the owning organism receives a flash from a neighbor.
+diff --git a/avida-core/source/main/cAvidaConfig.h b/avida-core/source/main/cAvidaConfig.h
+index 14c8b3e62..c8e4d8751 100644
+--- a/avida-core/source/main/cAvidaConfig.h
++++ b/avida-core/source/main/cAvidaConfig.h
+@@ -878,6 +878,28 @@ public:
+ 
+ 
+   // -------- DEPRECATED ---------
++  // -------- Conserved material (Code Petri Dish port) --------
++  CONFIG_ADD_GROUP(MATERIAL_GROUP, "Conserved-material copying (h-copy-mat)");
++  CONFIG_ADD_VAR(MATERIAL_MODE, int, 0, "0 = off (h-copy-mat behaves as h-copy)\n2 = local integer material pools per cell and instruction");
++  CONFIG_ADD_VAR(MATERIAL_DENSITY, double, 8.0, "Letters of material per cell at the start, uniformly random over the instruction set");
++  CONFIG_ADD_VAR(MATERIAL_REACH, int, 4, "Neighbours searched after the own cell: 0, 4 (N,E,S,W) or 8");
++  CONFIG_ADD_VAR(MATERIAL_DIFFUSE, double, 0.0, "Per update, cells*value attempts to move one free letter to a random orthogonal neighbour");
++  CONFIG_ADD_VAR(MATERIAL_SEED, int, 0, "Seed of the material streams (<=0: derived from RANDOM_SEED)");
++  CONFIG_ADD_VAR(MATERIAL_INJECT_TAKE, int, 0, "Letters of injected genomes: 0 = taken anywhere (random cells), 1 = own cell/neighbours then anywhere, 2 = own cell/neighbours only");
++  CONFIG_ADD_VAR(MATERIAL_AUDIT_INTERVAL, int, 100, "Conservation audit every N updates (0 = off)");
++  CONFIG_ADD_VAR(MATERIAL_AUDIT_ABORT, int, 1, "Abort the run on an audit violation");
++  CONFIG_ADD_VAR(MATERIAL_CENSUS_FILE, cString, "-", "Prefix of census (.census.gz) and audit (.audit.txt) outputs; - = none");
++  CONFIG_ADD_VAR(MATERIAL_CENSUS_INTERVAL, int, 100, "Census row per lineage label every N updates");
++  CONFIG_ADD_VAR(MATERIAL_DEBUG_NO_DEATH_RETURN, int, 0, "Negative control: do not return letters on death");
++  CONFIG_ADD_VAR(MATERIAL_CENSUS_FOUNDER, cString, "-", "If a sequence is given, census counters of organisms whose genome differs from it go to bucket label+4");
++  CONFIG_ADD_VAR(MATERIAL_LIFESPAN, int, 0, "Lifespan constant a in updates since birth (not reset at divide): each organism lives a + U[0,a) updates; 0 = off (use DEATH_METHOD)");
++  CONFIG_ADD_VAR(MATERIAL_DEATH_RATE, double, 0.0, "Age-independent death probability per organism per update (material stream)");
++  CONFIG_ADD_VAR(COPY_DRAW_RULE, int, 0, "Error draw of h-copy-mat: 0 = draw-first (draw, then seek the letter)\n1 = find-first (seek the intended letter, draw only if within reach)\n2 = draw-once (draw first, carry the outcome across stalls)");
++  CONFIG_ADD_VAR(COPY_REDRAW_Q, double, -1.0, "Draw-once only: probability that a stall discards the carried draw (<0 = never)");
++  CONFIG_ADD_VAR(COPY_MAT_SUB_PROB, double, 0.0, "h-copy-mat: substitution probability per draw (random instruction, uniform)");
++  CONFIG_ADD_VAR(COPY_MAT_INS_PROB, double, 0.0, "h-copy-mat: insertion probability per draw");
++  CONFIG_ADD_VAR(COPY_MAT_DEL_PROB, double, 0.0, "h-copy-mat: deletion probability per draw");
++
+   CONFIG_ADD_GROUP(DEPRECATED_GROUP, "DEPRECATED (New functionality listed in comments)");
+   CONFIG_ADD_VAR(ANALYZE_MODE, int, 0, "0 = Disabled\n1 = Enabled\n2 = Interactive\nDEPRECATED: use command line options -a[nalyze] or -i[nteractive])");
+   CONFIG_ADD_VAR(REPRO_METHOD, int, 1, "Replace existing organism: 1=yes\nDEPRECATED: Use BIRTH_METHOD 3 instead.");
+diff --git a/avida-core/source/main/cPopulation.cc b/avida-core/source/main/cPopulation.cc
+index 4070d3840..c9b86fdb5 100644
+--- a/avida-core/source/main/cPopulation.cc
++++ b/avida-core/source/main/cPopulation.cc
+@@ -21,6 +21,7 @@
+  */
+ 
+ #include "cPopulation.h"
++#include "cMaterial.h"
+ 
+ #include "avida/core/Feedback.h"
+ #include "avida/core/InstructionSequence.h"
+@@ -269,6 +270,7 @@ cPopulation::cPopulation(cWorld* world)
+ : m_world(world)
+ , m_scheduler(NULL)
+ , birth_chamber(world)
++, m_material(new cMaterial(world))
+ , print_mini_trace_genomes(false)
+ , use_micro_traces(false)
+ , m_next_prey_q(0)
+@@ -607,6 +609,7 @@ cPopulation::~cPopulation()
+ {
+   for (int i = 0; i < cell_array.GetSize(); i++) delete cell_array[i].GetOrganism(); 
+   delete m_scheduler;
++  delete m_material;
+ }
+ 
+ 
+@@ -964,6 +967,7 @@ bool cPopulation::ActivateOffspring(cAvidaContext& ctx, const Genome& offspring_
+           || (m_world->GetConfig().EPIGENETIC_METHOD.Get() == EPIGENETIC_METHOD_BOTH) ) {
+         offspring_array[i]->GetHardware().InheritState(parent_organism->GetHardware());
+       }
++      if (m_material->Enabled()) m_material->OnPlaced(parent_organism, offspring_array[i]);
+       bool org_survived = ActivateOrganism(ctx, offspring_array[i], GetCell(target_cells[i]));
+       // only assign an avatar cell if the org lived through birth and it isn't the parent
+       if (m_world->GetConfig().USE_AVATARS.Get() && org_survived) {
+@@ -982,6 +986,7 @@ bool cPopulation::ActivateOffspring(cAvidaContext& ctx, const Genome& offspring_
+         else KillOrganism(GetCell(target_cells[i]), ctx);
+       }
+     } else {
++      if (m_material->Enabled()) m_material->OnDropped(parent_organism, offspring_array[i], parent_id);
+       delete offspring_array[i];
+     }
+   }
+@@ -2313,8 +2318,11 @@ void cPopulation::KillOrganism(cPopulationCell& in_cell, cAvidaContext& ctx)
+     in_cell.AddGenomeFragments(ctx, *seq);
+   }
+   
++  // Conserved material: the organism's letters return to its cell.
++  if (m_material->Enabled()) m_material->OnDeath(organism, cellID);
++
+   // And clear it!
+-  in_cell.RemoveOrganism(ctx); 
++  in_cell.RemoveOrganism(ctx);
+   if (!organism->IsRunning()) delete organism;
+   else organism->GetPhenotype().SetToDelete();
+   
+@@ -6318,7 +6326,9 @@ void cPopulation::ProcessPostUpdate(cAvidaContext& ctx)
+     UpdateMaleFemaleOrgStats(ctx);
+   }
+   
+-  for (int i = 0; i < deme_array.GetSize(); i++) deme_array[i].ProcessUpdate(ctx);   
++  for (int i = 0; i < deme_array.GetSize(); i++) deme_array[i].ProcessUpdate(ctx);
++
++  if (m_material->Enabled()) m_material->PostUpdate(ctx);
+ }
+ 
+ void cPopulation::ProcessUpdateCellActions(cAvidaContext& ctx)
+@@ -7193,6 +7203,9 @@ void cPopulation::Inject(const Genome& genome, Systematics::Source src, cAvidaCo
+     else if (dest_y == m_world->GetConfig().WORLD_Y.Get() - 1) cell_id -= m_world->GetConfig().WORLD_X.Get();
+   }
+   
++  // Conserved material: the injected genome's letters are taken from the pools (or the injection is skipped).
++  if (m_material->Enabled() && !m_material->OnInject(ctx, cell_id, genome)) return;
++
+   // if the injected org already has a group we will assign it to, do not assign group id in activate organism
+   if (!inject_group) InjectGenome(cell_id, src, genome, ctx, lineage_label, true);
+   else InjectGenome(cell_id, src, genome, ctx, lineage_label, false);
+diff --git a/avida-core/source/main/cPopulation.h b/avida-core/source/main/cPopulation.h
+index 90b0fb681..bb879a95a 100644
+--- a/avida-core/source/main/cPopulation.h
++++ b/avida-core/source/main/cPopulation.h
+@@ -42,6 +42,7 @@ class cAvidaContext;
+ class cCodeLabel;
+ class cEnvironment;
+ class cLineage;
++class cMaterial;
+ class cOrganism;
+ class cPopulationCell;
+ 
+@@ -70,6 +71,7 @@ private:
+   Apto::Array<int> empty_cell_id_array;     // Used for PREFER_EMPTY birth methods
+   cResourceCount resource_count;       // Global resources available
+   cBirthChamber birth_chamber;         // Global birth chamber.
++  cMaterial* m_material;               // Conserved material pools (MATERIAL_MODE)
+   //Keeps track of which organisms are in which group.
+   Apto::Map<int, Apto::Array<cOrganism*, Apto::Smart> > m_group_list;
+   Apto::Map<int, Apto::Array<pair<int,int> > > m_group_intolerances;
+@@ -297,6 +299,7 @@ public:
+   
+   int GetSize() const { return cell_array.GetSize(); }
+   int GetWorldX() const { return world_x; }
++  cMaterial& GetMaterial() { return *m_material; }
+   int GetWorldY() const { return world_y; }
+   int GetNumDemes() const { return deme_array.GetSize(); }
+   cDeme& GetDeme(int i) { return deme_array[i]; }
+--- /dev/null
++++ b/avida-core/source/main/cMaterial.h
+@@ -0,0 +1,166 @@
++/*
++ *  cMaterial.h
++ *  Avida — conserved-material copying (Code Petri Dish port, branch material-draw)
++ *
++ *  Integer per-cell, per-instruction material pools. A copy by h-copy-mat must take
++ *  the letter it writes from the pool of its own cell or a neighbour (MATERIAL_REACH);
++ *  if none is within reach the attempt is a stall: it spends the cycle and writes
++ *  nothing. Letters return to the pool on death, on overwrite, when an offspring
++ *  cannot be placed and when allocated sites are discarded at divide.
++ *  The position of the error draw relative to the material check is set by
++ *  COPY_DRAW_RULE (0 draw-first, 1 find-first, 2 draw-once; COPY_REDRAW_Q for draw-once).
++ *  Copy draws use their own random stream so that, at zero error, the three rules
++ *  give identical trajectories.
++ */
++
++#ifndef cMaterial_h
++#define cMaterial_h
++
++#include <cstdint>
++#include <cstdio>
++#include <string>
++#include <vector>
++
++class cWorld;
++class cOrganism;
++class cAvidaContext;
++
++namespace Avida { class Genome; }
++
++// splitmix64: small, fast, self-contained, independent of Avida's RNG
++struct cMatRng {
++  uint64_t s;
++  cMatRng() : s(0x1234567ULL) { ; }
++  explicit cMatRng(uint64_t seed) : s(seed) { ; }
++  void Seed(uint64_t seed) { s = seed; }
++  uint64_t Next() {
++    uint64_t z = (s += 0x9E3779B97F4A7C15ULL);
++    z = (z ^ (z >> 30)) * 0xBF58476D1CE4E5B9ULL;
++    z = (z ^ (z >> 27)) * 0x94D049BB133111EBULL;
++    return z ^ (z >> 31);
++  }
++  double Uniform() { return (double)(Next() >> 11) * (1.0 / 9007199254740992.0); }
++  int Below(int n) { return (int)(Uniform() * n); }
++};
++
++// Counters of copy outcomes, kept per lineage label
++struct cMatCounters {
++  long long attempts;      // executions of h-copy-mat in the population
++  long long stalls;        // attempts that wrote nothing because the letter was not within reach
++  long long nodraw_stalls; // stalls under find-first (no draw taken)
++  long long draws;         // error draws taken
++  long long reused;        // attempts that reused a carried draw (draw-once)
++  long long err_draws;     // draws that gave an error (deletion, insertion or substitution)
++  long long err_stalls;    // stalls whose letter was an erroneous one (insertion/substitution)
++  long long del;           // deletions realised (no material needed)
++  long long ins_written;   // insertions written
++  long long sub_draws;     // draws that gave a substitution
++  long long sub_written;   // substitutions written
++  long long sub_changed;   // substitutions written that changed the letter
++  long long written;       // letters written (including insertions)
++  long long gap_sum;       // cycles between consecutive attempts within a gestation
++  long long gap_n;
++  long long divides;       // successful divides
++  long long div_fail_mat;  // divides refused because un-copied sites could not be materialised
++  long long uncopied_mat;  // un-copied sites materialised at divide
++  long long extra_ret;     // copied sites beyond the offspring returned at divide
++  long long overwrite_ret; // letters returned when a held site was overwritten
++  long long placed;        // offspring placed
++  long long dropped;       // offspring that could not be placed (material returned to parent cell)
++  long long placed_changed;// placed offspring whose sequence differs from the parent's genome
++  long long placed_len;    // sum of placed offspring lengths
++  cMatCounters() { Clear(); }
++  void Clear();
++  void Add(const cMatCounters& o);
++};
++
++class cMaterial {
++public:
++  enum { MAX_LABEL = 8 };
++
++  explicit cMaterial(cWorld* world);
++  ~cMaterial();
++
++  bool Enabled() const { return m_mode != 0; }
++  void EnsureInit();
++  int NumKinds() const { return m_nk; }
++
++  // config read live (SetConfig / fork arms may change them)
++  int Rule() const;
++  double Q() const;
++  double PSub() const;
++  double PIns() const;
++  double PDel() const;
++
++  // pools
++  bool Has(int cell, int k) const;
++  int Take(int cell, int k);                  // own cell, then neighbours N,E,S,W(,NE,SE,SW,NW); returns source cell or -1
++  void Put(int cell, int k) { m_pool[(size_t)cell * m_nk + k]++; }
++  int TakeAnywhere(int k, cMatRng& rng);      // random cells, up to 200000 tries
++  int TakeNearThenAnywhere(int cell, int k, cMatRng& rng);
++  int RandomKind() { return m_copy_rng.Below(m_nk); }
++  int DrawLifespan();
++  bool FounderOn() const { return !m_founder.empty(); }
++  const std::vector<int>& Founder() const { return m_founder; }
++
++  cMatRng& CopyRng() { return m_copy_rng; }
++  cMatRng& QRng() { return m_q_rng; }
++  cMatRng& EnvRng() { return m_env_rng; }
++
++  cMatCounters& Ctr(int label) {
++    if (label < 0) label = 0;
++    if (label >= MAX_LABEL) label = MAX_LABEL - 1;
++    return m_ctr[label];
++  }
++
++  // transit (offspring between divide and placement)
++  void TransitAdd(const std::vector<int>& kinds);
++  void TransitRemove(const std::vector<int>& kinds);
++  void TransitReturn(int cell, const std::vector<int>& kinds);
++
++  // hooks
++  void OnDeath(cOrganism* org, int cell);
++  bool OnInject(cAvidaContext& ctx, int cell, const Avida::Genome& genome);
++  void OnPlaced(cOrganism* parent, cOrganism* offspring);
++  void OnDropped(cOrganism* parent, cOrganism* offspring, int parent_cell);
++  void PostUpdate(cAvidaContext& ctx);
++
++  long long Audit(bool force_print);
++  void WriteCensus(int update);
++  void FlushOutputs();
++  void Anomaly(const char* what);
++
++  // experiment actions
++  void Invade(cAvidaContext& ctx, const std::string& seq, double frac, uint64_t inj_seed, int label,
++              int& n, int& target, int& done, int& skipped);
++  void ForkArms(cAvidaContext& ctx, const std::string& arms_file, int parallel);
++  void ClearCarriedDraws();
++
++  static std::vector<int> KindsOf(const Avida::Genome& genome);
++
++  bool m_suppress_death_return;
++  bool m_suppress_inject_take;
++
++private:
++  cWorld* m_world;
++  int m_mode;
++  bool m_init;
++  int m_cells, m_nk, m_wx, m_wy, m_reach;
++  std::vector<int> m_pool;        // cells * nk
++  std::vector<int> m_nb;          // cells * 8 (N,E,S,W,NE,SE,SW,NW), -1 if none
++  std::vector<long long> m_init_kind;
++  std::vector<long long> m_transit;
++  std::vector<int> m_founder;     // census founder sequence (op codes), empty = off
++  cMatRng m_copy_rng, m_q_rng, m_env_rng;
++  cMatCounters m_ctr[MAX_LABEL];
++  long long m_audit_runs, m_audit_viol, m_anomalies, m_inject_skipped;
++  std::string m_prefix;
++  FILE* m_census;
++  FILE* m_audit;
++  void openOutputs();
++  void closeOutputs();
++  void seedStreams(uint64_t base);
++  void checkGuards();
++};
++
++#endif
+--- /dev/null
++++ b/avida-core/source/main/cMaterial.cc
+@@ -0,0 +1,576 @@
++/*
++ *  cMaterial.cc
++ *  Avida — conserved-material copying (Code Petri Dish port, branch material-draw)
++ */
++
++#include "cMaterial.h"
++
++#include "avida/core/Feedback.h"
++#include "avida/core/Genome.h"
++#include "avida/core/InstructionSequence.h"
++#include "avida/systematics/Types.h"
++
++#include "cAvidaContext.h"
++#include "cHardwareBase.h"
++#include "cHardwareManager.h"
++#include "cInstSet.h"
++#include "cOrganism.h"
++#include "cPopulation.h"
++#include "cPopulationCell.h"
++#include "cStats.h"
++#include "cWorld.h"
++
++#include <algorithm>
++#include <cmath>
++#include <cstdlib>
++#include <cstring>
++#include <fstream>
++#include <iostream>
++#include <sstream>
++#include <sys/types.h>
++#include <sys/wait.h>
++#include <unistd.h>
++
++using namespace Avida;
++
++static bool matOrgIdLess(cOrganism* a, cOrganism* b) { return a->GetID() < b->GetID(); }
++
++void cMatCounters::Clear()
++{
++  attempts = stalls = nodraw_stalls = draws = reused = err_draws = err_stalls = 0;
++  del = ins_written = sub_draws = sub_written = sub_changed = written = 0;
++  gap_sum = gap_n = divides = div_fail_mat = uncopied_mat = extra_ret = overwrite_ret = 0;
++  placed = dropped = placed_changed = placed_len = 0;
++}
++
++void cMatCounters::Add(const cMatCounters& o)
++{
++  attempts += o.attempts; stalls += o.stalls; nodraw_stalls += o.nodraw_stalls; draws += o.draws;
++  reused += o.reused; err_draws += o.err_draws; err_stalls += o.err_stalls; del += o.del;
++  ins_written += o.ins_written; sub_draws += o.sub_draws; sub_written += o.sub_written;
++  sub_changed += o.sub_changed; written += o.written; gap_sum += o.gap_sum; gap_n += o.gap_n;
++  divides += o.divides; div_fail_mat += o.div_fail_mat; uncopied_mat += o.uncopied_mat;
++  extra_ret += o.extra_ret; overwrite_ret += o.overwrite_ret; placed += o.placed; dropped += o.dropped;
++  placed_changed += o.placed_changed; placed_len += o.placed_len;
++}
++
++cMaterial::cMaterial(cWorld* world)
++  : m_suppress_death_return(false), m_suppress_inject_take(false)
++  , m_world(world), m_mode(world->GetConfig().MATERIAL_MODE.Get()), m_init(false)
++  , m_cells(0), m_nk(0), m_wx(0), m_wy(0), m_reach(4)
++  , m_audit_runs(0), m_audit_viol(0), m_anomalies(0), m_inject_skipped(0)
++  , m_census(NULL), m_audit(NULL)
++{
++}
++
++cMaterial::~cMaterial()
++{
++  closeOutputs();
++}
++
++int cMaterial::Rule() const { return m_world->GetConfig().COPY_DRAW_RULE.Get(); }
++double cMaterial::Q() const { return m_world->GetConfig().COPY_REDRAW_Q.Get(); }
++double cMaterial::PSub() const { return m_world->GetConfig().COPY_MAT_SUB_PROB.Get(); }
++double cMaterial::PIns() const { return m_world->GetConfig().COPY_MAT_INS_PROB.Get(); }
++double cMaterial::PDel() const { return m_world->GetConfig().COPY_MAT_DEL_PROB.Get(); }
++
++void cMaterial::seedStreams(uint64_t base)
++{
++  cMatRng mix(base);
++  m_copy_rng.Seed(mix.Next());
++  m_q_rng.Seed(mix.Next());
++  m_env_rng.Seed(mix.Next());
++}
++
++void cMaterial::checkGuards()
++{
++  cAvidaConfig& c = m_world->GetConfig();
++  std::ostringstream bad;
++  const double zero_vars[] = {
++    c.COPY_MUT_PROB.Get(), c.COPY_INS_PROB.Get(), c.COPY_DEL_PROB.Get(), c.COPY_UNIFORM_PROB.Get(), c.COPY_SLIP_PROB.Get(),
++    c.POINT_MUT_PROB.Get(), c.POINT_INS_PROB.Get(), c.POINT_DEL_PROB.Get(), c.INST_POINT_MUT_PROB.Get(),
++    c.DIV_MUT_PROB.Get(), c.DIV_INS_PROB.Get(), c.DIV_DEL_PROB.Get(), c.DIV_UNIFORM_PROB.Get(), c.DIV_SLIP_PROB.Get(),
++    c.DIV_TRANS_PROB.Get(), c.DIV_LGT_PROB.Get(),
++    c.DIVIDE_MUT_PROB.Get(), c.DIVIDE_INS_PROB.Get(), c.DIVIDE_DEL_PROB.Get(), c.DIVIDE_UNIFORM_PROB.Get(),
++    c.DIVIDE_SLIP_PROB.Get(), c.DIVIDE_TRANS_PROB.Get(), c.DIVIDE_LGT_PROB.Get(),
++    c.DIVIDE_POISSON_MUT_MEAN.Get(), c.DIVIDE_POISSON_INS_MEAN.Get(), c.DIVIDE_POISSON_DEL_MEAN.Get(),
++    c.DIVIDE_POISSON_SLIP_MEAN.Get(), c.DIVIDE_POISSON_TRANS_MEAN.Get(), c.DIVIDE_POISSON_LGT_MEAN.Get(),
++    c.INJECT_MUT_PROB.Get(), c.PARENT_MUT_PROB.Get(), c.PARENT_INS_PROB.Get(), c.PARENT_DEL_PROB.Get(),
++    c.META_COPY_MUT.Get()
++  };
++  for (size_t i = 0; i < sizeof(zero_vars) / sizeof(zero_vars[0]); i++) {
++    if (zero_vars[i] != 0.0) bad << " mutation-var#" << i << "=" << zero_vars[i];
++  }
++  if (c.SPECULATIVE.Get()) bad << " SPECULATIVE=1";
++  if (c.DIVIDE_METHOD.Get() != 1) bad << " DIVIDE_METHOD!=1";
++  if (m_mode != 2) bad << " MATERIAL_MODE must be 0 or 2";
++  if (c.MATERIAL_LIFESPAN.Get() > 0 && c.DEATH_METHOD.Get() != 0) bad << " MATERIAL_LIFESPAN needs DEATH_METHOD 0";
++  const int r = c.COPY_DRAW_RULE.Get();
++  if (r < 0 || r > 2) bad << " COPY_DRAW_RULE";
++  if (m_reach != 0 && m_reach != 4 && m_reach != 8) bad << " MATERIAL_REACH";
++  if (bad.str().size()) {
++    std::cerr << "[material] configuration not allowed with MATERIAL_MODE on:" << bad.str() << std::endl;
++    std::exit(3);
++  }
++}
++
++void cMaterial::EnsureInit()
++{
++  if (m_init || !Enabled()) return;
++  m_init = true;
++  cAvidaConfig& c = m_world->GetConfig();
++  m_reach = c.MATERIAL_REACH.Get();
++  checkGuards();
++  m_wx = c.WORLD_X.Get();
++  m_wy = c.WORLD_Y.Get();
++  m_cells = m_wx * m_wy;
++  m_nk = m_world->GetHardwareManager().GetDefaultInstSet().GetSize();
++  const bool torus = (c.WORLD_GEOMETRY.Get() == 2);
++  if (c.WORLD_GEOMETRY.Get() != 1 && c.WORLD_GEOMETRY.Get() != 2) {
++    std::cerr << "[material] WORLD_GEOMETRY must be 1 or 2" << std::endl;
++    std::exit(3);
++  }
++  m_nb.assign((size_t)m_cells * 8, -1);
++  const int dx[8] = { 0, 1, 0, -1, 1, 1, -1, -1 };
++  const int dy[8] = { -1, 0, 1, 0, -1, 1, 1, -1 };
++  for (int y = 0; y < m_wy; y++) for (int x = 0; x < m_wx; x++) {
++    for (int d = 0; d < 8; d++) {
++      int nx = x + dx[d], ny = y + dy[d];
++      if (torus) { nx = (nx + m_wx) % m_wx; ny = (ny + m_wy) % m_wy; }
++      else if (nx < 0 || ny < 0 || nx >= m_wx || ny >= m_wy) continue;
++      m_nb[(size_t)(y * m_wx + x) * 8 + d] = ny * m_wx + nx;
++    }
++  }
++  long long seed = c.MATERIAL_SEED.Get();
++  if (seed <= 0) seed = (long long)c.RANDOM_SEED.Get() * 2654435761LL + 0x5EEDLL;
++  seedStreams((uint64_t)seed);
++
++  m_pool.assign((size_t)m_cells * m_nk, 0);
++  const long long total = llround(m_cells * c.MATERIAL_DENSITY.Get());
++  for (long long t = 0; t < total; t++) {
++    const int cell = m_env_rng.Below(m_cells);
++    const int k = m_env_rng.Below(m_nk);
++    m_pool[(size_t)cell * m_nk + k]++;
++  }
++  m_init_kind.assign(m_nk, 0);
++  m_transit.assign(m_nk, 0);
++  for (int i = 0; i < m_cells; i++) for (int k = 0; k < m_nk; k++) m_init_kind[k] += m_pool[(size_t)i * m_nk + k];
++  {
++    const std::string f = (const char*)c.MATERIAL_CENSUS_FOUNDER.Get();
++    if (f.size() && f != "-") for (size_t i = 0; i < f.size(); i++) m_founder.push_back(f[i] - 'a');
++  }
++  m_prefix = (const char*)c.MATERIAL_CENSUS_FILE.Get();
++  openOutputs();
++  std::cerr << "[material] init cells=" << m_cells << " kinds=" << m_nk << " letters=" << total
++            << " reach=" << m_reach << " rule=" << Rule() << std::endl;
++}
++
++void cMaterial::openOutputs()
++{
++  if (m_prefix.size() == 0 || m_prefix == "-") return;
++  std::string cmd = "gzip -c > '" + m_prefix + ".census.gz'";
++  m_census = popen(cmd.c_str(), "w");
++  m_audit = fopen((m_prefix + ".audit.txt").c_str(), "w");
++  if (m_census) {
++    fprintf(m_census, "update label alive attempts stalls nodraw_stalls draws reused err_draws err_stalls del ins_written "
++                      "sub_draws sub_written sub_changed written gap_sum gap_n divides div_fail_mat uncopied_mat extra_ret "
++                      "overwrite_ret placed dropped placed_changed placed_len free_total\n");
++  }
++}
++
++void cMaterial::closeOutputs()
++{
++  if (m_census) { pclose(m_census); m_census = NULL; }
++  if (m_audit) { fclose(m_audit); m_audit = NULL; }
++}
++
++void cMaterial::FlushOutputs()
++{
++  if (m_census) fflush(m_census);
++  if (m_audit) fflush(m_audit);
++  fflush(stdout); fflush(stderr);
++  std::cout.flush(); std::cerr.flush();
++}
++
++void cMaterial::Anomaly(const char* what)
++{
++  m_anomalies++;
++  if (m_anomalies <= 20) std::cerr << "[material] ANOMALY " << what << std::endl;
++}
++
++bool cMaterial::Has(int cell, int k) const
++{
++  if (m_pool[(size_t)cell * m_nk + k] > 0) return true;
++  for (int d = 0; d < m_reach; d++) {
++    const int t = m_nb[(size_t)cell * 8 + d];
++    if (t >= 0 && m_pool[(size_t)t * m_nk + k] > 0) return true;
++  }
++  return false;
++}
++
++int cMaterial::Take(int cell, int k)
++{
++  int& own = m_pool[(size_t)cell * m_nk + k];
++  if (own > 0) { own--; return cell; }
++  for (int d = 0; d < m_reach; d++) {
++    const int t = m_nb[(size_t)cell * 8 + d];
++    if (t >= 0) {
++      int& v = m_pool[(size_t)t * m_nk + k];
++      if (v > 0) { v--; return t; }
++    }
++  }
++  return -1;
++}
++
++int cMaterial::TakeAnywhere(int k, cMatRng& rng)
++{
++  for (int t = 0; t < 200000; t++) {
++    const int cell = rng.Below(m_cells);
++    int& v = m_pool[(size_t)cell * m_nk + k];
++    if (v > 0) { v--; return cell; }
++  }
++  return -1;
++}
++
++int cMaterial::TakeNearThenAnywhere(int cell, int k, cMatRng& rng)
++{
++  const int at = Take(cell, k);
++  if (at >= 0) return at;
++  return TakeAnywhere(k, rng);
++}
++
++void cMaterial::TransitAdd(const std::vector<int>& kinds)
++{
++  for (size_t i = 0; i < kinds.size(); i++) m_transit[kinds[i]]++;
++}
++
++void cMaterial::TransitRemove(const std::vector<int>& kinds)
++{
++  for (size_t i = 0; i < kinds.size(); i++) m_transit[kinds[i]]--;
++}
++
++void cMaterial::TransitReturn(int cell, const std::vector<int>& kinds)
++{
++  for (size_t i = 0; i < kinds.size(); i++) { m_transit[kinds[i]]--; Put(cell, kinds[i]); }
++}
++
++std::vector<int> cMaterial::KindsOf(const Genome& genome)
++{
++  ConstInstructionSequencePtr seq;
++  seq.DynamicCastFrom(genome.Representation());
++  std::vector<int> out;
++  out.reserve(seq->GetSize());
++  for (int i = 0; i < seq->GetSize(); i++) out.push_back((*seq)[i].GetOp());
++  return out;
++}
++
++void cMaterial::OnDeath(cOrganism* org, int cell)
++{
++  if (!m_init) return;
++  if (m_suppress_death_return || m_world->GetConfig().MATERIAL_DEBUG_NO_DEATH_RETURN.Get()) {
++    org->GetHardware().MaterialDiscard();
++    return;
++  }
++  org->GetHardware().MaterialReleaseAll(*this, cell);
++}
++
++bool cMaterial::OnInject(cAvidaContext& ctx, int cell, const Genome& genome)
++{
++  EnsureInit();
++  if (!Enabled() || m_suppress_inject_take) return true;
++  cPopulation& pop = m_world->GetPopulation();
++  if (pop.GetCell(cell).IsOccupied()) pop.KillOrganism(pop.GetCell(cell), ctx);
++  const std::vector<int> kinds = KindsOf(genome);
++  const int policy = m_world->GetConfig().MATERIAL_INJECT_TAKE.Get();
++  std::vector<std::pair<int, int> > taken;
++  for (size_t i = 0; i < kinds.size(); i++) {
++    int at = -1;
++    if (policy == 0) at = TakeAnywhere(kinds[i], m_env_rng);
++    else if (policy == 1) at = TakeNearThenAnywhere(cell, kinds[i], m_env_rng);
++    else at = Take(cell, kinds[i]);
++    if (at < 0) {
++      for (size_t j = 0; j < taken.size(); j++) Put(taken[j].first, taken[j].second);
++      m_inject_skipped++;
++      std::cerr << "[material] inject skipped at cell " << cell << " (letter unavailable)" << std::endl;
++      return false;
++    }
++    taken.push_back(std::make_pair(at, kinds[i]));
++  }
++  return true;
++}
++
++void cMaterial::OnPlaced(cOrganism* parent, cOrganism* offspring)
++{
++  if (!m_init) return;
++  const std::vector<int> ok = KindsOf(offspring->GetGenome());
++  TransitRemove(ok);
++  cMatCounters& C = Ctr(parent->GetHardware().MaterialBucket(*this));
++  C.placed++;
++  C.placed_len += (long long)ok.size();
++  const std::vector<int> pk = KindsOf(parent->GetGenome());
++  if (pk != ok) C.placed_changed++;
++}
++
++void cMaterial::OnDropped(cOrganism* parent, cOrganism* offspring, int parent_cell)
++{
++  if (!m_init) return;
++  TransitReturn(parent_cell, KindsOf(offspring->GetGenome()));
++  Ctr(parent->GetHardware().MaterialBucket(*this)).dropped++;
++}
++
++long long cMaterial::Audit(bool force_print)
++{
++  if (!m_init) return 0;
++  std::vector<long long> now(m_nk, 0);
++  long long negatives = 0;
++  for (int i = 0; i < m_cells; i++) for (int k = 0; k < m_nk; k++) {
++    const int v = m_pool[(size_t)i * m_nk + k];
++    if (v < 0) negatives++;
++    now[k] += v;
++  }
++  long long held_total = 0;
++  const Apto::Array<cOrganism*, Apto::Smart>& live = m_world->GetPopulation().GetLiveOrgList();
++  for (int i = 0; i < live.GetSize(); i++) live[i]->GetHardware().MaterialAddHeld(now);
++  long long viol = negatives;
++  long long total = 0, init_total = 0;
++  for (int k = 0; k < m_nk; k++) {
++    now[k] += m_transit[k];
++    if (m_transit[k] != 0) viol++;      // between updates nothing may be in transit
++    if (now[k] != m_init_kind[k]) viol++;
++    total += now[k];
++    init_total += m_init_kind[k];
++  }
++  (void)held_total;
++  m_audit_runs++;
++  if (viol) m_audit_viol++;
++  if (m_audit && (viol || force_print)) {
++    fprintf(m_audit, "%d audit total=%lld init=%lld kind_or_neg_violations=%lld anomalies=%lld inject_skipped=%lld\n",
++            m_world->GetStats().GetUpdate(), total, init_total, viol, m_anomalies, m_inject_skipped);
++  }
++  if (viol && m_world->GetConfig().MATERIAL_AUDIT_ABORT.Get()) {
++    FlushOutputs();
++    std::cerr << "[material] AUDIT VIOLATION at update " << m_world->GetStats().GetUpdate()
++              << " total=" << total << " init=" << init_total << std::endl;
++    closeOutputs();
++    std::exit(4);
++  }
++  return viol;
++}
++
++void cMaterial::WriteCensus(int update)
++{
++  if (!m_census) return;
++  long long alive[MAX_LABEL];
++  for (int l = 0; l < MAX_LABEL; l++) alive[l] = 0;
++  const Apto::Array<cOrganism*, Apto::Smart>& live = m_world->GetPopulation().GetLiveOrgList();
++  for (int i = 0; i < live.GetSize(); i++) {
++    alive[live[i]->GetHardware().MaterialBucket(*this)]++;
++  }
++  long long free_total = 0;
++  for (size_t j = 0; j < m_pool.size(); j++) free_total += m_pool[j];
++  for (int l = 0; l < MAX_LABEL; l++) {
++    const cMatCounters& C = m_ctr[l];
++    if (alive[l] == 0 && C.attempts == 0 && C.placed == 0 && C.dropped == 0 && l > 1) continue;
++    fprintf(m_census, "%d %d %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld %lld\n",
++            update, l, alive[l], C.attempts, C.stalls, C.nodraw_stalls, C.draws, C.reused, C.err_draws, C.err_stalls,
++            C.del, C.ins_written, C.sub_draws, C.sub_written, C.sub_changed, C.written, C.gap_sum, C.gap_n,
++            C.divides, C.div_fail_mat, C.uncopied_mat, C.extra_ret, C.overwrite_ret, C.placed, C.dropped,
++            C.placed_changed, C.placed_len, free_total);
++    m_ctr[l].Clear();
++  }
++}
++
++int cMaterial::DrawLifespan()
++{
++  const int a = m_world->GetConfig().MATERIAL_LIFESPAN.Get();
++  return a + m_env_rng.Below(a);
++}
++
++void cMaterial::PostUpdate(cAvidaContext& ctx)
++{
++  if (!Enabled()) return;
++  EnsureInit();
++  cAvidaConfig& c = m_world->GetConfig();
++  const int life_a = c.MATERIAL_LIFESPAN.Get();
++  const double pdeath = c.MATERIAL_DEATH_RATE.Get();
++  if (life_a > 0 || pdeath > 0) {
++    cPopulation& pop = m_world->GetPopulation();
++    const int now_u = m_world->GetStats().GetUpdate();
++    const Apto::Array<cOrganism*, Apto::Smart>& live = pop.GetLiveOrgList();
++    std::vector<int> doomed;
++    for (int i = 0; i < live.GetSize(); i++) {
++      bool die = false;
++      if (life_a > 0 && live[i]->GetHardware().MaterialLifeCheck(*this, now_u)) die = true;
++      if (pdeath > 0 && m_env_rng.Uniform() < pdeath) die = true;
++      if (die) doomed.push_back(live[i]->GetCellID());
++    }
++    for (size_t j = 0; j < doomed.size(); j++) pop.KillOrganism(pop.GetCell(doomed[j]), ctx);
++  }
++  const double rate = c.MATERIAL_DIFFUSE.Get();
++  if (rate > 0) {
++    const int n = (int)(m_cells * rate);
++    for (int q = 0; q < n; q++) {
++      const int i = m_env_rng.Below(m_cells);
++      const int k = m_env_rng.Below(m_nk);
++      int& v = m_pool[(size_t)i * m_nk + k];
++      if (v > 0) {
++        const int t = m_nb[(size_t)i * 8 + m_env_rng.Below(4)];
++        if (t >= 0) { v--; m_pool[(size_t)t * m_nk + k]++; }
++      }
++    }
++  }
++  const int update = m_world->GetStats().GetUpdate();
++  const int ai = c.MATERIAL_AUDIT_INTERVAL.Get();
++  if (ai > 0 && update % ai == 0) Audit(false);
++  const int ci = c.MATERIAL_CENSUS_INTERVAL.Get();
++  if (ci > 0 && update % ci == 0) WriteCensus(update);
++}
++
++void cMaterial::ClearCarriedDraws()
++{
++  const Apto::Array<cOrganism*, Apto::Smart>& live = m_world->GetPopulation().GetLiveOrgList();
++  for (int i = 0; i < live.GetSize(); i++) live[i]->GetHardware().MaterialClearCarried();
++}
++
++void cMaterial::Invade(cAvidaContext& ctx, const std::string& seqstr, double frac, uint64_t inj_seed, int label,
++                       int& n, int& target, int& done, int& skipped)
++{
++  EnsureInit();
++  cPopulation& pop = m_world->GetPopulation();
++  const cInstSet& is = m_world->GetHardwareManager().GetDefaultInstSet();
++  HashPropertyMap props;
++  cHardwareManager::SetupPropertyMap(props, (const char*)is.GetInstSetName());
++  Genome genome(is.GetHardwareType(), props, GeneticRepresentationPtr(new InstructionSequence(seqstr.c_str())));
++  const std::vector<int> G = KindsOf(genome);
++
++  std::vector<cOrganism*> list;
++  const Apto::Array<cOrganism*, Apto::Smart>& live = pop.GetLiveOrgList();
++  for (int i = 0; i < live.GetSize(); i++) list.push_back(live[i]);
++  std::sort(list.begin(), list.end(), matOrgIdLess);
++  std::vector<int> cells;
++  for (size_t i = 0; i < list.size(); i++) cells.push_back(list[i]->GetCellID());
++  n = (int)cells.size();
++  target = (int)llround(n * frac);
++  cMatRng rnd(inj_seed);
++  for (int q = 0; q < target; q++) {
++    const int j = q + rnd.Below(n - q);
++    std::swap(cells[q], cells[j]);
++  }
++  done = skipped = 0;
++  for (int q = 0; q < target; q++) {
++    const int cell = cells[q];
++    cOrganism* org = pop.GetCell(cell).GetOrganism();
++    if (!org) { skipped++; continue; }
++    std::vector<long long> held(m_nk, 0);
++    if (Enabled()) {
++      org->GetHardware().MaterialAddHeld(held);
++      for (int k = 0; k < m_nk; k++) m_pool[(size_t)cell * m_nk + k] += (int)held[k];
++      std::vector<std::pair<int, int> > taken;
++      bool ok = true;
++      for (size_t i = 0; i < G.size(); i++) {
++        const int at = TakeNearThenAnywhere(cell, G[i], rnd);
++        if (at < 0) { ok = false; break; }
++        taken.push_back(std::make_pair(at, G[i]));
++      }
++      if (!ok) {
++        for (size_t i = 0; i < taken.size(); i++) Put(taken[i].first, taken[i].second);
++        for (int k = 0; k < m_nk; k++) m_pool[(size_t)cell * m_nk + k] -= (int)held[k];
++        skipped++;
++        continue;
++      }
++    }
++    m_suppress_death_return = true;
++    pop.KillOrganism(pop.GetCell(cell), ctx);
++    m_suppress_death_return = false;
++    m_suppress_inject_take = true;
++    pop.Inject(genome, Systematics::Source(Systematics::DIVISION, "", true), ctx, cell, -1, label, 0);
++    m_suppress_inject_take = false;
++    done++;
++  }
++}
++
++// Arms file: one arm per non-comment line:
++//   name out_prefix main_seed sequence frac inj_seed label rule q psub pins pdel
++void cMaterial::ForkArms(cAvidaContext& ctx, const std::string& arms_file, int parallel)
++{
++  EnsureInit();
++  std::ifstream in(arms_file.c_str());
++  if (!in) { std::cerr << "[material] cannot open arms file " << arms_file << std::endl; std::exit(5); }
++  struct Arm { std::string name, prefix, seq; long long main_seed; double frac; long long inj_seed; int label, rule; double q, psub, pins, pdel; };
++  std::vector<Arm> arms;
++  std::string line;
++  while (std::getline(in, line)) {
++    if (line.empty() || line[0] == '#') continue;
++    std::istringstream ss(line);
++    Arm a;
++    if (!(ss >> a.name >> a.prefix >> a.main_seed >> a.seq >> a.frac >> a.inj_seed >> a.label >> a.rule >> a.q >> a.psub >> a.pins >> a.pdel)) {
++      std::cerr << "[material] bad arms line: " << line << std::endl; std::exit(5);
++    }
++    arms.push_back(a);
++  }
++  if (parallel < 1) parallel = 1;
++  // audit before forking: the background must be conserved
++  const long long v0 = Audit(true);
++  FlushOutputs();
++  std::vector<pid_t> running;
++  int failures = 0;
++  for (size_t ai = 0; ai < arms.size(); ai++) {
++    while ((int)running.size() >= parallel) {
++      int st = 0;
++      pid_t p = wait(&st);
++      if (p > 0) {
++        running.erase(std::remove(running.begin(), running.end(), p), running.end());
++        if (!(WIFEXITED(st) && WEXITSTATUS(st) == 0)) failures++;
++      }
++    }
++    FlushOutputs();
++    pid_t pid = fork();
++    if (pid < 0) { std::cerr << "[material] fork failed" << std::endl; std::exit(6); }
++    if (pid == 0) {
++      // ---- child: become one arm ----
++      const Arm& a = arms[ai];
++      if (m_census) { close(fileno(m_census)); m_census = NULL; }   // parent's pipe; buffer was flushed
++      if (m_audit) { close(fileno(m_audit)); m_audit = NULL; }
++      cAvidaConfig& c = m_world->GetConfig();
++      c.COPY_DRAW_RULE.Set(a.rule);
++      c.COPY_REDRAW_Q.Set(a.q);
++      c.COPY_MAT_SUB_PROB.Set(a.psub);
++      c.COPY_MAT_INS_PROB.Set(a.pins);
++      c.COPY_MAT_DEL_PROB.Set(a.pdel);
++      m_world->GetRandom().ResetSeed((int)(a.main_seed & 0x7FFFFFFF));
++      seedStreams((uint64_t)a.main_seed * 0x9E3779B97F4A7C15ULL + 0xA4A4ULL);
++      for (int l = 0; l < MAX_LABEL; l++) m_ctr[l].Clear();
++      ClearCarriedDraws();
++      m_prefix = a.prefix;
++      openOutputs();
++      int n = 0, target = 0, done = 0, skipped = 0;
++      Invade(ctx, a.seq, a.frac, (uint64_t)a.inj_seed, a.label, n, target, done, skipped);
++      const long long v = Audit(true);
++      FILE* info = fopen((a.prefix + ".info").c_str(), "w");
++      if (info) {
++        fprintf(info, "name %s\nupdate %d\nseq %s\nmain_seed %lld\ninj_seed %lld\nlabel %d\nrule %d\nq %g\npsub %g\npins %g\npdel %g\n"
++                      "frac %g\nn %d\ntarget %d\ndone %d\nskipped %d\naudit_after_inject %lld\nbackground_audit %lld\n",
++                a.name.c_str(), m_world->GetStats().GetUpdate(), a.seq.c_str(), a.main_seed, a.inj_seed, a.label, a.rule,
++                a.q, a.psub, a.pins, a.pdel, a.frac, n, target, done, skipped, v, v0);
++        fclose(info);
++      }
++      for (int l = 0; l < MAX_LABEL; l++) m_ctr[l].Clear();
++      WriteCensus(m_world->GetStats().GetUpdate());   // t = 0 row (counts after injection)
++      return;   // continue the event loop as this arm
++    }
++    running.push_back(pid);
++  }
++  while (!running.empty()) {
++    int st = 0;
++    pid_t p = wait(&st);
++    if (p <= 0) break;
++    running.erase(std::remove(running.begin(), running.end(), p), running.end());
++    if (!(WIFEXITED(st) && WEXITSTATUS(st) == 0)) failures++;
++  }
++  std::cerr << "[material] fork parent: " << arms.size() << " arms finished, failures=" << failures << std::endl;
++  closeOutputs();
++  FILE* done = fopen((arms_file + ".done").c_str(), "w");
++  if (done) { fprintf(done, "arms %d failures %d\n", (int)arms.size(), failures); fclose(done); }
++  std::fflush(NULL);
++  _exit(failures ? 7 : 0);
++}

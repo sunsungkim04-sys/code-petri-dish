@@ -117,9 +117,9 @@ F7   pairs15          B1|racld|* (8짝)                              ΔΔ(μ) �
 F7   pairs15          B1|racldx|* (12짝)                            ΔΔ(μ) 평균 -0.65 -0.52 -0.41 -0.32 -0.12 · 통과 12/12
 F7   pairs15          B1|rascled|* (12짝)                           ΔΔ(μ) 평균 -0.89 -0.72 -0.52 -0.28 -0.07 · 통과 12/12
 F7   pairs15          B1|acld|* (6짝)                               ΔΔ(μ) 평균 -0.65 -0.53 -0.47 -0.22 -0.68 · 통과 1/6
-F7   pairs15          C2|orig · C3|ff · C2|rem                     roll-first Δμ +0.275 [+0.230, +0.331]
+F7   pairs15          C2|orig · C3|ff · C2|rem                     draw-first Δμ +0.275 [+0.230, +0.331]
 F7   pairs15                                                       find-first Δμ +0.017 [-0.016, +0.051]
-F7   pairs15                                                       remember-roll Δμ +0.034 [-0.010, +0.072]
+F7   pairs15                                                       draw-once Δμ +0.034 [-0.010, +0.072]
 F7   pairs15          C1|ff                                        μ0 차 +0.035 [+0.002, +0.067]
 F7   pairs15          C1|rem                                       μ0 차 +0.020 [-0.017, +0.051]
 F7   pairs18          D1|acld (d8 · d32 · ratio)                   +0.115 · +0.027 · 0.24
@@ -160,3 +160,13 @@ FS2  model12          flow|rascld/U                                0.2296
 FS2  model12          flow|rsacld/U                                0.1769
 FS2  model12          flow|racld/U                                 0.1421
 FS2  model12          flow|racldx/U                                0.1464
+FS3  theory30         collapse.points q=0 (d)                      0.357 0.383 0.341 0.304 0.229
+FS3  theory30         collapse.points q=0.25 (d)                   0.383 0.358 0.210 0.068 -0.213
+FS3  theory30         collapse.points q=0.5 (d)                    0.356 0.284 0.058 -0.124 -0.454
+FS3  theory30         collapse.points q=0.75 (d)                   0.386 0.230 -0.078 -0.293 -0.633
+FS3  theory30         collapse.points q=1 (d)                      0.388 0.136 -0.201 -0.408 -0.753
+FS3  theory30         collapse.points q=0 (x · dd)                 0.0013/+0.026 0.0039/-0.016 0.0065/-0.053 0.0129/-0.128
+FS3  theory30         collapse.points q=0.25 (x · dd)              0.0179/-0.025 0.0536/-0.174 0.0894/-0.316 0.1788/-0.597
+FS3  theory30         collapse.points q=0.5 (x · dd)               0.0323/-0.072 0.0969/-0.298 0.1616/-0.480 0.3231/-0.811
+FS3  theory30         collapse.points q=0.75 (x · dd)              0.0451/-0.156 0.1353/-0.464 0.2255/-0.679 0.4510/-1.020
+FS3  theory30         collapse.points q=1 (x · dd)                 0.0566/-0.252 0.1697/-0.589 0.2829/-0.796 0.5658/-1.141

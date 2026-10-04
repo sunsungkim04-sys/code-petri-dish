@@ -1,0 +1,12 @@
+3 df 0.0003 A 11.133 R 11.133 TR 3.015 W 30.40 F 0.958 supply 0.0574 I 11.090 alive 3426 viol 0
+3 df 0.001 A 5.824 R 5.824 TR 3.022 W 14.47 F 0.963 supply 0.0960 I 5.594 alive 3521 viol 0
+3 ff 0.0003 A 10.449 R 1.000 TR 3.003 W 28.35 F 0.962 supply 0.0053 I 1.027 alive 3425 viol 0
+3 ff 0.001 A 9.108 R 1.000 TR 3.004 W 24.32 F 0.981 supply 0.0172 I 1.005 alive 3456 viol 0
+3 do 0.0003 A 13.262 R 1.027 TR 3.002 W 36.79 F 1.000 supply 0.0060 I 1.155 alive 3371 viol 0
+3 do 0.001 A 13.222 R 1.027 TR 3.009 W 36.67 F 1.000 supply 0.0189 I 1.099 alive 3369 viol 0
+6 df 0.0003 A 7.224 R 7.224 TR 3.897 W 37.34 F 0.961 supply 0.0426 I 8.216 alive 3221 viol 0
+6 df 0.001 A 4.928 R 4.928 TR 5.914 W 23.57 F 0.973 supply 0.0862 I 5.024 alive 3389 viol 0
+6 ff 0.0003 A 7.084 R 1.000 TR 3.598 W 36.51 F 0.988 supply 0.0079 I 1.534 alive 2947 viol 0
+6 ff 0.001 A 4.331 R 1.000 TR 3.724 W 19.99 F 0.984 supply 0.0239 I 1.391 alive 3272 viol 0
+6 do 0.0003 A 8.131 R 1.019 TR 3.512 W 42.78 F 1.000 supply 0.0075 I 1.457 alive 3069 viol 0
+6 do 0.001 A 6.375 R 1.024 TR 5.967 W 32.25 F 1.000 supply 0.0216 I 1.259 alive 3334 viol 0

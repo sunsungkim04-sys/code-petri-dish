@@ -6,7 +6,7 @@
 입력은 전부 판정기가 쓴 `_RESULT_*.json` 이고, 이 스크립트는 **읽기만** 한다.
 숫자를 새로 계산하지 않는다: 판정 결과에 없는 값을 그리면 그림과 본문의 정본이 갈린다.
 
-  F2  침입 Δ 대 μ — roll-first · find-first · remember-roll · 둘째 시조   (_RESULT_inv9 · _RESULT_inv10)
+  F2  침입 Δ 대 μ — draw-first · find-first · draw-once (10-03 이름 바꿈) · 둘째 시조   (_RESULT_inv9 · _RESULT_inv10)
   F3  부풀림 I = R × F — 밀도 × 규칙                                      (_RESULT_spec8)
   F4  헛손질/성공 대 수명과 분해                                          (_RESULT_an11)
   F5  (a) 고리 길이 사다리 (b) 수명별 침입 곡선                           (_RESULT_an11)
@@ -19,7 +19,7 @@
   PDF · PNG 는 `rsvg-convert -f pdf|png` 로 만든다. 판정 기록에서 나온 값이 아니므로 _PROVENANCE 에도 없다.
 
 축 라벨 규약 (2026-09-29 · 투고 점검에서 정함 — 새 그림도 이걸 따른다)
-  · 오류율 축은 한 문구로: "nominal error rate, $\\mu$ (% per letter)"
+  · 오류율 축은 한 문구로: "nominal error rate, $\\mu$ (%)"  (10-03: μ 는 글자당이 아니라 추첨당 값)
   · Δ · ΔΔ 계열은 무단위가 아니다 — "(ln units)" · "(ln units per tick)" 를 붙인다
   · 고리 길이 단위는 "ticks per copy attempt" 하나로(글자당 아님 — 헛손질이 있으면 갈린다)
   · 변수는 mathtext 로 이탤릭($\\mu$ · $\\Delta$ · $I$ · $R$ · $F$ · $U$ · $a$), 코드 이름은 $\\mathtt{...}$
@@ -32,7 +32,7 @@
   · **범례·라벨이 데이터를 덮으면 안 된다** — 자리를 손으로 정하지 말고 `legend_clear(ax, ...)` 를 쓸 것
       (후보 자리를 다 그려 보고 겹치는 점을 세어 고르고, 어디에도 자리가 없으면 위쪽에 여유를 준다.
        09-29 에 손으로 정한 자리 여섯이 데이터를 덮고 있었다 — 사용자가 둘을 먼저 잡아냈다.)
-  · 두 패널이 같은 계열을 쓰면 **그림 전체 범례 하나**로 둔다(`fig.legend(loc="outside upper center")` · 09-29 사용자 결정).
+  · 두 패널이 같은 계열을 쓰면 **그림 전체 범례 하나**로 둔다(09-29 사용자 결정) · 자리는 **그림 아래**(`loc="outside lower center"` · 10-03 사용자 — 패널 문자보다 위에 두지 않는다).
       패널 밖이라 데이터를 가릴 수 없고, (b) 만 봐도 색을 안다. F4 가 그 예다.
   · 한 그림 안에서 **같은 범례를 두 번 싣지 않는다**(F4(b) 가 (a) 와 같은 셋을 또 실어 y 축 글자에 붙었다 — 09-29 사용자 지적).
       캡션이 "colours as in (a)" 로 잇는다.
@@ -58,7 +58,7 @@ from matplotlib.patches import Patch   # noqa: E402
 
 D = os.path.dirname(os.path.abspath(__file__))
 BASE = os.path.join(os.path.dirname(D), "petri")   # 09-28 폴더 정리: 결과·스크립트·동결 해시는 petri/ (lab101 ~/petri/ 미러)
-OUT = D if os.path.basename(D) == "figures" else os.path.join(D, "figures")   # 공개 repo: 이 파일이 figures/ 안에 있다
+OUT = os.path.join(D, "figures")
 os.makedirs(OUT, exist_ok=True)
 PROV = []
 MUS = [0.0, 0.001, 0.003, 0.005, 0.01]
@@ -155,15 +155,57 @@ def note(fig, src, path, val):
 
 def panel_labels(fig):
     """10-02(사용자 결정): "(a) 제목" 꼴 가운데 제목을 굵은 패널 문자 a + 왼쪽 정렬 짧은 제목으로 바꾼다.
-    Fig. 1(손 그림)과 같은 모양 · 지침 §2(패널 문자 굵게, 왼쪽 위). 그림마다 고치지 않고 여기 한 곳에서."""
+    10-03(사용자 지적 셋 — 제목이 축 라벨보다 작다 · 제목이 너무 왼쪽 · 문자가 y 축 라벨과 겹친다):
+      · 크기: 문자 9 pt 굵게 · 제목 8 pt(= 축 라벨, 지침 §2)
+      · 문자는 축선에서 시작하고 제목이 4 pt 뒤에 붙는다 — 한 덩어리(사용자 "같이" · "아직 왼쪽")
+      · 높이는 그림 안 모든 패널에 같은 값 — 제목 줄이 맞는다. 문자가 y 축 라벨과 겹치면 그림 전체를 함께 올린다
+    그림마다 고치지 않고 여기 한 곳에서."""
+    items = []
     for ax in fig.axes:
         m = re.match(r"^\((\w)\)\s*(.*)$", ax.get_title())
         if not m:
             continue
         ax.set_title("")
-        ax.set_title(m.group(2), loc="left", fontsize=7, pad=5)
-        ax.annotate(m.group(1), xy=(0, 1), xycoords="axes fraction", xytext=(-16, 5), textcoords="offset points",
-                    fontsize=9, fontweight="bold", ha="right", va="bottom", annotation_clip=False)
+        items.append((ax, m.group(1), m.group(2)))
+    if not items:
+        return
+    fig.canvas.draw()
+    r = fig.canvas.get_renderer()
+    pt = fig.dpi / 72.0                                          # 1 pt 의 화면 픽셀
+    arts = []
+    for ax, letter, title in items:
+        lab = ax.annotate(letter, xy=(0, 1), xycoords="axes fraction", xytext=(0, 6), textcoords="offset points",
+                          fontsize=9, fontweight="bold", ha="left", va="baseline", annotation_clip=False)
+        tt = ax.annotate(title, xy=(0, 1), xycoords="axes fraction", xytext=(0, 6), textcoords="offset points",
+                         fontsize=8, ha="left", va="baseline", annotation_clip=False) if title else None
+        arts.append((ax, lab, tt))
+
+    def place(dy):
+        fig.canvas.draw()
+        for ax, lab, tt in arts:
+            ab = ax.get_window_extent(r)
+            yb = ax.yaxis.get_tightbbox(r)                       # y 축이 없는 패널은 None
+            lw = lab.get_window_extent(r).width / pt
+            left_pt = ((yb.x0 - ab.x0) / pt) if yb is not None else 0.0
+            x = 0.0                                               # 10-03(사용자: 아직 왼쪽): 문자가 축선에서 시작하고 제목이 4 pt 뒤에 붙는다
+            lab.xyann = (x, dy)
+            if tt is not None:
+                tt.xyann = (lw + 4, dy)
+
+    dy = 6.0
+    place(dy)
+    for _ in range(3):                                           # 문자–y 축 라벨 겹침이 없어질 때까지 그림 전체를 함께 올린다
+        fig.canvas.draw()
+        up = 0.0
+        for ax, lab, tt in arts:
+            yb = ax.yaxis.get_tightbbox(r)
+            lb = lab.get_window_extent(r)
+            if yb is not None and lb.y0 < yb.y1 and lb.x0 < yb.x1 and lb.x1 > yb.x0:
+                up = max(up, (yb.y1 - lb.y0) / pt + 2)
+        if up <= 0:
+            break
+        dy += up
+        place(dy)
 
 
 def save(fig, name):
@@ -204,7 +246,7 @@ def b_table():
 # ---------------------------------------------------------------- F2
 def f2():
     z9, z10 = load("inv9"), load("inv10")
-    rules = [("orig", z10, "roll-first"), ("ff", z10, "find-first"), ("mem", z9, "remember-roll"), ("anc", z10, r"roll-first, $\mathtt{racld}$-founded")]
+    rules = [("orig", z10, "draw-first"), ("ff", z10, "find-first"), ("mem", z9, "draw-once"), ("anc", z10, r"draw-first, $\mathtt{racld}$-founded backgrounds")]
     fig, ax = plt.subplots(figsize=(3.4, 2.5))
     for i, (r, z, lab) in enumerate(rules):
         ys, lo, hi = [], [], []
@@ -218,7 +260,7 @@ def f2():
         ax.plot(x, ys, "-", marker="os^D"[i], ms=3, lw=1.2,   # 10-02: 흑백에서도 갈리게 마커를 규칙마다 다르게(사용자 결정)
                 color=["#c0392b", "#2980b9", "#8e44ad", "#e67e22"][i], label=lab)
     ax.axhline(0, color="k", lw=0.6, ls=":")
-    ax.set_xlabel(r"nominal error rate, $\mu$ (% per letter)")
+    ax.set_xlabel(r"nominal error rate, $\mu$ (%)")
     ax.set_ylabel(r"invasion $\Delta$ of $\mathtt{rascld}$ (ln units)")   # 정의는 캡션에 있다
     legend_clear(ax, frameon=False, fontsize=6.5)
     save(fig, "F2_invasion_by_rule")
@@ -228,7 +270,7 @@ def f2():
 def f3():
     z = load("spec8")
     fig, axes = plt.subplots(1, 2, figsize=(6.0, 2.5), sharey=True)
-    for ax, rule, title in ((axes[0], "orig", "(a) roll-first"), (axes[1], "ff", "(b) find-first")):
+    for ax, rule, title in ((axes[0], "orig", "(a) draw-first"), (axes[1], "ff", "(b) find-first")):
         for code in ("rascld", "rsacld", "racld"):   # 10-02: 범례를 고리 길이 순(2 · 3 · 4)으로
             xs, ys = [], []
             for d in (4, 8, 32):
@@ -271,11 +313,11 @@ def f4():
     ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
     ax.set_xticks([300, 600, 1200]); ax.set_xticklabels(["300", "600", "1,200"])
     ax.set_xlabel(r"lifespan constant $a$ (ticks)")
-    ax.set_ylabel("stalls per copied letter")
+    ax.set_ylabel(r"stalls per copied letter, $h$")
     ax.set_title("(a) stalls and lifespan", fontsize=7)
-    # 09-29: 두 패널이 같은 세 코드를 쓰므로 범례는 그림 전체에 하나 둔다(아래 fig.legend · 사용자 결정).
+    # 09-29: 두 패널이 같은 세 코드를 쓰므로 범례는 그림 전체에 하나 둔다(아래 fig.legend · 사용자 결정). 10-03: 위치는 그림 아래로(사용자).
     ax = axes[1]
-    names = [r"$\Delta$ ln $s$" "\n(total)", "stall\ntime share", "org-ticks\nper birth", "letters\nper birth"]
+    names = [r"change in ln $h$" "\n(total)", "stall\ntime share", "org-ticks\nper birth", "letters\nper birth"]
     for j, code in enumerate(("rascld", "rsacld", "racld")):
         c = z["A_contrast|%s|8" % code]
         vals = [c[0][0], c[1][0], c[2][0], -c[3][0]]
@@ -283,14 +325,14 @@ def f4():
             ax.bar(i + (j - 1) * 0.26, v, width=0.25, color=COL[code], label=LBL[code] if i == 0 else None)
         note("F4", "an11", "A_contrast|%s|8" % code, "Δln s %.3f · share %.3f · tpb %.3f · lpb %.3f" % (c[0][0], c[1][0], c[2][0], c[3][0]))
     ax.axhline(0, color="k", lw=0.6)
-    ax.set_xticks(range(4)); ax.set_xticklabels(names, fontsize=6)
-    ax.set_ylabel(r"$\Delta$ ln stalls per letter", fontsize=7)
+    ax.set_xticks(range(4)); ax.set_xticklabels(names)   # 10-03: (a) 와 같은 크기
+    ax.set_ylabel(r"change in ln $h$")
     ax.set_title("(b) exact decomposition", fontsize=7)
     # 09-29: (a) 와 같은 세 코드라 범례를 두 번 싣지 않는다 — 색은 캡션이 "(a) 와 같다" 로 잇는다.
     ax.set_ylim(top=max(z["A_contrast|%s|8" % q][2][0] for q in ("rascld", "rsacld", "racld")) * 1.5)
     fig.legend(handles=[Line2D([], [], marker="o", ls="-", ms=3, lw=1.2, color=COL[c], label=LBL[c])
                         for c in ("rascld", "rsacld", "racld")],
-               loc="outside upper center", ncol=3, frameon=False, fontsize=6.2,
+               loc="outside lower center", ncol=3, frameon=False, fontsize=7,   # 10-03(사용자): 패널 문자 위가 아니라 그림 아래
                handlelength=1.4, columnspacing=1.6, borderaxespad=0.2)
     save(fig, "F4_lifespan_budget")
 
@@ -316,7 +358,7 @@ def f5():
     ax.axhline(0, color="k", lw=0.6, ls=":")
     ax.set_xticks([2, 3, 4, 5]); ax.set_xlim(1.6, 5.6); ax.set_xlabel("copy-loop length (ticks per attempt)")
     ax.set_ylabel(r"invasion $\Delta$ at $\mu$ = 0 (ln units)")
-    ax.set_title("(a) loop-length ladder", fontsize=7)
+    ax.set_title("(a) loop-length series", fontsize=7)
     ax.set_ylim(-1.75, 0.75)
     v = z["C_delta|racldr"]
     # 09-29: racldr 의 값(−3.52)과 축 밖이라는 사실은 캡션에 있다 — 화살표만 남긴다.
@@ -335,7 +377,7 @@ def f5():
             note("F5", "an11.txt", "B table lifespan %d · mu %g" % (a, m), "%+.3f" % tab[a][m])
         ax.plot(xs, ys, "o-", ms=3, lw=1.2, color=col, label="lifespan %s" % format(a, ","))
     ax.axhline(0, color="k", lw=0.6, ls=":")
-    ax.set_xlabel(r"nominal error rate, $\mu$ (% per letter)")
+    ax.set_xlabel(r"nominal error rate, $\mu$ (%)")
     ax.set_ylabel(r"invasion $\Delta$ (ln units)", fontsize=7)
     legend_clear(ax, frameon=False, fontsize=6.5)
     ax.set_title("(b) three lifespans", fontsize=7)
@@ -357,7 +399,7 @@ def f6():
         ax.plot(xs, pr, "^--", ms=3, lw=1.0, color=COL[code], alpha=0.65)
     ax.axvspan(0.05, 0.35, color="#f1c40f", alpha=0.10, lw=0)   # 띠의 뜻은 캡션(보충 S7)이 말한다
     ax.axhline(0, color="k", lw=0.6, ls=":")
-    ax.set_xlabel(r"nominal error rate, $\mu$ (% per letter)")
+    ax.set_xlabel(r"nominal error rate, $\mu$ (%)")
     ax.set_ylabel(r"invasion $\Delta$ (ln units)", fontsize=7)
     legend_clear(ax, frameon=False, fontsize=5.8, labelspacing=0.35)   # 실선·파선의 뜻도 캡션에 있다 — 코드 셋만 싣는다
     ax.set_title("(a) measurement and model", fontsize=7)
@@ -368,7 +410,7 @@ def f6():
         ax.bar(i, f["U"], color=COL[c], width=0.6)
         note("FS2", "model12", "flow|%s/U" % c, "%.4f" % f["U"])
     ax.set_xticks(range(len(codes))); ax.set_xticklabels([r"$\mathtt{%s}$" % c for c in codes], fontsize=6.5)
-    ax.set_ylabel(r"variant offspring per birth, $U$", fontsize=7)
+    ax.set_ylabel(r"variant offspring per birth", fontsize=7)
     ax.set_title("(b) variant flow", fontsize=7)
     save(fig, "FS2_model_vs_measured")
 
@@ -411,10 +453,10 @@ def f7():
     ax.set_xlabel(r"$\Delta\Delta$ per added loop tick (ln units)")
     ax.set_xlim(-1.45, 0.25)
     legend_clear(ax, handles=[
-        Line2D([], [], marker="o", ls="", ms=2.6, color="#34495e", label="re-read"),
+        Line2D([], [], marker="o", ls="", ms=2.6, color="#34495e", label="reread"),
         Line2D([], [], marker="o", ls="", ms=2.6, color="#c0392b", label="pre-registered"),
         Patch(facecolor="#bdc3c7", alpha=0.25, label="pre-registered range"),
-        Line2D([], [], ls="--", lw=0.8, color="#27ae60", label="ladder slope (Fig. 3a)"),   # 10-02: 패널 안 수치 뺌
+        Line2D([], [], ls="--", lw=0.8, color="#27ae60", label="series slope (Fig. 3a)"),   # 10-02: 패널 안 수치 뺌
     ], frameon=False, fontsize=5.2, handlelength=1.5, borderaxespad=0.25, labelspacing=0.35)
     ax.set_title("(a) matched pairs", fontsize=7)
     ax = axes[1]
@@ -500,18 +542,18 @@ def f8():
         mean = [sum((v["dd_by_mu"].get(str(m), v["dd_by_mu"].get(m)) for v in rows)) / len(rows) for m in MU]
         ax.plot([m * 100 for m in MU], mean, "o-", color=BC[b], ms=2.6, lw=1.1, label=r"$\mathtt{%s}$" % b)   # 10-02: 짝 수 · 실패 수는 캡션으로(패널 안 수치 금지)
         note("F7", "pairs15", "B1|%s|* (%d짝)" % (b, len(rows)), "ΔΔ(μ) 평균 %s · 통과 %d/%d" % (" ".join("%+.2f" % x for x in mean), sum(1 for v in rows if v["pass"]), len(rows)))
-    ax.set_xlabel(r"nominal error rate, $\mu$ (% per letter)")
+    ax.set_xlabel(r"nominal error rate, $\mu$ (%)")
     ax.set_ylabel(r"$\Delta\Delta$, longer loop minus shorter (ln units)")
     ax.set_xticks([0, 0.1, 0.3, 0.5, 1.0]); ax.set_ylim(-1.05, 0.35)
     legend_clear(ax, fontsize=5.2, frameon=False, ncol=2, handlelength=1.4)
-    ax.set_title("(a) error ladder", fontsize=7)
+    ax.set_title("(a) error-rate series", fontsize=7)
     ax = axes[1]
-    bars = [("roll-first", Z["C2|orig"], "#c0392b"), ("find-first", Z["C3|ff"], "#2980b9"), ("remember-roll", Z["C2|rem"], "#8e44ad")]   # 10-02: Fig. 2 의 규칙 색 · 이름
+    bars = [("draw-first", Z["C2|orig"], "#c0392b"), ("find-first", Z["C3|ff"], "#2980b9"), ("draw-once", Z["C2|rem"], "#8e44ad")]   # 10-02: Fig. 2 의 규칙 색 · 이름
     for i, (lab, v, col) in enumerate(bars):
         ax.bar(i, v["m"], color=col, width=0.62, alpha=0.9)
         ax.errorbar([i], [v["m"]], yerr=[[v["m"] - v["ci"][0]], [v["ci"][1] - v["m"]]], fmt="none", ecolor="k", capsize=2, lw=0.8)
         note("F7", "pairs15", "C2|orig · C3|ff · C2|rem" if i == 0 else "", "%s Δμ %+.3f [%+.3f, %+.3f]" % (lab, v["m"], v["ci"][0], v["ci"][1]))
-    c1 = [("find-first", Z["C1|ff"]), ("remember-roll", Z["C1|rem"])]
+    c1 = [("find-first", Z["C1|ff"]), ("draw-once", Z["C1|rem"])]
     for i, (lab, v) in enumerate(c1, start=1):
         ax.plot([i], [v["m"]], "D", ms=3.2, color="white", mec="k", mew=0.7, zorder=4)
         note("F7", "pairs15", "C1|%s" % ("ff" if i == 1 else "rem"), "μ0 차 %+.3f [%+.3f, %+.3f]" % (v["m"], v["ci"][0], v["ci"][1]))
@@ -557,7 +599,7 @@ def f9():
         note("F8", "evo17", "curve|%s (median · q1 · q3)" % mu, "끝 %.3f · 최대 %.3f" % (c["median"][-1], max(c["median"])))
     ax.axhline(2, color="#7f8c8d", lw=0.5, ls=":"); ax.axhline(4, color="#7f8c8d", lw=0.5, ls=":")
     ax.set_xlabel("time (thousands of ticks)")
-    ax.set_ylabel("mean copy-loop length (ticks per attempt)")
+    ax.set_ylabel("mean copy-loop length\n(ticks per attempt)")
     ax.set_ylim(1.8, 4.5)
     legend_clear(ax, fontsize=5.6, frameon=False, ncol=2)
     ax.set_title("(a) loop length over time", fontsize=7)
@@ -568,8 +610,8 @@ def f9():
         ax.plot(xs, v, "o", ms=2.2, color=MC[mu], alpha=0.75, lw=0)
         ax.plot([i - 0.32, i + 0.32], [Z["V1|%s" % mu]["median"]] * 2, "-", color="k", lw=1.0)
         note("F8", "evo17", "V1|%s" % mu, "끝점 L̄ 중앙 %.3f · 접시 %d" % (Z["V1|%s" % mu]["median"], Z["V1|%s" % mu]["n"]))
-    ax.set_xticks(range(len(MU))); ax.set_xticklabels(["%g" % (mu * 100) for mu in MU]); ax.set_xlabel(r"nominal error rate, $\mu$ (% per letter)")
-    ax.set_ylabel("mean copy-loop length (ticks per attempt)"); ax.set_ylim(1.8, 4.5)
+    ax.set_xticks(range(len(MU))); ax.set_xticklabels(["%g" % (mu * 100) for mu in MU]); ax.set_xlabel(r"nominal error rate, $\mu$ (%)")
+    ax.set_ylabel("mean copy-loop length\n(ticks per attempt)"); ax.set_ylim(1.8, 4.5)
     # 09-29: Spearman 은 캡션으로 — 패널 안에 통계를 적지 않는다(저널 표본 11장에서 0건).
     note("F8", "evo17", "V1.rho · ci", "%.3f [%.3f, %.3f]" % (Z["V1"]["rho"], Z["V1"]["ci"][0], Z["V1"]["ci"][1]))
     ax.set_title("(b) endpoint by error rate", fontsize=7)
@@ -600,7 +642,7 @@ def fS1():
     # 09-29: V1 · V2 수치는 캡션(보충 S6)이 세 자리로 들고 있어 그림에서 뺐다.
     note("FS1", tag, "V1.diff · V2.contrast", "%+.3f [%+.3f, %+.3f] · %+.3f [%+.3f, %+.3f]" % (v1["diff"], v1["ci"][0], v1["ci"][1], v2["contrast"], v2["ci"][0], v2["ci"][1]))
     legend_clear(ax, fontsize=5.8, frameon=False)
-    ax.set_title("(a) lifespan ladder", fontsize=7)
+    ax.set_title("(a) lifespan series", fontsize=7)
     ax = axes[1]
     for d in ("8", "32"):
         v = [Z["cell|d%s|a%d" % (d, a)]["vac_median"] * 100 for a in AGES]
@@ -616,7 +658,42 @@ def fS1():
     save(fig, "FS1_lifespan_ladder")
 
 
-FIGS = {"F2": f2, "F3": f3, "F4": f4, "F5": f5, "F6": f7, "F7": f8, "F8": f9, "FS1": fS1, "FS2": f6}
+def fS3():
+    """보충 그림 S3 — 갱신 계산(사후 · _RESULT_theory30 · 원자료 _RESULT_inv28). (a) q 별 Δ(μ) (b) Δ(μ) − Δ(0) 를 초과 추첨 공급 x = (52/33)Σ(q)μ 에 대해."""
+    Z = load("theory30")
+    Q = [0.0, 0.25, 0.5, 0.75, 1.0]
+    QC = {0.0: "#fde725", 0.25: "#5ec962", 0.5: "#21918c", 0.75: "#3b528b", 1.0: "#440154"}   # q 는 순서 있는 양 — viridis 5단계
+    pts = Z["collapse"]["points"]
+    fig, axes = plt.subplots(1, 2, figsize=(6.4, 2.6))
+    ax = axes[0]
+    for q in Q:
+        ps = sorted([p for p in pts if p["q"] == q], key=lambda p: p["mu"])
+        d0 = ps[0]["d0"]
+        mus = [0.0] + [p["mu"] * 100 for p in ps]
+        m = [d0[0]] + [p["d"][0] for p in ps]
+        lo = [d0[1]] + [p["d"][1] for p in ps]; hi = [d0[2]] + [p["d"][2] for p in ps]
+        ax.fill_between(mus, lo, hi, color=QC[q], alpha=0.18, lw=0)
+        ax.plot(mus, m, "o-", color=QC[q], ms=2.6, lw=1.1, label=r"$q$ = %g" % q, mec="#333333" if q == 0.0 else QC[q], mew=0.4)
+        note("FS3", "theory30", "collapse.points q=%g (d)" % q, " ".join("%.3f" % x for x in m))
+    ax.axhline(0, color="k", lw=0.5, ls=":")
+    ax.set_xlabel(r"nominal error rate, $\mu$ (%)")
+    ax.set_ylabel(r"invasion $\Delta$ of $\mathtt{rascld}$ (ln units)")
+    legend_clear(ax, fontsize=5.8, frameon=False)
+    ax.set_title("(a) invasion by redraw probability", fontsize=7)
+    ax = axes[1]
+    for q in Q:
+        ps = sorted([p for p in pts if p["q"] == q], key=lambda p: p["mu"])
+        ax.plot([p["x"] for p in ps], [p["dd"] for p in ps], "o-", color=QC[q], ms=2.6, lw=0.9, mec="#333333" if q == 0.0 else QC[q], mew=0.4)
+        note("FS3", "theory30", "collapse.points q=%g (x · dd)" % q, " ".join("%.4f/%+.3f" % (p["x"], p["dd"]) for p in ps))
+    ax.axhline(0, color="k", lw=0.5, ls=":")
+    ax.set_xlabel("excess realised letter changes per offspring,\nfounder over resident (from draw counts)")
+    ax.set_ylabel(r"$\Delta(\mu) - \Delta(0)$ (ln units)")
+    ax.set_title("(b) against excess draw supply", fontsize=7)
+    axes[1].set_ylim(axes[0].get_ylim()[0] - 0.4, 0.15)
+    save(fig, "FS3_renewal_collapse")
+
+
+FIGS = {"F2": f2, "F3": f3, "F4": f4, "F5": f5, "F6": f7, "F7": f8, "F8": f9, "FS1": fS1, "FS2": f6, "FS3": fS3}
 
 
 def main():

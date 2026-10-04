@@ -1,0 +1,188 @@
+====================================================================================================
+RENEWAL THEORY OF mu* — post hoc · inputs read from petri/ (read-only)
+====================================================================================================
+
+-- derived inputs
+  founder rascld: R_arm(mu0) = T/(T/R)_L = 17.858  -> h = 16.858 · W = hL = 33.72 ticks · R_family(pairs14) 15.601 · b (random-letter availability from F1/F0) = 0.736
+  resident racld : R_arm(mu0) = T/(T/R)_L = 11.065  -> h = 10.065 · W = hL = 40.26 ticks · R_family(pairs14) 9.664 · b (random-letter availability from F1/F0) = 0.760
+  s0 = Delta0/G : q=1 0.0543 · pooled-q Delta0 0.3741 -> s0 0.0524 per generation
+
+-- (1) draws per letter and inflation vs q  (mode A: R from invasion arms at mu 0)
+   q     R_f     R_r     F_f    F_r     I_f     I_r    K(q)=n_f I_f - n_r I_r
+  0.00    1.00    1.00   0.920  0.940    0.92    0.94      0.82
+  0.25    5.21    3.52   0.860  0.886    4.49    3.11     11.34
+  0.50    9.43    6.03   0.810  0.839    7.64    5.06     20.51
+  0.75   13.64    8.55   0.766  0.798   10.46    6.82     28.62
+  1.00   17.86   11.07   0.729  0.762   13.01    8.43     35.90
+   check q=0 R: theory 1.00 vs draw-once census founder 1.11 · resident 1.12 (reg9, one seed, mu 1%)
+
+-- (2) lambda-, G-, Delta0-free prediction: mu*(q)/mu*(1) = K(1)/K(q)  (linearised, equal lambda)
+   q    meas mu*   meas ratio | ratio A (arms mu0) · FAM (pairs14 family R) · A w/ F const · B (nominal-mu R) · C (realised-rate R)
+  0.25  0.621%    3.44     |  3.16 ·  3.14 ·  3.82 ·  4.30 ·  3.24
+  0.50  0.364%    2.02     |  1.75 ·  1.75 ·  1.97 ·  2.10 ·  1.82
+  0.75  0.249%    1.38     |  1.25 ·  1.25 ·  1.33 ·  1.37 ·  1.29
+  1.00  0.180%    1.00     |  1.00 ·  1.00 ·  1.00 ·  1.00 ·  1.00
+   q=0: K(0) = 0.82 vs K(1) = 35.90 -> predicted mu*(0)/mu*(1) = 43.8 (i.e. ~7.90%, beyond the 1% grid); measured: no crossing within 1%
+
+-- (3) absolute mu*, NO fitted parameter: lambda = 1 (every variant lost) and lambda = sterile share (only sterile variants lost)
+   exact = root of the model curve; grid = model evaluated at the 5 measured mu and interpolated like the measurement
+   q    measured [approx 95%]            | lam=1  exact/grid (A)  | lam=sterile exact/grid (A) | lam=1 grid (C) | lam=sterile grid (C)
+  0.00  none<1% P(none)=1.00           | 3.867% / none<1% | none<1% / none<1% | none<1% | none<1%
+  0.25  0.621% [0.546, 0.684]          | 0.300% / 0.300% | 0.609% / 0.618% | 0.348% | none<1%
+  0.50  0.364% [0.326, 0.400]          | 0.154% / 0.154% | 0.304% / 0.304% | 0.184% | 0.474%
+  0.75  0.249% [0.224, 0.286]          | 0.120% / 0.120% | 0.236% / 0.239% | 0.143% | 0.389%
+  1.00  0.180% [0.161, 0.199]          | 0.096% / 0.096% | 0.188% / 0.194% | 0.112% | 0.306%
+
+-- (4) draw-first, independent flow instrument (variant fraction per birth inside the invasion arms, mu 0.3%)
+   U_g(0.3%) founder 0.2609 · resident 0.1533 · dU 0.1076  -> per unit mu 35.9
+   implied inflation at 0.3%: founder 9.20 · resident 6.48 (vs census-A at mu0: 13.01 · 8.43)
+   lam=1       mu* (U linear in mu) 0.151% · (U shaped by lineage-census I(mu)) 0.139%  | measured q=1 0.180% (5-pt) · Set A 8-pt 0.183% [0.165, 0.202] · new 0.170% [0.158, 0.184]
+   lam=sterile mu* (U linear in mu) 0.310% · (U shaped by lineage-census I(mu)) 0.312%  | measured q=1 0.180% (5-pt) · Set A 8-pt 0.183% [0.165, 0.202] · new 0.170% [0.158, 0.184]
+
+-- (5) M7 — excess realised genomic rate at the measured crossing, in units of s0
+   flow (arms, 0.3%, scaled linearly to mu*)     dU* = 0.0647 per offspring · s0 = 0.0543 per generation · dU*/s0 = 1.19  (theory: 1/lambda in [1, 1.64])
+   census A (arms R at mu0, F1)                  dU* = 0.1021 per offspring · s0 = 0.0543 per generation · dU*/s0 = 1.88  (theory: 1/lambda in [1, 1.64])
+   census C (R falling with realised rate)       dU* = 0.0771 per offspring · s0 = 0.0543 per generation · dU*/s0 = 1.42  (theory: 1/lambda in [1, 1.64])
+   (absolute, census C at mu*: U_founder 0.180 · U_resident 0.103 letter changes per offspring; nominal n*52/33*mu = 0.0171 · 0.0142)
+
+-- (6) ONE fitted parameter (common lambda), fitted on the q = 1 crossing (grid-interpolated, like the measurement); predict the rest
+   mode A: lambda_fit = 0.586
+     q 0.00  mu* pred none      meas none      | slope pred    -5.2  meas   -14.6 [-18.7, -10.4]
+     q 0.25  mu* pred 0.560%    meas 0.621%    | slope pred   -64.1  meas   -61.6 [-69.0, -54.9]
+     q 0.50  mu* pred 0.283%    meas 0.364%    | slope pred  -102.6  meas   -82.2 [-89.2, -75.0]
+     q 0.75  mu* pred 0.224%    meas 0.249%    | slope pred  -127.1  meas  -100.8 [-107.4, -94.9]
+     q 1.00  mu* pred 0.180%    meas 0.180%    | slope pred  -141.8  meas  -109.1 [-118.6, -99.4]
+     draw-first, 8-pt grid: Set A pred 0.177% meas 0.183% [0.165, 0.202] · new 40 bg pred 0.175% meas 0.170% [0.158, 0.184]
+     LOO (fit on one q, predict the other three): lambda range 0.478–0.586 · |ln(pred/meas)| median 0.121 · max 0.252
+   mode C: lambda_fit = 0.758
+     q 0.00  mu* pred none      meas none      | slope pred    -6.9  meas   -14.6 [-18.7, -10.4]
+     q 0.25  mu* pred 0.541%    meas 0.621%    | slope pred   -56.8  meas   -61.6 [-69.0, -54.9]
+     q 0.50  mu* pred 0.270%    meas 0.364%    | slope pred   -81.4  meas   -82.2 [-89.2, -75.0]
+     q 0.75  mu* pred 0.222%    meas 0.249%    | slope pred  -108.5  meas  -100.8 [-107.4, -94.9]
+     q 1.00  mu* pred 0.180%    meas 0.180%    | slope pred  -130.1  meas  -109.1 [-118.6, -99.4]
+     draw-first, 8-pt grid: Set A pred 0.173% meas 0.183% [0.165, 0.202] · new 40 bg pred 0.170% meas 0.170% [0.158, 0.184]
+     LOO (fit on one q, predict the other three): lambda range 0.630–0.758 · |ln(pred/meas)| median 0.148 · max 0.297
+
+-- (7) Monte Carlo (n=1000): Delta0 ~ N(inv28 CI), F1 ~ N(spec8 CI), lambda refit on a resampled q=1 crossing; mode C
+   lambda_fit 0.758 [0.669, 0.855]
+   q 0.00 pred: no crossing within 1% in 1000/1000 draws · meas none
+   q 0.25 pred 0.541% [0.411, 0.714] (none in 0%) · meas 0.621% [0.548, 0.684]
+   q 0.50 pred 0.271% [0.218, 0.348] (none in 0%) · meas 0.364% [0.327, 0.400]
+   q 0.75 pred 0.222% [0.168, 0.286] (none in 0%) · meas 0.249% [0.223, 0.285]
+   q 1.00 pred 0.180% [0.160, 0.198] (none in 0%) · meas 0.180% [0.162, 0.200]
+
+-- (8) out-of-sample check — lifespan constant a = 300, 600, 1200 (an11 B; second-founder world)
+   G(a) = assay window / mean age at death, window = 3000 a/300 (an11 B: lengths scaled by the lifespan multiple)
+   mode A, lambda fitted on draw-first Set A = 0.586
+     a   G(a)   meas mu*(grid)  slope meas | pred (i) h x single-code h(a)/h(300) · slope | pred (ii) I x lineage-census I(a)/I(300) · slope
+    300  7.14  0.184%  -111.9 | 0.176% · -141.8 | 0.176% · -141.8
+    600  7.64  0.126%  -129.6 | 0.082% · -159.6 | 0.152% · -151.7
+   1200  8.70  0.102%  -135.5 | 0.050% · -103.4 | 0.151% · -172.7
+   mode C, lambda fitted on draw-first Set A = 0.758
+     a   G(a)   meas mu*(grid)  slope meas | pred (i) h x single-code h(a)/h(300) · slope | pred (ii) I x lineage-census I(a)/I(300) · slope
+    300  7.14  0.184%  -111.9 | 0.174% · -130.1 | 0.174% · -130.1
+    600  7.64  0.126%  -129.6 | 0.081% · -212.9 | 0.143% · -139.2
+   1200  8.70  0.102%  -135.5 | 0.056% · -273.3 | 0.141% · -158.5
+
+-- sources
+   Delta q=0 mu=0.0                                     0.3569, 0.30676, 0.40622                 _RESULT_inv28.json delta['0|rascld|0.0']
+   Delta q=0 mu=0.001                                   0.38273, 0.3462, 0.41603                 _RESULT_inv28.json delta['0|rascld|0.001']
+   Delta q=0 mu=0.003                                   0.34051, 0.29753, 0.37993                _RESULT_inv28.json delta['0|rascld|0.003']
+   Delta q=0 mu=0.005                                   0.30376, 0.2535, 0.35117                 _RESULT_inv28.json delta['0|rascld|0.005']
+   Delta q=0 mu=0.01                                    0.22905, 0.19371, 0.2618                 _RESULT_inv28.json delta['0|rascld|0.01']
+   Delta q=0.25 mu=0.0                                  0.38343, 0.33876, 0.4294                 _RESULT_inv28.json delta['0.25|rascld|0.0']
+   Delta q=0.25 mu=0.001                                0.35825, 0.30215, 0.40917                _RESULT_inv28.json delta['0.25|rascld|0.001']
+   Delta q=0.25 mu=0.003                                0.20979, 0.16043, 0.25447                _RESULT_inv28.json delta['0.25|rascld|0.003']
+   Delta q=0.25 mu=0.005                                0.067814, 0.02251, 0.11281               _RESULT_inv28.json delta['0.25|rascld|0.005']
+   Delta q=0.25 mu=0.01                                 -0.21319, -0.2738, -0.15824              _RESULT_inv28.json delta['0.25|rascld|0.01']
+   Delta q=0.5 mu=0.0                                   0.35631, 0.32107, 0.3898                 _RESULT_inv28.json delta['0.5|rascld|0.0']
+   Delta q=0.5 mu=0.001                                 0.28445, 0.23136, 0.33423                _RESULT_inv28.json delta['0.5|rascld|0.001']
+   Delta q=0.5 mu=0.003                                 0.057833, 0.021024, 0.096333             _RESULT_inv28.json delta['0.5|rascld|0.003']
+   Delta q=0.5 mu=0.005                                 -0.12373, -0.17647, -0.066396            _RESULT_inv28.json delta['0.5|rascld|0.005']
+   Delta q=0.5 mu=0.01                                  -0.45449, -0.50473, -0.40507             _RESULT_inv28.json delta['0.5|rascld|0.01']
+   Delta q=0.75 mu=0.0                                  0.38624, 0.33328, 0.43273                _RESULT_inv28.json delta['0.75|rascld|0.0']
+   Delta q=0.75 mu=0.001                                0.2299, 0.20096, 0.25909                 _RESULT_inv28.json delta['0.75|rascld|0.001']
+   Delta q=0.75 mu=0.003                                -0.078209, -0.13641, -0.016249           _RESULT_inv28.json delta['0.75|rascld|0.003']
+   Delta q=0.75 mu=0.005                                -0.2931, -0.36598, -0.22051              _RESULT_inv28.json delta['0.75|rascld|0.005']
+   Delta q=0.75 mu=0.01                                 -0.63332, -0.6905, -0.58109              _RESULT_inv28.json delta['0.75|rascld|0.01']
+   Delta q=1 mu=0.0                                     0.38777, 0.33901, 0.43634                _RESULT_inv28.json delta['1|rascld|0.0']
+   Delta q=1 mu=0.001                                   0.1357, 0.096436, 0.18021                _RESULT_inv28.json delta['1|rascld|0.001']
+   Delta q=1 mu=0.003                                   -0.20148, -0.2483, -0.15519              _RESULT_inv28.json delta['1|rascld|0.003']
+   Delta q=1 mu=0.005                                   -0.40819, -0.46119, -0.34845             _RESULT_inv28.json delta['1|rascld|0.005']
+   Delta q=1 mu=0.01                                    -0.75307, -0.83741, -0.66665             _RESULT_inv28.json delta['1|rascld|0.01']
+   slope q=0                                            -14.58, -18.711, -10.445                 _RESULT_inv28.json slopes['0|rascld']
+   slope q=0.25                                         -61.598, -68.996, -54.895                _RESULT_inv28.json slopes['0.25|rascld']
+   slope q=0.5                                          -82.214, -89.188, -75.048                _RESULT_inv28.json slopes['0.5|rascld']
+   slope q=0.75                                         -100.75, -107.41, -94.914                _RESULT_inv28.json slopes['0.75|rascld']
+   slope q=1                                            -109.1, -118.62, -99.37                  _RESULT_inv28.json slopes['1|rascld']
+   crossing q=0                                         None                                     _RESULT_inv28.json D4.crossing['0']
+   crossing q=0.25                                      0.0062066                                _RESULT_inv28.json D4.crossing['0.25']
+   crossing q=0.5                                       0.0036371                                _RESULT_inv28.json D4.crossing['0.5']
+   crossing q=0.75                                      0.0024923                                _RESULT_inv28.json D4.crossing['0.75']
+   crossing q=1                                         0.0018049                                _RESULT_inv28.json D4.crossing['1']
+   crossing SetA 8-pt                                   0.0018272, 0.0016507, 0.0020248          _RESULT_inv21.json R4.flip_old(+_ci)
+   crossing new 40 bg                                   0.0016953, 0.0015774, 0.001844           _RESULT_inv21.json R4.flip_new(+_ci)
+   Delta0 new 40 bg                                     0.38321, 0.35039, 0.41719                _RESULT_inv21.json delta_new.rascld['0.0']
+   G generations/assay                                  7.1429                                   _RESULT_model12.json G (=3000/420; Supp S8 M1)
+   T founder, invasion arm mu0                          35.905                                   _RESULT_invbud.json G3['침입 rascld'].tpl (txt line 22)
+   T resident, invasion arm mu0                         43.492                                   _RESULT_invbud.json G3['침입 racld'].tpl (txt line 21)
+   T/R loop-2 class mean (11 codes)                     2.0105                                   _RESULT_pairs14.json code|*|* T/R where L=2
+   T/R loop-4 class mean (11 codes)                     3.9305                                   _RESULT_pairs14.json code|*|* T/R where L=4
+   R loop-2 rascld-family mean (7-letter codes)         15.601                                   _RESULT_pairs14.json code|rascld|* R where L=2
+   R loop-4 racld-family mean (6-letter codes)          9.664                                    _RESULT_pairs14.json code|racld|* R where L=4
+   F1 founder d8 mu0.1%                                 0.72868, 0.72315, 0.73421                _RESULT_spec8.json cells['orig/rascld/8/0.001'].F
+   F1 resident d8 mu0.1%                                0.76227, 0.75854, 0.76617                _RESULT_spec8.json cells['orig/racld/8/0.001'].F
+   R single-code d8 rascld mu0.001                      16.893                                   _RESULT_spec8.json cells['orig/rascld/8/0.001'].R
+   R single-code d8 rascld mu0.01                       10.19                                    _RESULT_spec8.json cells['orig/rascld/8/0.01'].R
+   R single-code d8 racld mu0.001                       11.105                                   _RESULT_spec8.json cells['orig/racld/8/0.001'].R
+   R single-code d8 racld mu0.01                        7.3783                                   _RESULT_spec8.json cells['orig/racld/8/0.01'].R
+   F0 draw-once rascld                                  0.92                                     _RESULT_reg9_check.txt line 14
+   R0 draw-once rascld                                  1.11                                     _RESULT_reg9_check.txt line 14
+   F0 draw-once racld                                   0.94                                     _RESULT_reg9_check.txt line 13
+   R0 draw-once racld                                   1.12                                     _RESULT_reg9_check.txt line 13
+   sterile share of variants, founder                   0.61055                                  _RESULT_model12.json flow|rascld.cls['불임'] (txt line 7)
+   sterile share of variants, resident                  0.65913                                  _RESULT_model12.json flow|racld.cls['불임'] (txt line 6)
+   variant fraction/birth founder, arms mu0.3%          0.22963                                  _RESULT_model12.json flow|rascld.U
+   variant fraction/birth resident, arms mu0.3%         0.14209                                  _RESULT_model12.json flow|racld.U
+   u_obs lineage census d8 rascld mu0.001               0.0877                                   _RESULT_lineage.json table['d08|rascld|0.001'].u
+   u_obs lineage census d8 rascld mu0.005               0.32336                                  _RESULT_lineage.json table['d08|rascld|0.005'].u
+   u_obs lineage census d8 rascld mu0.01                0.48167                                  _RESULT_lineage.json table['d08|rascld|0.01'].u
+   u_obs lineage census d8 racld mu0.001                0.051295                                 _RESULT_lineage.json table['d08|racld|0.001'].u
+   u_obs lineage census d8 racld mu0.005                0.20819                                  _RESULT_lineage.json table['d08|racld|0.005'].u
+   u_obs lineage census d8 racld mu0.01                 0.33442                                  _RESULT_lineage.json table['d08|racld|0.01'].u
+   an11 B Delta table (point)                           (table)                                  _RESULT_an11.txt lines 86-90
+   h single-code mu0 d8 f a=300                         18.478                                   _RESULT_an11.json A_cells['rascld|8|300'].s
+   h single-code mu0 d8 f a=600                         34.312                                   _RESULT_an11.json A_cells['rascld|8|600'].s
+   h single-code mu0 d8 f a=1200                        59.16                                    _RESULT_an11.json A_cells['rascld|8|1200'].s
+   h single-code mu0 d8 r a=300                         10.897                                   _RESULT_an11.json A_cells['racld|8|300'].s
+   h single-code mu0 d8 r a=600                         20.267                                   _RESULT_an11.json A_cells['racld|8|600'].s
+   h single-code mu0 d8 r a=1200                        34.949                                   _RESULT_an11.json A_cells['racld|8|1200'].s
+   mean age at death d8 a=300 (rascld)                  420.05                                   _RESULT_an11.json A_cells['rascld|8|300'].life
+   mean age at death d8 a=600 (rascld)                  785.44                                   _RESULT_an11.json A_cells['rascld|8|600'].life
+   mean age at death d8 a=1200 (rascld)                 1379.7                                   _RESULT_an11.json A_cells['rascld|8|1200'].life
+   I lineage census mu0.1% d8 rascld a=300              12.292                                   _RESULT_an11.json L_cell|rascld|8|300.I
+   I lineage census mu0.1% d8 rascld a=1200             23.322                                   _RESULT_an11.json L_cell|rascld|8|1200.I
+   I lineage census mu0.1% d8 racld a=300               8.4814                                   _RESULT_an11.json L_cell|racld|8|300.I
+   I lineage census mu0.1% d8 racld a=1200              20.421                                   _RESULT_an11.json L_cell|racld|8|1200.I
+
+-- collapse (mode A)
+   q=0.0   mu=0.001  x=0.0013 dd=+0.026
+   q=0.0   mu=0.003  x=0.0039 dd=-0.016
+   q=0.0   mu=0.005  x=0.0065 dd=-0.053
+   q=0.0   mu=0.01   x=0.0129 dd=-0.128
+   q=0.25  mu=0.001  x=0.0179 dd=-0.025
+   q=0.5   mu=0.001  x=0.0323 dd=-0.072
+   q=0.75  mu=0.001  x=0.0451 dd=-0.156
+   q=0.25  mu=0.003  x=0.0536 dd=-0.174
+   q=1.0   mu=0.001  x=0.0566 dd=-0.252
+   q=0.25  mu=0.005  x=0.0894 dd=-0.316
+   q=0.5   mu=0.003  x=0.0969 dd=-0.298
+   q=0.75  mu=0.003  x=0.1353 dd=-0.464
+   q=0.5   mu=0.005  x=0.1616 dd=-0.480
+   q=1.0   mu=0.003  x=0.1697 dd=-0.589
+   q=0.25  mu=0.01   x=0.1788 dd=-0.597
+   q=0.75  mu=0.005  x=0.2255 dd=-0.679
+   q=1.0   mu=0.005  x=0.2829 dd=-0.796
+   q=0.5   mu=0.01   x=0.3231 dd=-0.811
+   q=0.75  mu=0.01   x=0.4510 dd=-1.020
+   q=1.0   mu=0.01   x=0.5658 dd=-1.141

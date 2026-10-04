@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1020" height="522" viewBox="0 0 1020 522" font-family="Helvetica, Arial, sans-serif">
 <style>
-  .lbl{font-size:17px;font-weight:700;fill:#111}
+  .lbl{font-size:19.5px;font-weight:700;fill:#111}
+  .pt{font-size:17.5px;font-weight:400;fill:#111}
   .h{font-size:12.5px;font-weight:700;fill:#111}
   .t{font-size:11px;fill:#333}
   .ti{font-size:10px;fill:#666;font-style:italic}
@@ -26,7 +27,7 @@
 
 <!-- ============ (a) ============ -->
 <text class="lbl" x="24" y="32">a</text>
-<text class="h" x="46" y="32">The dish and a copy attempt</text>
+<text class="pt" x="46" y="32">The dish and a copy attempt</text>
 
 <g transform="translate(44,50)">
   <rect class="cell"  x="0"  y="0"  width="46" height="46"/>
@@ -65,7 +66,7 @@
 
 <!-- ============ (b) ============ -->
 <text class="lbl" x="592" y="32">b</text>
-<text class="h" x="614" y="32">The copying loop</text>
+<text class="pt" x="614" y="32">The copying loop</text>
 
 <g transform="translate(604,54)">
   <g transform="translate(0,0)">
@@ -109,11 +110,11 @@
 
 <!-- ============ (c) ============ -->
 <text class="lbl" x="24" y="296">c</text>
-<text class="h" x="46" y="296">Where the error draw sits</text>
+<text class="pt" x="46" y="296">Where the error draw sits</text>
 
-<!-- roll-first -->
+<!-- draw-first -->
 <g transform="translate(96,320)">
-  <text class="h" x="0" y="0" fill="#c0392b">roll-first  (original)</text>
+  <text class="h" x="0" y="0" fill="#c0392b">draw-first  (default)</text>
   <rect class="die"  x="0" y="14" width="98" height="30" rx="3"/><text class="t" x="49" y="33" text-anchor="middle">draw</text>
   <path class="ar" d="M49,44 L49,64" marker-end="url(#a)"/>
   <rect class="seek" x="0" y="64" width="98" height="30" rx="3"/><text class="t" x="49" y="83" text-anchor="middle">seek letter</text>
@@ -135,7 +136,7 @@
   <text class="ti" x="101" y="24">not found</text>
   <rect class="box" x="146" y="14" width="76" height="30" rx="3"/><text class="t" x="184" y="33" text-anchor="middle">stall</text>
   <path class="ar" d="M224,18 C248,18 248,42 228,41" marker-end="url(#a)"/>
-  <text class="ti" x="252" y="33">re-seek</text>
+  <text class="ti" x="252" y="33">reseek</text>
   <path class="ar" d="M49,44 L49,64" marker-end="url(#a)"/>
   <text class="ti" x="55" y="60">found</text>
   <rect class="die"  x="0" y="64" width="98" height="30" rx="3"/><text class="t" x="49" y="83" text-anchor="middle">draw</text>
@@ -144,9 +145,9 @@
   <text class="ti" x="49" y="176" text-anchor="middle" font-weight="700">one draw per letter — a stall draws nothing</text>
 </g>
 
-<!-- remember-roll -->
+<!-- draw-once -->
 <g transform="translate(764,320)">
-  <text class="h" x="0" y="0" fill="#8e44ad">remember-roll</text>
+  <text class="h" x="0" y="0" fill="#8e44ad">draw-once</text>
   <rect class="die"  x="0" y="14" width="98" height="30" rx="3"/><text class="t" x="49" y="33" text-anchor="middle">draw</text>
   <path class="ar" d="M49,44 L49,64" marker-end="url(#a)"/>
   <rect class="seek" x="0" y="64" width="98" height="30" rx="3"/><text class="t" x="49" y="83" text-anchor="middle">seek letter</text>
@@ -157,7 +158,7 @@
   <text class="ti" x="55" y="112">not found</text>
   <rect class="box" x="0" y="122" width="98" height="30" rx="3" stroke="#8e44ad"/><text class="t" x="49" y="141" text-anchor="middle" fill="#8e44ad">stall</text>
   <path class="arg" d="M-12,137 C-42,137 -42,79 -6,79" marker-end="url(#ap)"/>
-  <text class="ti" x="49" y="176" text-anchor="middle" fill="#8e44ad" font-weight="700">outcome kept — re-seek, do not draw again</text>
+  <text class="ti" x="49" y="176" text-anchor="middle" fill="#8e44ad" font-weight="700">outcome kept — reseek, do not draw again</text>
 </g>
 
 

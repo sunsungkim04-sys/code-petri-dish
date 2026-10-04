@@ -1,0 +1,41 @@
+# E2 arms 12 · errors 0 · incomplete 0 · audit-violation arms 0 · skipped/target 0/4020 = 0.0000 (guard ≤ 0.05)
+  lost injected lineages (code, rule, μ): none
+
+## Q0 (precondition) Δ(L3) at μ = 0: +2.174 [+2.174, +2.174] · Δ(L5) at μ = 0: -2.256 [-2.256, -2.256]
+  Q0 = PASS (lower > 0: the shorter loop invades at zero error)
+
+## Q1 (primary) slope of Δ(L3) on μ over μ ∈ (0.0, 0.0003, 0.001, 0.003, 0.01), per rule (per unit μ)
+  b3_df: +778.380 [+778.380, +778.380]
+  b3_ff: +235.685 [+235.685, +235.685]
+  b3_do: +306.470 [+306.470, +306.470]
+  b3_df − b3_ff: +542.696 [+542.696, +542.696] · b3_df − b3_do: +471.910 [+471.910, +471.910] → Q1 = FAIL (both upper < 0)
+
+## Q2 (secondary) slope of Δ(L5) − Δ(L3) on μ (fidelity component)
+  c_df: -368.262 [-368.262, -368.262]
+  c_ff: +334.361 [+334.361, +334.361]
+  c_do: -25.902 [-25.902, -25.902]
+  c_df − c_ff: -702.623 [-702.623, -702.623] · c_df − c_do: -342.360 [-342.360, -342.360] → Q2 = FAIL (both lower > 0)
+
+## E2 primary verdict: ❌  (✅ Q0 ∧ Q1 · 🟡 Q1 without Q0 · ❌ Q1 fails)
+
+## Q3 (open) mean Δ by μ and crossing (sign change, linear interpolation)
+  L3 df: μ0 +2.174 μ0.001 +2.953 · crossing none in range
+  L3 ff: μ0 +2.174 μ0.001 +2.410 · crossing none in range
+  L3 do: μ0 +2.174 μ0.001 +2.481 · crossing none in range
+  L5 df: μ0 -2.256 μ0.001 -1.846 · crossing none in range
+  L5 ff: μ0 -2.256 μ0.001 -1.686 · crossing none in range
+  L5 do: μ0 -2.256 μ0.001 -1.976 · crossing none in range
+
+## injected-lineage draws per letter (mean over arms): code rule μ | R_injected R_resident supply_injected
+L3 df 0.0 | 12.991 11.089 0.0000
+L3 df 0.001 | 6.414 6.627 0.1077
+L3 do 0.001 | 1.029 1.031 0.0203
+L3 ff 0.001 | 1.000 1.000 0.0204
+L5 df 0.0 | 9.587 10.384 0.0000
+L5 df 0.001 | 5.822 5.700 0.1060
+L5 do 0.001 | 1.031 1.029 0.0143
+L5 ff 0.001 | 1.000 1.000 0.0196
+ref df 0.0 | 10.349 10.409 0.0000
+ref df 0.001 | 5.679 5.642 0.1068
+ref do 0.001 | 1.028 1.030 0.0233
+ref ff 0.001 | 1.000 1.000 0.0132

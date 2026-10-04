@@ -14,6 +14,9 @@
  * 해부 17(09-28 추가): --loops 1 이면 topEvery 틱마다 살아 있는 개체의 **복사 고리 길이 히스토그램**을 전수에서 센다(읽기만 · 난수 소비 없음 → 체크섬 그대로).
  *   loops — [tick, {고리 길이: 개체 수}, 고리 없는 개체 수] · 고리 길이는 pairs13_analyze.py 의 loop_ticks 와 같은 정의(라벨 s 뒤부터 l 까지 · x 는 0 틱).
  *   출력에 loops · loops_on 이 더해지고 파일 이름은 그대로다. 기본값(끔)이면 출력이 전과 같다.
+ * 해부 29(10-03 추가): --remember-die 1 이면 sim v0.3.4+ 의 **기억하는 주사위(draw-once)** 세계로 처음부터 돌린다(파일 이름 끝 _do · 출력에 remember_die).
+ *   sim 의 opts.rememberDie 를 켤 뿐이다 — dms.js 가 팔 동안 w.o.rememberDie = true 로 켜는 것과 같은 copyOne 경로(redrawP 는 null 그대로 · w.rnd2 안 씀).
+ *   --find-first 와 함께 주면 중단. --find-first 의 허용 sim 버전에 0.3.6 을 더했다(동작은 그대로). 두 깃발 다 끔이면 출력이 전과 같다.
  */
 'use strict';
 const fs = require('fs');
@@ -39,6 +42,7 @@ const mu = parseFloat(args.mu || '0.01');
 const outDir = args.out || '.';
 const findFirst = args['find-first'] === '1';
 const loopsOn = args.loops === '1';
+const rememberDie = args['remember-die'] === '1';
 function loopTicks(code) {
   if (!code.includes('l') || !code.includes('c')) return null;
   const li = code.indexOf('l');
@@ -55,9 +59,12 @@ function loopOf(key) {
   if (!loopCache.has(key)) loopCache.set(key, loopTicks(key));
   return loopCache.get(key);
 }
-if (findFirst && !['0.3.3', '0.3.4', '0.3.5'].includes(Sim.VERSION)) { console.error('--find-first 는 sim 0.3.3~0.3.5 가 필요하다'); process.exit(2); }
+if (findFirst && !['0.3.3', '0.3.4', '0.3.5', '0.3.6'].includes(Sim.VERSION)) { console.error('--find-first 는 sim 0.3.3~0.3.6 가 필요하다'); process.exit(2); }
+if (rememberDie && !['0.3.4', '0.3.5', '0.3.6'].includes(Sim.VERSION)) { console.error('--remember-die 는 sim 0.3.4~0.3.6 가 필요하다'); process.exit(2); }
+if (rememberDie && findFirst) { console.error('--remember-die 와 --find-first 를 함께 주지 말 것'); process.exit(2); }
 const opts = Object.assign({ seed, density, mu, light: 1 }, COND[cond]);
 if (findFirst) opts.findFirst = true;
+if (rememberDie) opts.rememberDie = true;
 const snapTick = ticks - 2000;
 
 const HEADER = ['tick', 'pop', 'kinds', 'mean_len', 'borrowing', 'has_j', 'has_e', 'has_h', 'has_x', 'no_c', ...[...Sim.LET].map(ch => `n_${ch}`)];
@@ -132,8 +139,9 @@ const out = {
 };
 if (loopsOn) { out.loops = loops; out.loops_on = true; }
 if (findFirst) out.find_first = true;
+if (rememberDie) out.remember_die = true;
 fs.mkdirSync(outDir, { recursive: true });
-const tag = `${cond}_d${String(density).replace('.', 'p')}_mu${String(mu).replace('.', 'p')}_s${String(seed).padStart(5, '0')}${findFirst ? '_ff' : ''}`;
+const tag = `${cond}_d${String(density).replace('.', 'p')}_mu${String(mu).replace('.', 'p')}_s${String(seed).padStart(5, '0')}${findFirst ? '_ff' : ''}${rememberDie ? '_do' : ''}`;
 fs.writeFileSync(path.join(outDir, `${tag}.json`), JSON.stringify(out));
 const last = samples[samples.length - 1];
 console.log([

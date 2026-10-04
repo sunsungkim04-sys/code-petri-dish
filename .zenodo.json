@@ -1,6 +1,6 @@
 {
-  "title": "Code Petri Dish: simulator, instruments, pre-registered judging scripts and results for 'Mutation rate without a modifier'",
-  "description": "Simulator (sim.js v0.3.6), instruments, launch and judging scripts, frozen SHA-256 files, independent recounts and result files behind every number in the manuscript <i>Mutation rate without a modifier: copy-loop geometry couples speed to fidelity when replication can stall</i> (MinSeo Kim and Jae-Ho Shin, 2026), together with the figure generator and its provenance list. Backgrounds are grown deterministically from their seeds by the scripts provided.",
+  "title": "Code Petri Dish: simulator, instruments, pre-specified analysis scripts and results for 'When a stalled copy draws again'",
+  "description": "Simulator (sim.js v0.3.6), instruments, launch and analysis scripts, frozen SHA-256 files, independent recounts and result files behind every number in the manuscript <i>When a stalled copy draws again: copy-loop length couples replication speed to realised mutation rate under conserved material</i> (MinSeo Kim and Jae-Ho Shin, 2026), together with the figure generator and its provenance list, and a patch adding the copying rules to Avida (LGPL-3.0-or-later). Backgrounds are grown deterministically from their seeds by the scripts provided.",
   "upload_type": "software",
   "license": "MIT",
   "creators": [
@@ -20,7 +20,8 @@
     "artificial life",
     "mutation rate",
     "replicator",
-    "pre-registration"
+    "pre-registration",
+    "Avida"
   ],
-  "version": "v1.1"
+  "version": "v1.2"
 }
