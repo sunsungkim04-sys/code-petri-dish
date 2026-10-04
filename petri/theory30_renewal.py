@@ -3,8 +3,9 @@
 """[10-03 정본 사본 — scratchpad/theory/renewal_mustar.py 에서 옮김 · 독립 감사 scratchpad/audit_theory 반영 · 끝에 수렴(collapse) 블록 추가 · 출력 _RESULT_theory30.json]
 Renewal-process account of the crossing error rate mu* (journal items M4 + M7).  POST HOC.
 
-Reads ONLY existing result files in petri/ (read-only).  Every input is loaded from a file and
-printed with its source key/line.  Nothing in the vault is written.
+Reads ONLY existing result files in petri/.  Every input is loaded from a file and printed with its source key/line.
+Writes petri/_RESULT_theory30.json (overwrites it); the .txt is this script's stdout (python3 theory30_renewal.py > _RESULT_theory30.txt).
+The manuscript (S27, Fig. S4) uses blocks (2)-(5) and 'collapse'; blocks (6)-(8) are exploratory checks reported only in one S27 sentence.
 
 Theory (see report):
   draws per letter      R(q) = 1 + q*h                    (Wald identity; h = stalls per letter written)

@@ -1,0 +1,74 @@
+('e1', 'plentiful', 'df', '0', 0) drop%=93.88 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'plentiful', 'df', '0.0003', 0) drop%=93.95 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'plentiful', 'df', '0.0003', 4) drop%=93.62 ovw/written=0.0113 divfail/div=0.0001 uncop/written=0.00080
+('e1', 'plentiful', 'df', '0.001', 0) drop%=94.21 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'plentiful', 'df', '0.001', 4) drop%=94.09 ovw/written=0.0124 divfail/div=0.0001 uncop/written=0.00077
+('e1', 'plentiful', 'df', '0.003', 0) drop%=94.48 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'plentiful', 'df', '0.003', 4) drop%=94.66 ovw/written=0.0186 divfail/div=0.0000 uncop/written=0.00042
+('e1', 'plentiful', 'do', '0', 0) drop%=93.88 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'plentiful', 'do', '0.0003', 0) drop%=93.95 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'plentiful', 'do', '0.0003', 4) drop%=93.62 ovw/written=0.0112 divfail/div=0.0001 uncop/written=0.00093
+('e1', 'plentiful', 'do', '0.001', 0) drop%=94.21 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'plentiful', 'do', '0.001', 4) drop%=94.09 ovw/written=0.0128 divfail/div=0.0001 uncop/written=0.00074
+('e1', 'plentiful', 'do', '0.003', 0) drop%=94.48 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'plentiful', 'do', '0.003', 4) drop%=94.65 ovw/written=0.0186 divfail/div=0.0000 uncop/written=0.00052
+('e1', 'plentiful', 'ff', '0', 0) drop%=93.88 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'plentiful', 'ff', '0.0003', 0) drop%=93.94 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'plentiful', 'ff', '0.0003', 4) drop%=93.65 ovw/written=0.0123 divfail/div=0.0002 uncop/written=0.00091
+('e1', 'plentiful', 'ff', '0.001', 0) drop%=94.22 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'plentiful', 'ff', '0.001', 4) drop%=94.08 ovw/written=0.0123 divfail/div=0.0001 uncop/written=0.00074
+('e1', 'plentiful', 'ff', '0.003', 0) drop%=94.48 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'plentiful', 'ff', '0.003', 4) drop%=94.66 ovw/written=0.0187 divfail/div=0.0000 uncop/written=0.00048
+('e1', 'scarce', 'df', '0', 0) drop%=31.27 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'scarce', 'df', '0.0003', 0) drop%=46.37 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'scarce', 'df', '0.0003', 4) drop%=58.06 ovw/written=0.0336 divfail/div=0.0017 uncop/written=0.00033
+('e1', 'scarce', 'df', '0.001', 0) drop%=67.45 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'scarce', 'df', '0.001', 4) drop%=74.64 ovw/written=0.0496 divfail/div=0.0016 uncop/written=0.00031
+('e1', 'scarce', 'df', '0.003', 0) drop%=85.07 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'scarce', 'df', '0.003', 4) drop%=86.81 ovw/written=0.0462 divfail/div=0.0004 uncop/written=0.00021
+('e1', 'scarce', 'do', '0', 0) drop%=31.27 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'scarce', 'do', '0.0003', 0) drop%=33.94 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'scarce', 'do', '0.0003', 4) drop%=51.81 ovw/written=0.0251 divfail/div=0.0000 uncop/written=0.00005
+('e1', 'scarce', 'do', '0.001', 0) drop%=40.41 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'scarce', 'do', '0.001', 4) drop%=61.36 ovw/written=0.0292 divfail/div=0.0001 uncop/written=0.00011
+('e1', 'scarce', 'do', '0.003', 0) drop%=60.30 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'scarce', 'do', '0.003', 4) drop%=75.74 ovw/written=0.0678 divfail/div=0.0002 uncop/written=0.00009
+('e1', 'scarce', 'ff', '0', 0) drop%=31.27 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'scarce', 'ff', '0.0003', 0) drop%=33.69 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'scarce', 'ff', '0.0003', 4) drop%=58.24 ovw/written=0.0276 divfail/div=0.0000 uncop/written=0.00015
+('e1', 'scarce', 'ff', '0.001', 0) drop%=43.12 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'scarce', 'ff', '0.001', 4) drop%=68.63 ovw/written=0.0341 divfail/div=0.0001 uncop/written=0.00005
+('e1', 'scarce', 'ff', '0.003', 0) drop%=55.05 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e1', 'scarce', 'ff', '0.003', 4) drop%=73.26 ovw/written=0.0483 divfail/div=0.0005 uncop/written=0.00011
+('e2', 'df', '0', 0) drop%=30.55 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e2', 'df', '0', 1) drop%=27.94 ovw/written=0.0000 divfail/div=0.0000 uncop/written=0.00000
+('e2', 'df', '0.0003', 0) drop%=41.89 ovw/written=0.0079 divfail/div=0.0001 uncop/written=0.00005
+('e2', 'df', '0.0003', 1) drop%=41.71 ovw/written=0.0092 divfail/div=0.0008 uncop/written=0.00013
+('e2', 'df', '0.001', 0) drop%=60.98 ovw/written=0.0181 divfail/div=0.0004 uncop/written=0.00013
+('e2', 'df', '0.001', 1) drop%=64.52 ovw/written=0.0176 divfail/div=0.0014 uncop/written=0.00025
+('e2', 'df', '0.003', 0) drop%=78.91 ovw/written=0.0295 divfail/div=0.0004 uncop/written=0.00018
+('e2', 'df', '0.003', 1) drop%=82.33 ovw/written=0.0266 divfail/div=0.0010 uncop/written=0.00030
+('e2', 'df', '0.01', 0) drop%=87.45 ovw/written=0.0522 divfail/div=0.0004 uncop/written=0.00020
+('e2', 'df', '0.01', 1) drop%=89.18 ovw/written=0.0481 divfail/div=0.0007 uncop/written=0.00032
+('e2', 'df', '0.03', 0) drop%=88.51 ovw/written=0.0934 divfail/div=0.0007 uncop/written=0.00023
+('e2', 'df', '0.03', 1) drop%=89.79 ovw/written=0.0874 divfail/div=0.0009 uncop/written=0.00028
+('e2', 'do', '0.0003', 0) drop%=31.23 ovw/written=0.0017 divfail/div=0.0000 uncop/written=0.00000
+('e2', 'do', '0.0003', 1) drop%=28.64 ovw/written=0.0019 divfail/div=0.0000 uncop/written=0.00001
+('e2', 'do', '0.001', 0) drop%=32.85 ovw/written=0.0056 divfail/div=0.0001 uncop/written=0.00002
+('e2', 'do', '0.001', 1) drop%=30.42 ovw/written=0.0062 divfail/div=0.0003 uncop/written=0.00003
+('e2', 'do', '0.003', 0) drop%=37.64 ovw/written=0.0164 divfail/div=0.0002 uncop/written=0.00005
+('e2', 'do', '0.003', 1) drop%=35.91 ovw/written=0.0172 divfail/div=0.0005 uncop/written=0.00007
+('e2', 'do', '0.01', 0) drop%=55.04 ovw/written=0.0499 divfail/div=0.0007 uncop/written=0.00015
+('e2', 'do', '0.01', 1) drop%=56.45 ovw/written=0.0521 divfail/div=0.0017 uncop/written=0.00024
+('e2', 'do', '0.03', 0) drop%=82.16 ovw/written=0.1021 divfail/div=0.0015 uncop/written=0.00025
+('e2', 'do', '0.03', 1) drop%=85.07 ovw/written=0.0982 divfail/div=0.0017 uncop/written=0.00028
+('e2', 'ff', '0.0003', 0) drop%=31.21 ovw/written=0.0017 divfail/div=0.0000 uncop/written=0.00001
+('e2', 'ff', '0.0003', 1) drop%=28.67 ovw/written=0.0017 divfail/div=0.0000 uncop/written=0.00000
+('e2', 'ff', '0.001', 0) drop%=32.77 ovw/written=0.0054 divfail/div=0.0000 uncop/written=0.00002
+('e2', 'ff', '0.001', 1) drop%=30.40 ovw/written=0.0058 divfail/div=0.0001 uncop/written=0.00003
+('e2', 'ff', '0.003', 0) drop%=37.52 ovw/written=0.0163 divfail/div=0.0001 uncop/written=0.00005
+('e2', 'ff', '0.003', 1) drop%=35.82 ovw/written=0.0173 divfail/div=0.0004 uncop/written=0.00009
+('e2', 'ff', '0.01', 0) drop%=54.36 ovw/written=0.0495 divfail/div=0.0007 uncop/written=0.00013
+('e2', 'ff', '0.01', 1) drop%=55.61 ovw/written=0.0523 divfail/div=0.0013 uncop/written=0.00020
+('e2', 'ff', '0.03', 0) drop%=82.09 ovw/written=0.1020 divfail/div=0.0013 uncop/written=0.00023
+('e2', 'ff', '0.03', 1) drop%=85.07 ovw/written=0.0979 divfail/div=0.0018 uncop/written=0.00029

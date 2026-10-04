@@ -12,3 +12,4 @@ d7d3102bbcb69280574cd716931a5a09aa4378535e79a7d68f447d3f1ad1e3fb  avida30/a30_an
 916c10bfe400730cc5c8665efd741e433449aab9de0c0677315e8b22bf2306a7  avida30/cfg/instset-mat.cfg
 320ecf803e962a509c45500deb29c53211abe0354b43d268bb52232048b50650  avida30/cfg/environment.cfg
 e1133368480239c3dd65a3c9e9f331a60aa7da885dc469097be5d820d9419c42  ../사전등록/해부30-사전등록-2026-10-03.md
+# 10-04 (appended after code review): the note hash above is that of the frozen-time note; §8 and status were filled after the run and the frozen-time text was not retained, so the note line no longer verifies. Scripts, cfg and patch lines verify (11/11).

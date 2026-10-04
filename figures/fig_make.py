@@ -659,7 +659,35 @@ def fS1():
 
 
 def fS3():
-    """보충 그림 S3 — 갱신 계산(사후 · _RESULT_theory30 · 원자료 _RESULT_inv28). (a) q 별 Δ(μ) (b) Δ(μ) − Δ(0) 를 초과 추첨 공급 x = (52/33)Σ(q)μ 에 대해."""
+    """보충 그림 S3 — 해부 29 (_RESULT_evo29). 끝점 평균 고리 길이 대 명목 μ · 규칙 셋 · 접시마다 점 · 중앙값 가로선."""
+    Z = load("evo29")
+    RULES = [("DF", "draw-first", "#c0392b", [0.001, 0.003, 0.005, 0.01]),
+             ("FF", "find-first", "#2980b9", [0.001, 0.003, 0.005, 0.01]),
+             ("DO", "draw-once", "#8e44ad", [0.001, 0.003, 0.005, 0.01, 0.03, 0.05])]   # 규칙 색은 그림 2 와 같다
+    MU = [0.001, 0.003, 0.005, 0.01, 0.03, 0.05]
+    off = {"DF": -0.22, "FF": 0.0, "DO": 0.22}
+    fig, ax = plt.subplots(figsize=(4.6, 2.7))
+    for key, lab, col, mus in RULES:
+        for mu in mus:
+            c = Z["cell|%s|%s" % (key, mu)]
+            i = MU.index(mu) + off[key]
+            v = c["values"]
+            xs = [i + (j - (len(v) - 1) / 2.0) * (0.16 / max(len(v), 1)) for j in range(len(v))]
+            ax.plot(xs, v, "o", ms=1.8, color=col, alpha=0.6, lw=0)
+            ax.plot([i - 0.09, i + 0.09], [c["median"]] * 2, "-", color="k", lw=0.9)
+            note("FS3", "evo29", "cell|%s|%s" % (key, mu), "중앙 %.3f · 평균 %.3f · 접시 %d" % (c["median"], c["mean"], c["n"]))
+        ax.plot([], [], "o", ms=3, color=col, label=lab)
+    ax.axhline(2, color="#7f8c8d", lw=0.5, ls=":"); ax.axhline(4, color="#7f8c8d", lw=0.5, ls=":")
+    ax.set_xticks(range(len(MU))); ax.set_xticklabels(["%g" % (m * 100) for m in MU])
+    ax.set_xlabel(r"nominal error rate, $\mu$ (%)")
+    ax.set_ylabel("mean copy-loop length at 50,000 ticks\n(ticks per attempt)")
+    ax.set_ylim(1.8, 4.5)
+    legend_clear(ax, fontsize=6, frameon=False)
+    save(fig, "FS3_evolution_by_rule")
+
+
+def fS4():
+    """보충 그림 S4 — 갱신 계산(사후 · _RESULT_theory30 · 원자료 _RESULT_inv28). (a) q 별 Δ(μ) (b) Δ(μ) − Δ(0) 를 초과 추첨 공급 x = (52/33)Σ(q)μ 에 대해."""
     Z = load("theory30")
     Q = [0.0, 0.25, 0.5, 0.75, 1.0]
     QC = {0.0: "#fde725", 0.25: "#5ec962", 0.5: "#21918c", 0.75: "#3b528b", 1.0: "#440154"}   # q 는 순서 있는 양 — viridis 5단계
@@ -674,7 +702,7 @@ def fS3():
         lo = [d0[1]] + [p["d"][1] for p in ps]; hi = [d0[2]] + [p["d"][2] for p in ps]
         ax.fill_between(mus, lo, hi, color=QC[q], alpha=0.18, lw=0)
         ax.plot(mus, m, "o-", color=QC[q], ms=2.6, lw=1.1, label=r"$q$ = %g" % q, mec="#333333" if q == 0.0 else QC[q], mew=0.4)
-        note("FS3", "theory30", "collapse.points q=%g (d)" % q, " ".join("%.3f" % x for x in m))
+        note("FS4", "theory30", "collapse.points q=%g (d)" % q, " ".join("%.3f" % x for x in m))
     ax.axhline(0, color="k", lw=0.5, ls=":")
     ax.set_xlabel(r"nominal error rate, $\mu$ (%)")
     ax.set_ylabel(r"invasion $\Delta$ of $\mathtt{rascld}$ (ln units)")
@@ -684,16 +712,16 @@ def fS3():
     for q in Q:
         ps = sorted([p for p in pts if p["q"] == q], key=lambda p: p["mu"])
         ax.plot([p["x"] for p in ps], [p["dd"] for p in ps], "o-", color=QC[q], ms=2.6, lw=0.9, mec="#333333" if q == 0.0 else QC[q], mew=0.4)
-        note("FS3", "theory30", "collapse.points q=%g (x · dd)" % q, " ".join("%.4f/%+.3f" % (p["x"], p["dd"]) for p in ps))
+        note("FS4", "theory30", "collapse.points q=%g (x · dd)" % q, " ".join("%.4f/%+.3f" % (p["x"], p["dd"]) for p in ps))
     ax.axhline(0, color="k", lw=0.5, ls=":")
-    ax.set_xlabel("excess realised letter changes per offspring,\nfounder over resident (from draw counts)")
+    ax.set_xlabel("estimated excess realised letter changes\nper offspring, founder over resident")
     ax.set_ylabel(r"$\Delta(\mu) - \Delta(0)$ (ln units)")
-    ax.set_title("(b) against excess draw supply", fontsize=7)
+    ax.set_title("(b) against estimated excess letter changes", fontsize=7)
     axes[1].set_ylim(axes[0].get_ylim()[0] - 0.4, 0.15)
-    save(fig, "FS3_renewal_collapse")
+    save(fig, "FS4_renewal_collapse")
 
 
-FIGS = {"F2": f2, "F3": f3, "F4": f4, "F5": f5, "F6": f7, "F7": f8, "F8": f9, "FS1": fS1, "FS2": f6, "FS3": fS3}
+FIGS = {"F2": f2, "F3": f3, "F4": f4, "F5": f5, "F6": f7, "F7": f8, "F8": f9, "FS1": fS1, "FS2": f6, "FS3": fS3, "FS4": fS4}
 
 
 def main():

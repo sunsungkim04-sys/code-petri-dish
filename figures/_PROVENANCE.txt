@@ -160,13 +160,27 @@ FS2  model12          flow|rascld/U                                0.2296
 FS2  model12          flow|rsacld/U                                0.1769
 FS2  model12          flow|racld/U                                 0.1421
 FS2  model12          flow|racldx/U                                0.1464
-FS3  theory30         collapse.points q=0 (d)                      0.357 0.383 0.341 0.304 0.229
-FS3  theory30         collapse.points q=0.25 (d)                   0.383 0.358 0.210 0.068 -0.213
-FS3  theory30         collapse.points q=0.5 (d)                    0.356 0.284 0.058 -0.124 -0.454
-FS3  theory30         collapse.points q=0.75 (d)                   0.386 0.230 -0.078 -0.293 -0.633
-FS3  theory30         collapse.points q=1 (d)                      0.388 0.136 -0.201 -0.408 -0.753
-FS3  theory30         collapse.points q=0 (x · dd)                 0.0013/+0.026 0.0039/-0.016 0.0065/-0.053 0.0129/-0.128
-FS3  theory30         collapse.points q=0.25 (x · dd)              0.0179/-0.025 0.0536/-0.174 0.0894/-0.316 0.1788/-0.597
-FS3  theory30         collapse.points q=0.5 (x · dd)               0.0323/-0.072 0.0969/-0.298 0.1616/-0.480 0.3231/-0.811
-FS3  theory30         collapse.points q=0.75 (x · dd)              0.0451/-0.156 0.1353/-0.464 0.2255/-0.679 0.4510/-1.020
-FS3  theory30         collapse.points q=1 (x · dd)                 0.0566/-0.252 0.1697/-0.589 0.2829/-0.796 0.5658/-1.141
+FS3  evo29            cell|DF|0.001                                중앙 2.301 · 평균 2.303 · 접시 20
+FS3  evo29            cell|DF|0.003                                중앙 3.289 · 평균 3.303 · 접시 20
+FS3  evo29            cell|DF|0.005                                중앙 3.834 · 평균 3.828 · 접시 19
+FS3  evo29            cell|DF|0.01                                 중앙 4.076 · 평균 4.072 · 접시 19
+FS3  evo29            cell|FF|0.001                                중앙 2.058 · 평균 2.064 · 접시 19
+FS3  evo29            cell|FF|0.003                                중앙 2.117 · 평균 2.115 · 접시 19
+FS3  evo29            cell|FF|0.005                                중앙 2.169 · 평균 2.186 · 접시 19
+FS3  evo29            cell|FF|0.01                                 중앙 2.489 · 평균 2.500 · 접시 19
+FS3  evo29            cell|DO|0.001                                중앙 2.065 · 평균 2.090 · 접시 20
+FS3  evo29            cell|DO|0.003                                중앙 2.111 · 평균 2.114 · 접시 20
+FS3  evo29            cell|DO|0.005                                중앙 2.212 · 평균 2.213 · 접시 20
+FS3  evo29            cell|DO|0.01                                 중앙 2.649 · 평균 2.676 · 접시 20
+FS3  evo29            cell|DO|0.03                                 중앙 3.772 · 평균 3.779 · 접시 18
+FS3  evo29            cell|DO|0.05                                 중앙 3.821 · 평균 3.761 · 접시 13
+FS4  theory30         collapse.points q=0 (d)                      0.357 0.383 0.341 0.304 0.229
+FS4  theory30         collapse.points q=0.25 (d)                   0.383 0.358 0.210 0.068 -0.213
+FS4  theory30         collapse.points q=0.5 (d)                    0.356 0.284 0.058 -0.124 -0.454
+FS4  theory30         collapse.points q=0.75 (d)                   0.386 0.230 -0.078 -0.293 -0.633
+FS4  theory30         collapse.points q=1 (d)                      0.388 0.136 -0.201 -0.408 -0.753
+FS4  theory30         collapse.points q=0 (x · dd)                 0.0013/+0.026 0.0039/-0.016 0.0065/-0.053 0.0129/-0.128
+FS4  theory30         collapse.points q=0.25 (x · dd)              0.0179/-0.025 0.0536/-0.174 0.0894/-0.316 0.1788/-0.597
+FS4  theory30         collapse.points q=0.5 (x · dd)               0.0323/-0.072 0.0969/-0.298 0.1616/-0.480 0.3231/-0.811
+FS4  theory30         collapse.points q=0.75 (x · dd)              0.0451/-0.156 0.1353/-0.464 0.2255/-0.679 0.4510/-1.020
+FS4  theory30         collapse.points q=1 (x · dd)                 0.0566/-0.252 0.1697/-0.589 0.2829/-0.796 0.5658/-1.141

@@ -4,3 +4,4 @@ be8237a54037d38a5ffbff512821938f95df9a0d840db785b60508f71900e2a8  replay.js
 1f1d7fa32ab92db8495e0ede5d57dd5f42fd267e48bcf459b6feac0b8b204228  evo29_launch.sh
 1e335efb2c1149addb72b6a1092092e55a2675a9da8fafcc74f24c893d3cd211  evo29_analyze.py
 783b256b86a6484d042bae0ff862cb6f9c0ca754baa6774cc5a187c8e9e2a4ae  ../사전등록/해부29-사전등록-2026-10-03.md
+# 10-04 (appended after code review): §8 and status of the note were filled after the run; the frozen-time note is retained on the server (~/사전등록/), which verifies against the line above.
