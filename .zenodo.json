@@ -1,6 +1,6 @@
 {
   "title": "Code Petri Dish: simulator, instruments, pre-specified analysis scripts and results for 'When a stalled copy draws again'",
-  "description": "Simulator (sim.js v0.3.6), instruments, launch and analysis scripts, frozen SHA-256 files, independent recounts and result files behind every number in the manuscript <i>When a stalled copy draws again: copy-loop length couples replication speed to realised mutation rate under conserved material</i> (MinSeo Kim and Jae-Ho Shin, 2026), together with the figure generator and its provenance list, and a patch adding the copying rules to Avida (LGPL-3.0-or-later). Backgrounds are grown deterministically from their seeds by the scripts provided.",
+  "description": "Simulator (sim.js v0.3.6), instruments, launch and analysis scripts, frozen SHA-256 files, independent recounts and result files behind every number in the manuscript <i>When a stalled copy draws again: copy-loop length couples replication speed to realised mutation rate under conserved material</i> (MinSeo Kim and Jae-Ho Shin, 2026), together with the figure generator and its provenance list, and a patch adding the copying rules to Avida (LGPL-3.0-or-later). The rendered figure files are not deposited, so that the figures of the article are published by the journal alone; the generator reproduces them from the result files. Backgrounds are grown deterministically from their seeds by the scripts provided.",
   "upload_type": "software",
   "license": "MIT",
   "creators": [
@@ -23,5 +23,5 @@
     "pre-registration",
     "Avida"
   ],
-  "version": "v1.3"
+  "version": "v1.4"
 }
