@@ -8,7 +8,8 @@ Simulator, instruments, launch and judging scripts, frozen hashes and result fil
 | Folder | Contents |
 |---|---|
 | `petri/sim.js` | The world (v0.3.6). One file, no dependencies. The browser trial and the server runs use the same file. v0.3.6 adds one option, `redrawP` (experiment 28); with its default the trajectory is identical to v0.3.5. |
-| `petri/mini26.py`, `petri/mini27.py` | Two minimal models outside the simulator, in Python with NumPy (Supplementary S17): a well-mixed global pool, and local material on a 40 × 25 grid. |
+| `petri/mini26.py`, `petri/mini27.py` | Two minimal models outside the simulator, in Python with NumPy (Supplementary S19): a well-mixed global pool, and local material on a 40 × 25 grid. |
+| `petri/p4win_*`, `petri/galA_window.py` | Post hoc recount of predictions P4a and P4b of the two minimal models (Tables S10 and S11; Supplementary S3) with draws compared at the same time in the assay. `galA_window.py` imports `mini27.py` unchanged and adds counters kept in 50-tick bins; the injected arms rerun identically to the original runs. Definitions were fixed and hashed (`p4win_frozen.sha256`) before the rerun; results in `_RESULT_p4win.*`, the weighting sensitivity in `_RESULT_p4win_posthoc.txt`. |
 | `petri/avida30/` | Experiment 30: the three copying rules added to Avida as a patch (`material-draw.patch`, LGPL-3.0-or-later as a modification of Avida; see the folder's README), its validation, launch and analysis scripts, and results. |
 | `petri/theory30_renewal.py` | The renewal account of the crossings (Supplementary S27), computed post hoc from existing result files into `_RESULT_theory30.*`. |
 | `petri/*.js` | Instruments: `replay.js` (run one dish; `--loops 1` census of loop lengths), `dms.js` (inject one code at a time and follow the marked lineage), `invbud.js` (count copy outcomes per lineage: draws, stalls, deletions), `lineage.js`, `budget.js`, `found.js`, `mono.js`, `region.js`, `lifehist.js`. |
@@ -45,6 +46,7 @@ Each judging run was preceded by a note fixing the cells, the guards, the judgin
 - v1.2: adds experiment 29 (evolution under draw-once and find-first; `replay.js --remember-die`), experiment 30 (the copying rules in Avida), the renewal account (Figure S3), the hash file of experiment 13, the revised title and figures.
 - v1.3: after an independent code review — Figure S3 (evolution under the three rules; the theory figure becomes S4), independent recounts (`evo29_recount_independent.py`, `_RECOUNT29_independent.txt`, `avida30/_REVIEW30_*`), notes appended to the frozen hash files of experiments 29–30, and a corrected docstring in `theory30_renewal.py`. No result changed.
 - v1.4: removes the rendered figure files (PNG and PDF), for the reason given in the `figures/` row above. `fig_make.py` and `_PROVENANCE.txt` are unchanged, so every plotted figure regenerates from the result files, and `F1_world_and_rules.svg` is retained as the drawing source of Figure 1. No result changed. The earlier tags here, and the Zenodo records of v1.0–v1.3, still contain the rendered files.
+- v1.5: adds the post hoc recount of P4a and P4b in the two minimal models at the same time in the assay (`p4win_*`, `galA_window.py`, `_RESULT_p4win.*`). The pre-specified verdicts in `_RESULT_mini26.*` and `_RESULT_mini27.*` are unchanged; the manuscript reports both. Supplementary section numbers in this README updated.
 
 ## License
 
