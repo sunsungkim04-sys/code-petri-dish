@@ -1,0 +1,10 @@
+# 해부 31 동결 — 2026-10-06 14:30:06 · 본실행 전
+# 사전등록: 볼트 사전등록/해부31-사전등록-2026-10-06.md (사본 _prereg31.md)
+# 판정 환경: python 3.13.12 numpy 2.4.3
+# mini27.py · mini27_analyze.py 는 해부 27 동결본 그대로(고치지 않았다 · import 해서 씀)
+acdd261b5ec82573a1c193828fb8637a8a9395234b26b035f3e09651657d8007  mini31_analyze.py
+9a3fcdb22600c6bba33b45fc423df0c3c1b12cedd52403b2b6c31ca725b656fd  mini31_launch.sh
+882891f63d68c516b196fc0bbfb00528f89a9e96cda70d876d4c5acbf53e1111  mini27.py
+4d7aca3998a148e4abd093232cd3e10705b5036e39370c47b607c5c5ce209dcd  mini27_analyze.py
+7d9b9901688cbd39dacd91bca06c8bfca49cecd4980d7f139964cacf23dd98c6  mini26.py
+0c36996e2107272817b665a99d39b93e30e4d5467a39afff490ae59950c254b4  _prereg31.md
